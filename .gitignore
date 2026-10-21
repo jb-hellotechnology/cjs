@@ -4,6 +4,7 @@
 # ...except this file, the assets folder and the perch folder
 !/.gitignore
 !/.gitattributes
+!/.cpanel.yml
 !/assets/
 !/perch/
 
