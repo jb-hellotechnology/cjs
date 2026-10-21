@@ -199,68 +199,19 @@ error_reporting(E_ALL);
     })
     </script>
   
+    <script src='/assets/javascript/cjs-location-picker.js?v=1'></script>
     <script>
-    function initLocationMap() {
-        var latField = document.getElementById('lat');
-        var lngField = document.getElementById('lng');
-    
-        // Use existing values if present and not 0
-        var lat = parseFloat(latField.value);
-        var lng = parseFloat(lngField.value);
-        var hasLocation = !isNaN(lat) && !isNaN(lng) && !(lat === 0 && lng === 0);
-    
-        // Fall back to a UK-wide view if no location set
-        var startPos = hasLocation ? {lat: lat, lng: lng} : {lat: 54.5, lng: -3.5};
-    
-        var map = new google.maps.Map(document.getElementById('location-map'), {
-            center: startPos,
-            zoom: hasLocation ? 14 : 5
-        });
-    
-        var marker = null;
-    
-        function updateFields(latLng) {
-            latField.value = latLng.lat().toFixed(6);
-            lngField.value = latLng.lng().toFixed(6);
-        }
-    
-        function placeMarker(position) {
-            if (marker) {
-                marker.setPosition(position);
-            } else {
-                marker = new google.maps.Marker({
-                    position: position,
-                    map: map,
-                    draggable: true
-                });
-                marker.addListener('dragend', function(e) {
-                    updateFields(e.latLng);
-                });
-            }
-        }
-    
-        // Show existing pin if we have a location
-        if (hasLocation) {
-            placeMarker(startPos);
-        }
-    
-        // Click anywhere to drop/move the pin
-        map.addListener('click', function(e) {
-            placeMarker(e.latLng);
-            updateFields(e.latLng);
-        });
-    
-        // Typing coordinates manually moves the pin too
-        function syncFromFields() {
-            var la = parseFloat(latField.value), ln = parseFloat(lngField.value);
-            if (!isNaN(la) && !isNaN(ln) && !(la === 0 && ln === 0)) {
-                var pos = {lat: la, lng: ln};
-                placeMarker(pos);
-                map.panTo(pos);
-            }
-        }
-        latField.addEventListener('change', syncFromFields);
-        lngField.addEventListener('change', syncFromFields);
-    }
-    </script>
-    <script async src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyATUBEmTAVMlmQUpMKKD95ic8B62ECXOQo&callback=initLocationMap\"></script>";
+    // Location picker: click the map or drag the pin to set Lat and Lng. Uses OpenStreetMap
+    // through Leaflet, so no Google account or API key is needed.
+    CJSLocationPicker({
+        map: 'location-map',
+        lat: 'lat',
+        lng: 'lng',
+        multiple: false,
+        draggable: true,
+        syncFields: true,
+        center: [54.5, -3.5],
+        zoom: 5,
+        focusZoom: 14
+    });
+    </script>";

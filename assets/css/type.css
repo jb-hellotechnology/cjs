@@ -1,0 +1,248 @@
+:root {
+  --color-dark: #252525;
+  --color-light: #fff;
+  --color-mid: #0477BF;
+  --color-dark: #034AA6;
+  --color-black: #04131b;
+  --color-white: #f0f5fc;
+  --size-step-0: clamp(1rem, calc(0.96rem + 0.22vw), 1.13rem);
+  --size-step-1: clamp(1.25rem, calc(1.16rem + 0.43vw), 1.5rem);
+  --size-step-2: clamp(1.56rem, calc(1.41rem + 0.76vw), 2rem);
+  --size-step-3: clamp(1.95rem, calc(1.71rem + 1.24vw), 2.66rem);
+  --size-step-4: clamp(2.44rem, calc(2.05rem + 1.93vw), 3.55rem);
+}
+
+body {
+  background: var(--color-white);
+  color: var(--color-black);
+  font-family: "arial", sans-serif;
+  font-size: var(--size-step-0);
+  line-height: 1.5;
+}
+
+*{
+	box-sizing: border-box;
+}
+
+a {
+  color: currentColor;
+  /* -webkit-text-decoration-color: var(--color-mid);
+		  text-decoration-color: var(--color-mid); */
+  text-decoration: none;
+  text-decoration-thickness: 0.1ex;
+  text-underline-offset: 0.3ex;
+  color:var(--color-dark);
+  font-weight:700;
+}
+
+a:hover{
+	color:var(--color-black);
+	text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "arial", serif;
+  font-weight: 800;
+  line-height: 1.1;
+  /* text-wrap: balance; */
+}
+
+h1 {
+  font-size: var(--size-step-3);
+}
+
+h2 {
+  font-size: var(--size-step-2);
+}
+
+h3 {
+  font-size: var(--size-step-1);
+}
+
+ul,
+ol {
+  -webkit-padding-start: 1em;
+  padding:0;
+}
+
+em{
+  font-style: italic;
+}
+
+blockquote {
+  font-style: italic;
+  font-size: var(--size-step-1);
+  max-width: 50ch;
+  border-left:10px solid var(--color-dark);
+  padding-left:1rem;
+  margin-bottom:2rem;
+}
+
+blockquote.inline {
+  font-style: italic;
+  font-size: var(--size-step-0);
+  max-width: 76ch;
+  color:var(--color-dark);
+  border:none;
+  padding:0;
+}
+
+blockquote.pullout {
+  background:var(--color-dark);
+  color:var(--color-light);
+  border:none;
+  padding:1rem;
+  border-radius:4px;
+  margin:2rem 30% 2rem 4rem;
+  float:right;
+  font-style: italic;
+  font-size: var(--size-step-0);
+  max-width: 50ch;
+}
+
+@media screen and (max-width:1280px){
+  blockquote.pullout{
+    margin-right:20%;
+  }
+}
+
+@media screen and (max-width:1024px){
+  blockquote.pullout{
+    margin:2rem 0rem;
+    max-width:76ch;
+    box-sizing: border-box;
+    float:none;
+  }
+}
+
+img{
+	display: block;
+	max-width: 100%;
+}
+
+/* a span{
+	width:0px;
+	overflow:hidden;
+	display:block;
+} */
+
+strong{
+	font-weight:700;
+}
+
+/* Utilities */
+.flow > * + * {
+  -webkit-margin-before: var(--flow-space, 0.5em);
+          margin-block-start: var(--flow-space, 0.5em);
+}
+
+/* Flow and rythm */
+:is(h1, h2, h3, h4, blockquote) {
+  --flow-space: 1.5em;
+}
+
+:is(h1, h2, h3, h4) + * {
+  --flow-space: 1em;
+}
+
+/* Line lengths */
+article {
+
+}
+
+blockquote {
+
+}
+
+h1 {
+  letter-spacing: 1px;
+}
+
+h2,
+h3 {
+
+}
+
+p{
+}
+
+/* TEXTAREA */
+.textarea h1{
+	font-size:var(--size-step-2);
+}
+
+.textarea h2{
+  font-size:var(--size-step-1);
+}
+
+.textarea h3{
+  font-size:var(--size-step-0);
+}
+
+.redactor-styles ul{
+  list-style:disc !important;
+}
+
+footer a span{
+  width:0px;
+  overlay: hidden;
+}
+
+.Train_heading {font-family: "Century Gothic","Apple Gothic",AppleGothic,"URW Gothic L","Avant Garde",Futura,sans-serif; font-size: 12pt; font-weight: bold; line-height: 150%; color: var(--color-dark);}
+.News_head {font-weight:bold;}
+h2.NewsHead {font-weight:bold;font-size:var(--size-step-0);}
+
+p.alt{
+  font-family:"Gill Sans";
+}
+
+.greenbox,
+.bluebox{
+  float:right;
+  background:var(--color-light);
+  padding:1rem;
+  width:auto;
+  max-width:30%;
+  text-align:right;
+  margin:0 0 1rem 1rem;
+  border:2px solid var(--color-dark);
+}
+
+.greenbox a,
+.bluebox a{
+  color:var(--color-dark);
+}
+
+.greenbox a:hover,
+.bluebox a:hover{
+  color: var(--color-dark) !important;
+}
+
+.home-grid h2{
+  margin-bottom:1rem;
+}
+
+@media screen and (max-width:480px){
+  .greenbox,
+  .bluebox{
+    max-width:100%;
+    margin:1rem 0;
+  }
+}
+
+header p{
+  max-width:76ch;
+}
+
+p.help{
+  font-size:80%;
+  color:var(--color-mid);
+}
+
+.news-post h2{
+  font-size:var(--size-step-1);
+  margin-top:2rem;
+}
