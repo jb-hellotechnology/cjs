@@ -1,0 +1,30 @@
+<perch:before>
+
+</perch:before>	
+
+<perch:if exists="providerName">
+	<section class="provider <perch:if id="displayAd" value="1" match="eq">displayad</perch:if>">
+		<perch:if exists="logo"><img src="<perch:cjs id="logo" />" alt="<perch:cjs id="logoAlt" />" /></perch:if>
+	  <h3><perch:cjs id="providerName"></h3>
+	  <p><a href="/training/centres-and-providers/all-adverts/<perch:cjs id="providerID" />">View All Adverts</a></p>
+	  <perch:cjs id="description" html />
+	  <p>
+		  <perch:if exists="advertEmail">
+		  	<a href="mailto:<perch:cjs id="advertEmail" />?subject=<perch:cjs id="providerName"> advertised in CJS Training Directory" /><perch:cjs id="advertEmail" /></a> 
+		  </perch:if>
+		  <perch:if exists="advertWebsite">
+		  	<a href="<perch:cjs id="advertWebsite" />" target="_blank">
+			  	<perch:if id="advertLink" value="s" match="eq">
+			  		<perch:cjs id="advertWebsiteShort" replace="http://|,https://|" />
+			  	<perch:else>
+			  		<perch:cjs id="advertWebsite" replace="http://|,https://|" />
+			  	</perch:if>
+			</a> 
+		  </perch:if>
+		  <perch:cjs id="advertTelephone" /></p>
+	</section>
+</perch:if>
+
+<perch:after>
+
+</perch:after>

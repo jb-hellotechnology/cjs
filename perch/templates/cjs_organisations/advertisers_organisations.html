@@ -1,0 +1,11 @@
+<perch:before>
+  <ul class="tags">    
+</perch:before>
+	<perch:if exists="slug">
+  <li data-tag="<perch:cjs id="name" format="LC" />">
+    <a href="/in-depth/organisations/<perch:cjs id="slug" />"><perch:cjs id="name" /></a> <span><perch:cjs id="name" format="LC" /></span>
+  </li>
+	</perch:if>
+<perch:after>
+  </ul>
+</perch:after>

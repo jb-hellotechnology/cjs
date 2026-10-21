@@ -1,0 +1,35 @@
+<perch:form id="cjs_samples" method="post" app="perch_forms" role="form">
+  
+  <p>
+    <strong>Request samples</strong>
+  </p>
+	<section class="input">
+		<perch:label for="name">My name is: <span>*</span></perch:label>
+		<perch:input type="text" id="name" label="Name" required="true" />
+	</section>
+  <section class="input">
+		<perch:label for="email">My email address: <span>*</span></perch:label>
+		<perch:input type="text" id="email" label="Email Address" required="true" />
+	</section>
+  <section class="input other">
+    <label>Are you human? If so, don't write in here.</label>
+    <perch:input type="text" id="enquiry" antispam="honeypot" />
+  </section>
+	<section class="input">
+		<perch:input type="submit" value="Send Request" />
+	</section>
+  
+  <perch:success>
+    <div class="success">
+      <perch:content type="textarea" id="confirmation" label="Confirmation Message" html editor="redactor" />
+    </div>
+  </perch:success>
+  
+  <p>
+    Sample copies are usually sent within two working days of your request.
+  </p>
+  <p>
+    <span>*</span> = required field
+  </p>
+	
+</perch:form>

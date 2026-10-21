@@ -1,0 +1,37 @@
+<perch:before>
+
+</perch:before>
+<section class="listing <perch:if exists="displaylisting">displaylisting</perch:if>">
+  <p class="listing-title">
+    <strong>
+      <a href="<perch:cjs id="advertURL"/>">
+        <perch:cjs id="title">
+      </a>
+    </strong>
+  </p>
+  <perch:if exists="imageLogo">
+    <img src="<perch:cjs id="imageLogo" />" alt="" />
+  </perch:if>
+
+  <ul class="details">
+    <perch:if exists="closingDate">
+      <li><strong>Closing Date:</strong> <perch:cjs id="closingDate"/></li>
+    </perch:if>
+    <perch:if exists="location">
+      <li><strong>Location:</strong> <perch:cjs id="location"/></li>
+    </perch:if>
+    <perch:if exists="postedDate">
+      <li><strong>Posted:</strong> <perch:cjs id="postedDate"/></li>
+    </perch:if>
+    <li class="right">
+      <a href="<perch:cjs id="advertURL"/>" class="more">
+        More...
+      </a>
+    </li>
+      <perch:cjs id="description" html/>
+  </ul>
+</section>
+
+<perch:after>
+
+</perch:after>

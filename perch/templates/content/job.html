@@ -1,0 +1,7 @@
+<h1><perch:content type="text" id="heading" label="Heading" title /></h1>
+<perch:content type="textarea" id="text" label="Job Information" html editor="redactor" />
+<perch:categories id="categories" set="jobs" label="Categories" display-as="select">
+    <a href="archive.php?cat=<perch:category id="catSlug" type="slug" />" class="p-category">
+        <perch:category id="catTitle" type="text" />
+    </a>
+</perch:categories>

@@ -1,0 +1,7 @@
+{
+    "CJS Subscribers": "CJS Subscribers",
+    "Subscribers": "Subscribers",
+    "Username": "Username",
+    "Password": "Password",
+    "Password2": "Password2"
+}

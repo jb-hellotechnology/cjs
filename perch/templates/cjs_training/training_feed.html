@@ -1,0 +1,20 @@
+<perch:if exists="shortTitle">
+<item>
+    <title><perch:cjs id="shortTitle"></title>
+    <description><perch:cjs id="shortTitle"></description>
+    <link>https://countryside-jobs.com/training/<perch:cjs id="categoryOne"></link>
+    <guid isPermaLink="false">cjs_short_<perch:cjs id="shortID" /></guid>
+    <pubDate><perch:if id="startDate" value="0000-00-00" match="neq"><perch:cjs id="startDate" format="D, j M Y H:i:s O" /><perch:else /><perch:cjs id="firstOnline" format="D, j M Y H:i:s O" /></perch:if></pubDate>
+</item>
+</perch:if>
+<perch:if exists="longTitle">
+<item>
+    <title><perch:cjs id="longTitle"></title>
+    <description><perch:cjs id="shortTitle"></description>
+    <link>https://countryside-jobs.com/training/long-courses/<perch:cjs id="categoryOne"></link>
+    <guid isPermaLink="false">cjs_short_<perch:cjs id="shortID" /></guid>
+    <pubDate><perch:if id="startDate" value="0000-00-00" match="neq"><perch:cjs id="startDate" format="D, j M Y H:i:s O" /><perch:else /><perch:cjs id="firstOnline" format="D, j M Y H:i:s O" /></perch:if></pubDate>
+</item>
+</perch:if>
+
+<perch:showall />

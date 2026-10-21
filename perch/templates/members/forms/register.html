@@ -1,0 +1,61 @@
+<p>By signing up for an Advertisers Account your consent for CJS to hold your details for use in relation to your advertisements. See our <a href="https://www.countryside-jobs.com/information/privacy-policy">privacy policy</a> here for more information.</p>
+
+<perch:form id="register" method="post" app="perch_members" type="default">
+
+	<section class="input">
+		<perch:label for="first_name">First name</perch:label>
+		<perch:input type="text" id="first_name" required="true" label="First name" />
+		<perch:error for="first_name" type="required">Please add your name</perch:error>
+	</section>
+
+	<section class="input">
+		<perch:label for="last_name">Last name</perch:label>
+		<perch:input type="text" id="last_name" required="true" label="Last name" />
+		<perch:error for="last_name" type="required">Please add your name</perch:error>
+	</section>
+	
+	<section class="input">
+		<perch:label for="organisation">Organisation</perch:label>
+		<perch:input type="text" id="organisation" required="true" label="Organisation" />
+	</section>
+	
+	<section class="input">
+		<perch:label for="telephone">Telephone</perch:label>
+		<perch:input type="text" id="telephone" required="true" label="Telephone" />
+	</section>
+	
+	<section class="input">
+		<perch:label for="telephone">Type of Account</perch:label>
+		<perch:input type="select" id="type" required="true" label="Type" options="Employer,Recruitment Agency" />
+	</section>
+
+	<section class="input">
+		<perch:label for="email">Email</perch:label>
+		<perch:input type="text" id="email" required="true" placeholder="you@company.com" helper="PerchMembers_Members::check_email" />
+		<perch:error for="email" type="required">Please add your email address</perch:error>
+		<perch:error for="email" type="helper">That email address is already in use</perch:error>
+	</section>
+
+	<section class="input">
+		<perch:label for="password">Password</perch:label>
+		<perch:input type="password" id="password" required="true" match-with="password2" />
+		<perch:error for="password" type="required">Please add a password</perch:error>
+		<perch:error for="password" type="match">Passwords do not match</perch:error>
+	</section>
+
+	<section class="input">
+		<perch:label for="password2">Password again</perch:label>
+		<perch:input type="password" id="password2" required="true" />
+		<perch:error for="password2" type="required">Please repeat your password</perch:error>
+	</section>
+
+
+	<section class="input">
+		<perch:input type="submit" value="Register" />
+	</section>
+
+	<perch:success>
+		<p>Thanks!</p>
+	</perch:success>
+
+</perch:form>

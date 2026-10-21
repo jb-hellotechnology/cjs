@@ -1,0 +1,371 @@
+<perch:form id="cjs_online" method="post" app="cjs_daily" role="form">
+  <perch:if id="memberID"><div id="form-member"></perch:if>
+  <p>
+    <strong>Advert details</strong>
+  </p>
+  <perch:if id="memberID">
+  <section class="input" id="type">
+	  <perch:label>Advert Type</perch:label>
+	  <perch:input type="select" id="advertType" options="Please Select,Basic|basic,Standard|standard,Unlimited|long" value="<perch:content id="form_advertType" />" />
+  </section>
+  </perch:if>
+  <section class="input">
+    <perch:label>Job Title</perch:label>
+    <perch:input type="text" id="jobtitle" label="Job Title" value="<perch:content id="form_jobtitle" />" />
+  </section>
+  <section class="input">
+    <perch:label>Employer Name</perch:label>
+    <perch:input type="text" id="employerDisplay" label="Employer Name" value="<perch:content id="form_employer" />" />
+  </section>
+  <p><strong>Your Advert</strong></p>
+  <p>
+    Linage <u>from</u> &pound;75 <a href="/advertise/how-much-does-it-cost" tagret="_blank">more information on costs here</a>  
+  </p>
+  <section class="input">
+	  <perch:input type="textarea" id="form_text" class="redactor" label="Linage" placeholder="Please enter your advert details here - including how applicants should apply and who to contact for more information." html />
+	  <p class="error basic">You've exceeded the 220 word limit for Basic adverts - please reduce the number of words, or choose Standard or Long advert</p>
+	  <p class="error standard">You've exceeded the 400 word limit for Standard adverts - please reduce the number of words, or choose an Unlimited advert</p>
+  </section>
+  <p>
+    <strong>Upload Your Logos</strong><em class="hide basic"> - to include your logo you need to <a href="#type">change the advert type from basic to standard or unlimited</a></em>
+  </p>
+  <section class="input hide standard long">
+	  <p>Image files ONLY - your text must be entered in the box above</p>
+    <perch:label>Logo File (JPG)</perch:label>
+    <perch:input type="file" id="logo" label="Logo #1" />
+    <perch:if exists="form_logo1">
+    	<br /><img src="<perch:content id="form_logo1" />" alt="Logo 1" id="form2_logo1_image" />
+    </perch:if>
+    <perch:input type="hidden" id="logo1_hidden" value="<perch:content id="form_logo1" />" />
+    <p><a href="javascript:removeFile('#form2_logo1');" class="remove">Click to Remove File</a></p>
+  </section>
+  <section class="input hide long">
+    <perch:label>Logo File #2 (JPG)</perch:label>
+    <perch:input type="file" id="logo2" label="Logo #2" />
+    <perch:if exists="form_logo2">
+    	<br /><img src="<perch:content id="form_logo2" />" alt="Logo 2" id="form2_logo2_image" />
+    </perch:if>
+    <perch:input type="hidden" id="logo2_hidden" value="<perch:content id="form_logo2" />" />
+    <p><a href="javascript:removeFile('#form2_logo2');" class="remove">Click to Remove File</a></p>
+  </section>
+  <section class="input hide long">
+    <perch:label>Logo File #3 (JPG)</perch:label>
+    <perch:input type="file" id="logo3" label="Logo #3" />
+    <perch:if exists="form_logo3">
+    	<br /><img src="<perch:content id="form_logo3" />" alt="Logo 3" id="form2_logo3_image" />
+    </perch:if>
+    <perch:input type="hidden" id="logo3_hidden" value="<perch:content id="form_logo3" />" />
+    <p><a href="javascript:removeFile('#form2_logo3');" class="remove">Click to Remove File</a></p>
+  </section>
+  <section class="input hide long">
+    <perch:label>Logo File #4 (JPG)</perch:label>
+    <perch:input type="file" id="logo4" label="Logo #4" />
+    <perch:if exists="form_logo4">
+    	<br /><img src="<perch:content id="form_logo1" />" alt="Logo 4" id="form2_logo4_image" />
+    </perch:if>
+    <perch:input type="hidden" id="logo4_hidden" value="<perch:content id="form_logo4" />" />
+    <p><a href="javascript:removeFile('#form2_logo4');" class="remove">Click to Remove File</a></p>
+  </section>
+  <section class="input hide long">
+    <perch:label>Logo File #5 (JPG)</perch:label>
+    <perch:input type="file" id="logo5" label="Logo #5" />
+    <perch:if exists="form_logo5">
+    	<br /><img src="<perch:content id="form_logo1" />" alt="Logo 5" id="form2_logo5_image" />
+    </perch:if>
+    <perch:input type="hidden" id="logo5_hidden" value="<perch:content id="form_logo5" />" />
+    <p><a href="javascript:removeFile('#form2_logo5');" class="remove">Click to Remove File</a></p>
+  </section>
+  <section class="input">
+    <perch:label>Closing Date</perch:label>
+    <perch:input type="text" id="closingDate" label="Closing Date" value="<perch:content id="form_closingdate" />" placeholder="dd/mm/yyyy" class="datefield" />
+  </section>
+  <section class="input">
+    <perch:label>Location</perch:label>
+    <perch:input type="text" id="location" label="Location" value="<perch:content id="form_location" />" />
+  </section>
+  <section class="input">
+    <perch:label>Region</perch:label>
+    <label><perch:input type="checkbox" id="form_rNational" value="1"> National</label>
+    <label><perch:input type="checkbox" id="form_rInternational" value="1"> International</label>
+    <label><perch:input type="checkbox" id="form_rScotlandNorth" value="1"> Scotland North</label>
+    <label><perch:input type="checkbox" id="form_rScotlandSouth" value="1"> Scotland South</label>
+    <label><perch:input type="checkbox" id="form_rWales" value="1"> Wales</label>
+    <label><perch:input type="checkbox" id="form_rNorthernIreland" value="1"> Northern Ireland</label>
+    <label><perch:input type="checkbox" id="form_rEngland" value="1"> England</label>
+    <label><perch:input type="checkbox" id="form_rAnglia" value="1"> East Anglia</label>
+    <label><perch:input type="checkbox" id="form_rMidlands" value="1"> Midlands</label>
+    <label><perch:input type="checkbox" id="form_rNorthEast" value="1"> North East</label>
+    <label><perch:input type="checkbox" id="form_rNorthWest" value="1"> North West</label>
+    <label><perch:input type="checkbox" id="form_rSouth" value="1"> South</label>
+    <label><perch:input type="checkbox" id="form_rSouthWest" value="1"> South West</label>
+    <label><perch:input type="checkbox" id="form_rHome" value="1"> Home Based</label>
+  </section>
+  <section class="input">
+    <perch:label>Sector</perch:label>
+    <label><perch:input type="checkbox" id="form_sAdminIT" value="1"> Administration, Support and IT</label>
+    <label><perch:input type="checkbox" id="form_sArbo" value="1"> Arboriculture</label>
+    <label><perch:input type="checkbox" id="form_sComVol" value="1"> Community and Volunteers</label>
+    <label><perch:input type="checkbox" id="form_sCountry" value="1"> Countryside</label>
+    <label><perch:input type="checkbox" id="form_sEco" value="1"> Ecology</label>
+    <label><perch:input type="checkbox" id="form_sEnvOE" value="1"> Environmental and Outdoor Education</label>
+    <label><perch:input type="checkbox" id="form_sFieldwork" value="1"> Fieldwork and Research</label>
+    <label><perch:input type="checkbox" id="form_sForestry" value="1"> Forestry</label>
+    <label><perch:input type="checkbox" id="form_sHorti" value="1"> Horticulture</label>
+    <label><perch:input type="checkbox" id="form_sPolicy" value="1"> Policy and Advice</label>
+    <label><perch:input type="checkbox" id="form_sPractical" value="1"> Practical Land Management</label>
+    <label><perch:input type="checkbox" id="form_sPubF" value="1"> Publicity and Fundraising</label>
+    <label><perch:input type="checkbox" id="form_sRoW" value="1"> Rights of Way</label>
+    <label><perch:input type="checkbox" id="form_sSustainability" value="1"> Sustainability</label>
+    <label><perch:input type="checkbox" id="form_sVisMan" value="1"> Visitor Management</label>
+    <label><perch:input type="checkbox" id="form_sWiWoAnC" value="1"> Wildlife Work and Animal Care</label>
+  </section>
+  <section class="input">
+    <perch:label>Contract Length</perch:label>
+    <perch:input type="text" id="contractLength" label="Contract Length" value="<perch:content id="form_contractlength" />" />
+  </section>
+  <section class="input">
+    <perch:label>Contract Type</perch:label>
+   <label><perch:input type="checkbox" id="form_cfullTime" value="1" label="Full Time" /> Full Time</label>
+   <label><perch:input type="checkbox" id="form_cpartTime" value="1" label="Part Time" /> Part Time</label>
+   <label><perch:input type="checkbox" id="form_cpermanent" value="1" label="Permanent" /> Permanent</label>
+   <label><perch:input type="checkbox" id="form_cTempFixed" value="1" label="Temporary/Fixed Contract" /> Temporary/Fixed Contract</label>
+   <label><perch:input type="checkbox" id="form_cseasonal" value="1" label="Seasonal" /> Seasonal</label>
+  </section>
+  <p>
+    <strong>Enhance Your Advert</strong>
+  </p>
+  <section class="input">
+    <perch:label><perch:input type="checkbox" id="socialmediapromotion" value="1" label="Social Media Promotion" /> Contact me about promoting my advert on Social Media. <a href="/advertise/promotions" target="_blank">Click here for more information.</a></perch:label>
+    <perch:if id="form_socialmediapromotion" value="1">
+    <script>
+		$('#form2_socialmediapromotion').attr('checked','checked');    
+	</script>
+    </perch:if>
+  </section>
+  <section class="input">
+    <perch:label><perch:input type="checkbox" id="video" value="1" label="Video" /> Include a video with your advert (we will contact you about how to send your video link to us).</perch:label>
+    <perch:if id="form_video" value="1">
+    <script>
+		$('#form2_video').attr('checked','checked');    
+	</script>
+    </perch:if>
+  </section>
+  <section class="input">
+    <perch:label><perch:input type="checkbox" id="unpaid" value="1" label="Unpaid Post" /> This is an unpaid/voluntary post (50% discount).</perch:label>
+    <perch:if id="form_unpaid" value="1">
+    <script>
+		$('#form2_unpaid').attr('checked','checked');    
+	</script>
+    </perch:if>
+  </section>
+  <section class="input">
+    <perch:label><perch:input type="checkbox" id="professional" value="1" label="Add CJS Professional" /> Add CJS Professional for &pound;10.</perch:label>
+    <perch:if id="form_professional" value="1">
+    <script>
+		$('#form2_professional').attr('checked','checked');    
+	</script>
+    </perch:if>
+  </section>
+  <p>
+    <strong>Payment Details:</strong>
+  </p>
+  <section class="input">
+    <perch:label>Please invoice us at</perch:label>
+    <perch:input type="text" id="invoiceaddress" label="Invoice Address" value="<perch:content id="form_invoiceaddress" />" />
+  </section>
+  <section class="input">
+    <perch:label>And quote reference/order number (if you do not supply one we will use the job title)</perch:label>
+    <perch:input type="text" id="reference" label="Reference" value="<perch:content id="form_reference" />" />
+  </section>
+  <section class="input">
+    <perch:label>I will pay by card - please contact me to arrange payment by:</perch:label>
+    <perch:input type="select" id="payment" options=",Phone,Email" label="Payment Preference" value="<perch:content id="form_payment" />" />
+  </section>
+  <p>
+    <strong>Contact details for CJS use only:</strong>
+  </p>
+  <perch:if exists="form_memberID">
+	  <p><a href="/advertisers/sign-out?r=/advertisers">Sign out/use different account</a></p>
+  </perch:if>
+	<section class="input">
+		<perch:label for="name">Name: <span>*</span></perch:label>
+		<perch:input type="text" id="name" label="Name" required="true" value="<perch:content id="form_name" />" />
+	</section>
+  <section class="input">
+		<perch:label for="organisation">Organisation: <span>*</span></perch:label>
+		<perch:input type="text" id="organisation" label="Organisation" required="true" value="<perch:content id="form_organisation" />" />
+	</section>
+  <section class="input">
+		<perch:label for="email">Email - we will acknowledge your submission by email: <span>*</span></perch:label>
+		<perch:input type="text" id="email" label="Email Address" required="true" value="<perch:content id="form_email" />" />
+	</section>
+	<section class="input">
+		<perch:label for="telephone">Telephone: <span>*</span></perch:label>
+		<perch:input type="text" id="telephone" label="Telephone" required="true" value="<perch:content id="form_phone" />" />
+	</section>
+  <section class="input">
+		<perch:label for="message">Any Message For CJS:</perch:label>
+		<perch:input type="text" id="message" label="Message for CJS" value="<perch:content id="form_message" />" />
+	</section>
+  <section class="input">
+    <perch:label>If this is your first time advertising with CJS it would be helpful if you could let us know how you found us:</perch:label>
+    <perch:input type="select" id="howdidyoufindus" label="How Did You Find Us" options="Please Select,Recommendation,Previous Reader/Subscriber,Link From Another Site (Please Specify in Message Box Above),CMA/SCRA,Google Search,Other Web Search,Other (Please Specify in Message Box Above)" value="<perch:content id="form_howdidyoufindus" />" />
+  </section>
+  <section class="input other">
+    <label>Are you human? If so, don't write in here.</label>
+    <perch:input type="text" id="enquiry" antispam="honeypot" />
+  </section>
+  <perch:if exists="form_memberID">
+  	<section class="input">
+	  	<label><strong>Type of Advert</strong></label>
+	  	<perch:input type="select" id="status" label="Status" options="<perch:content id="form_statusOptions" />" />
+  	</section>
+  </perch:if>
+  <section class="input">
+	  <div class="g-recaptcha" data-sitekey="6LcKQNYfAAAAAKfvMMYcA6xI8d64c0oxSbIpoSuB" data-callback="enableBtn"></div>
+  </section>
+	<section class="input">
+		<perch:if exists="form_advertID">
+			<perch:input type="submit" value="Update Advert" id="submit" disabled="disabled" />
+		<perch:else>
+			<perch:input type="submit" value="Submit Advert" id="submit" disabled="disabled" />
+		</perch:if>
+	</section>
+	<perch:input type="hidden" id="memberID" value="<perch:content id="form_memberID" />" />
+	<perch:input type="hidden" id="advertID" value="<perch:content id="form_advertID" />" />
+	<perch:input type="hidden" id="advertURL" value="<perch:content id="form_advertURL" />" />
+	
+  <p>If you have any problems using this form please email your request direct to CJS, <a href="mailto:ranger@countryside-jobs.com">ranger@countryside-jobs.com</a></p>
+  
+  <perch:success>
+    <div class="success">
+      <perch:content type="textarea" id="confirmation" label="Confirmation Message" html editor="redactor" />
+      <perch:if exists="form_memberID">
+      	<p>If you have submitted a draft advert you can check, update and submit for publication through your advertisers profile, <a href="/advertisers">click here</a>.</p>
+      </perch:if>
+    </div>
+  </perch:success>
+  
+  <p>
+    <span>*</span> = required field
+  </p>
+	<perch:if id="memberID"></div></perch:if>
+</perch:form>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="//jqueryui.com/resources/demos/style.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+	 function enableBtn(){
+	   document.getElementById("form2_submit").disabled = false;
+	 }
+
+	$( function() {
+	  	$( ".datefield" ).datepicker({ dateFormat: 'dd/mm/yy'});
+  	});
+  
+	$('.redactor').redactor(
+  	{ 
+	  	plugins: ['counter', 'limiter'], 
+	  	buttons: ['ul', 'link'],
+	  	linkSize: 1000,
+	  	callbacks: {
+        	keydown: function(data)
+	        {
+	        	getContent();
+	        },
+	        enter: function(data)
+	        {
+	        	getContent();
+	        },
+	        tab: function(data)
+	        {
+	        	getContent();
+	        },
+	        blur: function(data)
+	        {
+	        	getContent();
+	        }
+	    }
+	}
+  );
+  
+  function getContent(){
+	  var count = $('.redactor-statusbar li:first-child').text();
+	  var res = count.split(" ");
+	  var words = res[1];
+	  	  
+	  var type = $('#form2_advertType').val();
+	  
+	  $('p.error.basic').hide();
+	  $('p.error.standard').hide();
+	  
+	  if(type == 'basic' && words>220){
+		  $('p.error.basic').show();
+		  $('#form2_submit').hide();
+	  }
+	  if(type == 'basic' && words<=220){
+		  $('p.error.basic').hide();
+		  $('#form2_submit').show();
+	  }
+	  if(type == 'standard' && words>400){
+		  $('p.error.standard').show();
+		  $('#form2_submit').hide();
+	  }
+	  if(type == 'standard' && words<=400){
+		  $('p.error.standard').hide();
+		  $('#form2_submit').show();
+	  }
+  }
+  
+  $(document).ready(function(){
+	var type = $('#form2_advertType').val(); 
+	if(type == 'long'){
+		$('.input.long').show();
+		$('.hide.basic').hide();
+		$('#form2_submit').show();
+	}
+	if(type == 'standard'){
+		$('.input.standard').show();
+		$('.hide.basic').hide();
+		$('#form2_submit').show();
+	}
+	if(type == 'basic'){
+		$('.hide.basic').show();
+		$('#form2_submit').show();
+	}
+  })
+  
+  $('#form2_advertType').change(function(){
+	  
+	$('#form2_logo').val('');
+	$('#form2_logo2').val('');
+	$('#form2_logo3').val('');
+	$('#form2_logo4').val('');
+	$('#form2_logo5').val('');
+	  
+	$('p.error.basic').hide();
+	$('p.error.standard').hide();
+	  
+	var type = $('#form2_advertType').val(); 
+	if(type == 'long'){
+		$('.input.long').show();
+		$('.hide.basic').hide();
+		$('#form2_submit').show();
+	}
+	if(type == 'standard'){
+		$('.input.standard').show();
+		$('.hide.basic').hide();
+		$('#form2_submit').show();
+	}
+	if(type == 'basic'){
+		$('.hide.basic').show();
+		$('#form2_submit').show();
+	}
+  });
+
+function removeFile(id){
+    $(id).val('');
+    $(id+'_image').remove();
+    $(id+'_hidden').val('');
+}
+</script>

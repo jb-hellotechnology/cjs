@@ -1,0 +1,799 @@
+<div class="restrict">
+  
+  <perch:form id="cjs_online" method="post" app="cjs_daily" role="form" class="clear-form">
+    
+    <header id="form-header">
+      <h3>Create Your Advert</h3>
+    </header>
+    
+    <div class="form-panel flow show" data-panel="0">
+      <h3>Advert Details</h3>
+      <div class="form-columns">
+        <div>
+          <section class="input" id="type">
+            <perch:label>Choose Advert Type <span>*</span></perch:label>
+            <perch:input type="select" id="advertType" options="Basic|basic,Standard|standard,Enhanced|enhanced,Unlimited|long" value="<perch:content id="form_advertType" />" required />
+          </section>
+          <section class="input">
+            <perch:label>Job Title <span>*</span></perch:label>
+            <perch:input type="text" id="jobtitle" label="Job Title" value="<perch:content id="form_jobtitle" />" required />
+          </section>
+          <section class="input">
+            <perch:label>Employer Name <span>*</span></perch:label>
+            <perch:input type="text" id="employerDisplay" label="Employer Name" value="<perch:content id="form_employer" />" required />
+          </section>
+          <section class="input">
+            <perch:label>Closing Date <span>*</span></perch:label>
+            <perch:input type="text" id="closingDate" label="Closing Date" value="<perch:content id="form_closingdate" />" placeholder="dd/mm/yyyy" class="datefield" required />
+          </section>
+        </div>
+        <div>
+          <p><strong>Your Advert</strong></p>
+          <p>Linage <u>from</u> &pound;75 <a href="/advertise/how-much-does-it-cost" target="_blank">more information on costs here</a></p>
+          <p><strong>Don't forget to include information about the job hunters should apply for this role.</strong></p>
+          <section class="input">
+          <!-- CHANGED: added the value attribute. The input id has to stay
+               form_text because the app reads $data->data['form_text'], so the
+               page-side var was renamed to form_advertText to avoid the clash.
+               Without this the saved advert text never loaded into Redactor. -->
+          <perch:input type="textarea" id="form_text" class="redactor" label="Linage" value="<perch:content id="form_advertText" />" placeholder="Please enter your advert details here - including how applicants should apply and who to contact for more information." html />
+          <p class="error basic">You've exceeded the 200 word limit for Basic adverts - please reduce the number of words, or choose Standard or Long advert</p>
+          <p class="error standard">You've exceeded the 400 word limit for Standard adverts - please reduce the number of words, or choose an Unlimited advert</p>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="form-panel flow" data-panel="1">
+      <h3>Logos</h3>
+      <p><strong>Upload Your Logos</strong><em class="hide basic"> - to include your logo you need to change the advert type from basic to standard, enhanced or unlimited. Click 'Previous' below if you want to do that.</em></p>
+      <section class="input hide standard long">
+      <p>Image files ONLY - your text must be entered in the previous step.</p>
+      <div class="form-columns">
+        <div>
+          <section class="input logo standard">
+            <perch:label>Logo File (JPG)</perch:label>
+            <perch:input type="file" id="logo" label="Logo #1" />
+            <perch:if exists="form_logo1">
+            <br /><img src="<perch:content id="form_logo1" />" alt="Logo 1" id="form1_logo_image" />
+            </perch:if>
+            <perch:input type="hidden" id="logo1_hidden" value="<perch:content id="form_logo1" />" />
+            <!-- CHANGED: file input id is "logo", so the DOM id is form1_logo,
+                 not form1_logo1. The old call matched nothing. -->
+            <p><a href="javascript:removeFile('#form1_logo','#form1_logo1_hidden');" class="remove">Click to Remove File</a></p>
+          </section>
+          <section class="input logo standard">
+            <perch:label>Logo File #2 (JPG)</perch:label>
+            <perch:input type="file" id="logo2" label="Logo #2" />
+            <perch:if exists="form_logo2">
+            <br /><img src="<perch:content id="form_logo2" />" alt="Logo 2" id="form1_logo2_image" />
+            </perch:if>
+            <perch:input type="hidden" id="logo2_hidden" value="<perch:content id="form_logo2" />" />
+            <p><a href="javascript:removeFile('#form1_logo2','#form1_logo2_hidden');" class="remove">Click to Remove File</a></p>
+          </section>
+          <section class="input logo long">
+            <perch:label>Logo File #3 (JPG)</perch:label>
+            <perch:input type="file" id="logo3" label="Logo #3" />
+            <perch:if exists="form_logo3">
+            <br /><img src="<perch:content id="form_logo3" />" alt="Logo 3" id="form1_logo3_image" />
+            </perch:if>
+            <perch:input type="hidden" id="logo3_hidden" value="<perch:content id="form_logo3" />" />
+            <p><a href="javascript:removeFile('#form1_logo3','#form1_logo3_hidden');" class="remove">Click to Remove File</a></p>
+          </section>
+        </div>
+        <div>
+          <section class="input logo long">
+            <perch:label>Logo File #4 (JPG)</perch:label>
+            <perch:input type="file" id="logo4" label="Logo #4" />
+            <perch:if exists="form_logo4">
+            <!-- CHANGED: was pointing at form_logo1 -->
+            <br /><img src="<perch:content id="form_logo4" />" alt="Logo 4" id="form1_logo4_image" />
+            </perch:if>
+            <perch:input type="hidden" id="logo4_hidden" value="<perch:content id="form_logo4" />" />
+            <p><a href="javascript:removeFile('#form1_logo4','#form1_logo4_hidden');" class="remove">Click to Remove File</a></p>
+          </section>
+          <section class="input logo long">
+            <perch:label>Logo File #5 (JPG)</perch:label>
+            <perch:input type="file" id="logo5" label="Logo #5" />
+            <perch:if exists="form_logo5">
+            <!-- CHANGED: was pointing at form_logo1 -->
+            <br /><img src="<perch:content id="form_logo5" />" alt="Logo 5" id="form1_logo5_image" />
+            </perch:if>
+            <perch:input type="hidden" id="logo5_hidden" value="<perch:content id="form_logo5" />" />
+            <p><a href="javascript:removeFile('#form1_logo5','#form1_logo5_hidden');" class="remove">Click to Remove File</a></p>
+          </section>
+        </div>
+      </div>
+      </section><!-- CHANGED: this section was never closed -->
+    </div>
+    <div class="form-panel" data-panel="2">
+      <h3>Location, Region &amp; Sector</h3>
+      <div class="form-columns">
+        <div>
+          <section class="input">
+            <perch:label>Location <span>*</span></perch:label>
+            <perch:input type="text" id="location" label="Location" value="<perch:content id="form_location" />" required />
+          </section>
+          <section class="input">
+            <perch:label>Map Markers</perch:label>
+            <p>Click to drop one or more map markers onto appropriate locations for this job. For national, international and work-from-home roles please drop a pin on your organisation's head office.</p>
+            <div id="map"></div>
+            <input id="delete-markers" type="button" value="Delete Markers" class="button small delete" />
+            <perch:input type="hidden" id="lat" label="Lat" value="<perch:content id="form_lat" />" />
+            <perch:input type="hidden" id="lng" label="Lng" value="<perch:content id="form_lng" />" />
+          </section>
+        </div>
+        <div>
+          <section class="input pill-labels">
+            <h4>Region</h4>
+            <label><perch:input type="checkbox" id="form_rNational" value="1"> National</label>
+            <label><perch:input type="checkbox" id="form_rInternational" value="1"> International</label>
+            <label><perch:input type="checkbox" id="form_rScotlandNorth" value="1"> Scotland North</label>
+            <label><perch:input type="checkbox" id="form_rScotlandSouth" value="1"> Scotland South</label>
+            <label><perch:input type="checkbox" id="form_rWales" value="1"> Wales</label>
+            <label><perch:input type="checkbox" id="form_rNorthernIreland" value="1"> Northern Ireland</label>
+            <label><perch:input type="checkbox" id="form_rEngland" value="1"> England</label>
+            <label><perch:input type="checkbox" id="form_rAnglia" value="1"> Anglia</label>
+            <label><perch:input type="checkbox" id="form_rMidlands" value="1"> Midlands</label>
+            <label><perch:input type="checkbox" id="form_rNorthEast" value="1"> North East</label>
+            <label><perch:input type="checkbox" id="form_rNorthWest" value="1"> North West</label>
+            <label><perch:input type="checkbox" id="form_rSouth" value="1"> South</label>
+            <label><perch:input type="checkbox" id="form_rSouthWest" value="1"> South West</label>
+            <label><perch:input type="checkbox" id="form_rHome" value="1"> Home Based</label>
+          </section>
+          <section class="input pill-labels">
+            <p>Choose the sector or sectors that best reflect the main purpose and day-to-day work of the role. <a href="https://www.countryside-jobs.com/advertise/advertiser-guidance">Read the Guidance from CJS here</a>.</p>
+            <h4>Sector - Countryside Management</h4>
+            <label><perch:input type="checkbox" id="form_sCountry" value="1"> Rangers and Countryside Wardens</label>
+            <label><perch:input type="checkbox" id="form_sPractical" value="1"> Practical Land and Habitat Management</label>
+            <label><perch:input type="checkbox" id="form_sRoW" value="1"> Rights of Way and Public Access</label>
+            <label><perch:input type="checkbox" id="form_sPolicy" value="1"> Policy and Advice</label>
+            <h4>Sector - Ecosystems Management</h4>
+            <label><perch:input type="checkbox" id="form_sEco" value="1"> Ecology and Biodiversity</label>
+            <label><perch:input type="checkbox" id="form_sFieldwork" value="1"> Fieldwork and Research</label>
+            <label><perch:input type="checkbox" id="form_sWiWoAnC" value="1"> Wildlife Work and Animal Care</label>
+            <label><perch:input type="checkbox" id="form_sSustainability" value="1"> Environmental Stewardship and Nature Recovery</label>
+            <h4>Sector - Land, Estates and Support Services</h4>
+            <label><perch:input type="checkbox" id="form_sArbo" value="1"> Arboriculture and Woodland</label>
+            <label><perch:input type="checkbox" id="form_sForestry" value="1"> Commercial Forestry and Timber</label>
+            <label><perch:input type="checkbox" id="form_sHorti" value="1"> Heritage and Conservation Horticulture</label>
+            <label><perch:input type="checkbox" id="form_sAdminIT" value="1"> Administration, IT and Support Services</label>
+            <h4>Sector - Education, Community and Engagement</h4>
+            <label><perch:input type="checkbox" id="form_sEnvOE" value="1"> Environmental and Outdoor Education</label>
+            <label><perch:input type="checkbox" id="form_sComVol" value="1"> Community Engagement and Volunteer Management</label>
+            <label><perch:input type="checkbox" id="form_sVisMan" value="1"> Countryside Recreation and Visitor Management</label>
+            <label><perch:input type="checkbox" id="form_sPubF" value="1"> Publicity and Fundraising</label>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="form-panel" data-panel="3">
+      <h3>Contract</h3>
+      <div class="form-columns">
+        <div>
+          <section class="input">
+          <perch:label>Contract Length</perch:label>
+          <perch:input type="text" id="contractLength" label="Contract Length" value="<perch:content id="form_contractlength" />" />
+          </section>
+        </div>
+        <div>
+          <section class="input pill-labels">
+          <h4>Contract Type</h4>
+          <label><perch:input type="checkbox" id="form_cfullTime" value="1" label="Full Time" /> Full Time</label>
+          <label><perch:input type="checkbox" id="form_cpartTime" value="1" label="Part Time" /> Part Time</label>
+          <label><perch:input type="checkbox" id="form_cpermanent" value="1" label="Permanent" /> Permanent</label>
+          <label><perch:input type="checkbox" id="form_cTempFixed" value="1" label="Temporary/Fixed Contract" /> Temporary/Fixed Contract</label>
+          <label><perch:input type="checkbox" id="form_cseasonal" value="1" label="Seasonal" /> Seasonal</label>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="form-panel" data-panel="4">
+      <h3>Enhance Your Advert</h3>
+      <p><strong>Enhance Your Advert - Paid Options</strong> <a href="/advertise/promotions" target="_blank">More information here</a>.</p>
+      <div class="form-columns">
+        <div>
+          <section class="input border">
+            <perch:label><perch:input type="checkbox" id="video" value="1" label="Video" /> Include a video with your advert (we will contact you about how to send your video link to us). &pound;40**</perch:label>
+          </section>
+          <section class="input border">
+            <perch:label><perch:input type="checkbox" id="professional" value="1" label="Add CJS Professional" /> Add CJS Professional for &pound;10. <a href="/professional">See the current edition here</a>.</perch:label>
+          </section>
+          <section class="input border">
+            <perch:label><perch:input type="checkbox" id="weekly" value="1" label="Add CJS Weekly" /> Featured job in CJS Weekly for &pound;25.</perch:label>
+          </section>
+          <section class="input border">
+            <perch:label><perch:input type="checkbox" id="jod" value="1" label="Add Job of the Day" data-show="jod-date" /> Add <a href="/advertise/promotions#JoD">Job of the Day</a> to boost sticky jobs or increase applications as the closing date nears. &pound;50.</perch:label>
+            <div class="hide jod-date">
+              <perch:label>Date you'd like your Job of the Day to appear</perch:label>
+              <perch:input type="text" id="jodDate" label="Job of the Day Date" value="<perch:content id="form_jodDate" />" placeholder="dd/mm/yyyy" class="datefield" />
+            </div>
+          </section>
+        </div>
+        <div>
+          <section class="input border">
+            <p><strong>Additional Social Media Coverage</strong></p>
+            <p>NB: Basic, Standard and Unlimited include basic social shares on the main networks. Enhanced includes Instagram. To be shared on the same day as your advert is published.</p>
+            <perch:label><perch:input type="checkbox" id="socialshares" value="1" label="Add Social Shares Package" data-show="social-date" /> Add <a href="/advertise/promotions#socialpackage">Social media package</a> to have your job promoted across our social channels. &pound;75.</perch:label>
+            <div class="hide social-date">
+              <perch:label>Date you'd like your additional social shares to be posted</perch:label>
+              <perch:input type="text" id="socialsharesDate" label="Social Shares Date" value="<perch:content id="form_socialsharesDate" />" placeholder="dd/mm/yyyy" class="datefield" />
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="form-panel" data-panel="5">
+      <h3>Payment Details</h3>
+      <div class="form-columns">
+        <div>
+          <section class="input">
+          <perch:label>Please invoice us at <span>*</span></perch:label>
+          <perch:input type="text" id="invoiceaddress" label="Invoice Address" value="<perch:content id="form_invoiceaddress" />" required />
+          </section>
+          <section class="input">
+          <perch:label><perch:input type="checkbox" id="unpaid" value="1" label="Unpaid Post" /> This is an unpaid/voluntary post (50% discount).</perch:label>
+          </section>
+          <section class="input">
+          <perch:label>And quote reference/order number (if you do not supply one we will use the job title)</perch:label>
+          <perch:input type="text" id="reference" label="Reference" value="<perch:content id="form_reference" />" />
+          </section>
+          <section class="input">
+          <perch:label>I will pay by card - please contact me to arrange payment by:</perch:label>
+          <perch:input type="select" id="payment" options=",Phone,Email" label="Payment Preference" value="<perch:content id="form_payment" />" />
+          </section>
+        </div>
+        <div>
+          <p><strong>Contact details for CJS use only:</strong></p>
+          <perch:if exists="form_memberID">
+            <p><a href="/advertisers/sign-out?r=/advertisers">Sign out/use different account</a></p>
+          </perch:if>
+          <section class="input">
+            <perch:label for="name">Name: <span>*</span></perch:label>
+            <perch:input type="text" id="name" label="Name" required="true" value="<perch:content id="form_name" />" />
+            </section>
+            <section class="input">
+            <perch:label for="organisation">Organisation: <span>*</span></perch:label>
+            <perch:input type="text" id="organisation" label="Organisation" required="true" value="<perch:content id="form_organisation" />" />
+          </section>
+          <section class="input">
+            <perch:label for="email">Email - we will acknowledge your submission by email: <span>*</span></perch:label>
+            <perch:input type="text" id="email" label="Email Address" required="true" value="<perch:content id="form_email" />" />
+          </section>
+          <section class="input">
+            <perch:label for="telephone">Telephone: <span>*</span></perch:label>
+            <perch:input type="text" id="telephone" label="Telephone" required="true" value="<perch:content id="form_phone" />" />
+          </section>
+          <section class="input">
+            <perch:label for="message">Any Message For CJS:</perch:label>
+            <perch:input type="text" id="message" label="Message for CJS" value="<perch:content id="form_message" />" />
+          </section>
+          <section class="input other">
+            <label>Are you human? If so, don't write in here.</label>
+            <perch:input type="text" id="enquiry" antispam="honeypot" />
+          </section>
+          <perch:if exists="form_memberID">
+          <section class="input">
+            <label><strong>Type of Advert</strong></label>
+            <perch:input type="select" id="status" label="Status" options="<perch:content id="form_statusOptions" />" />
+          </section>
+          </perch:if>
+          <section class="input">
+            <div class="g-recaptcha" data-sitekey="6LcKQNYfAAAAAKfvMMYcA6xI8d64c0oxSbIpoSuB" data-callback="enableBtn"></div>
+          </section>
+          <section class="input">
+            <perch:if exists="form_advertID">
+            <perch:input type="submit" value="Update Advert" id="submit" disabled="disabled" />
+            <perch:else>
+            <perch:input type="submit" value="Submit Advert" id="submit" disabled="disabled" />
+            </perch:if>
+          </section>
+          <perch:input type="hidden" id="memberID" value="<perch:content id="form_memberID" />" />
+          <perch:input type="hidden" id="advertID" value="<perch:content id="form_advertID" />" />
+          <perch:input type="hidden" id="advertURL" value="<perch:content id="form_advertURL" />" />
+
+          <!-- CHANGED: single source for restoring every checkbox. Replaces the
+               35 set_var calls on the page that nothing was reading. -->
+          <perch:input type="hidden" id="checkedFields" value="<perch:content id="form_checkedFields" />" />
+          <perch:input type="hidden" id="restoreVideo" value="<perch:content id="form_video" />" />
+          <perch:input type="hidden" id="restoreProfessional" value="<perch:content id="form_professional" />" />
+          <perch:input type="hidden" id="restoreWeekly" value="<perch:content id="form_weekly" />" />
+          <perch:input type="hidden" id="restoreUnpaid" value="<perch:content id="form_unpaid" />" />
+          <perch:input type="hidden" id="restoreJod" value="<perch:content id="form_jod" />" />
+          <perch:input type="hidden" id="restoreSocialshares" value="<perch:content id="form_socialshares" />" />
+          
+          <p>If you have any problems using this form please email your request direct to CJS, <a href="mailto:ranger@countryside-jobs.com">ranger@countryside-jobs.com</a></p>
+    
+    <perch:success>
+      <div class="success">
+        <perch:content type="textarea" id="confirmation" label="Confirmation Message" html editor="redactor" />
+        <perch:if exists="form_memberID">
+        <p>If you have submitted a draft advert you can check, update and submit for publication through your advertisers profile, <a href="/advertisers">click here</a>.</p>
+        </perch:if>
+      </div>
+    </perch:success>
+    </div>
+    </div>
+  
+</div>
+<footer>
+  <div>
+    <button class="prev" id="prev" type="button">Previous</button>
+  </div>
+  <div>
+    <p class="progress">Section <span id="panel"></span> of <span id="totalPanels"></span></p>
+  </div>
+  <div>
+    <button class="next" id="next" type="button">Next</button>
+  </div>
+</footer>
+</perch:form>
+  <!-- <div class="form-help">
+    <p><span>*</span> required field</p>
+    <p><span>**</span> For enhanced adverts, if your file size permits, we will post your video with the social media coverage.</p>
+  </div> -->
+</div>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="//jqueryui.com/resources/demos/style.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+key: "AIzaSyATUBEmTAVMlmQUpMKKD95ic8B62ECXOQo",
+v: "weekly",
+// Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
+// Add other bootstrap parameters as needed, using camel case.
+});
+</script>
+<script>
+function enableBtn(){
+  document.getElementById("form1_submit").disabled = false;
+}
+
+$( function() {
+  $( ".datefield" ).datepicker({ dateFormat: 'dd/mm/yy'});
+});
+
+$('.redactor').redactor({ 
+  plugins: ['counter', 'limiter'], 
+  buttons: ['ul', 'link'],
+  linkSize: 1000,
+  minHeight: '300px',
+  pasteClean: true,
+  pasteInlineTags: ['br'],
+  pasteBlockTags: ['p', 'ul', 'ol', 'li'],
+  callbacks: {
+    keydown: function(data){
+      getContent();
+    },
+    enter: function(data){
+      getContent();
+    },
+    tab: function(data){
+      getContent();
+    },
+    blur: function(data){
+      getContent();
+    }
+  }
+});
+
+getContent();
+
+function getContent(){
+    var count = $('.redactor-statusbar li:first-child').text();
+    var res = count.split(" ");
+    var words = parseInt(res[1]) || 0;
+    var type = $('#form1_advertType').val();
+
+    $('p.error.basic').hide();
+    $('p.error.standard').hide();
+
+    if (type == 'basic' && words > 230) {
+        $('p.error.basic').show();
+    }
+    if (type == 'standard' && words > 460) {
+        $('p.error.standard').show();
+    }
+}
+
+/* ---------------------------------------------------------------
+   CHANGED: restore saved values on edit.
+   Perch prefixes field ids with form1_, so a field with
+   id="form_rNational" becomes #form1_form_rNational in the DOM.
+   --------------------------------------------------------------- */
+function restoreSavedValues(){
+  var checkedFields = $('#form1_checkedFields').val() || '';
+  if (checkedFields) {
+    checkedFields.split(',').forEach(function(f){
+      $('#form1_form_' + $.trim(f)).prop('checked', true);
+    });
+  }
+
+  // The old inline <script> blocks used .attr('checked','checked'), which
+  // stops working in jQuery 1.9+ once the element has been interacted with.
+  var singles = {
+    'form1_video':         'form1_restoreVideo',
+    'form1_professional':  'form1_restoreProfessional',
+    'form1_weekly':        'form1_restoreWeekly',
+    'form1_unpaid':        'form1_restoreUnpaid',
+    'form1_jod':           'form1_restoreJod',
+    'form1_socialshares':  'form1_restoreSocialshares'
+  };
+  for (var box in singles) {
+    if ($('#' + singles[box]).val() == '1') {
+      $('#' + box).prop('checked', true);
+    }
+  }
+}
+
+/* ---------------------------------------------------------------
+   CHANGED: the markup uses class="hide jod-date" / "hide social-date",
+   but the old handlers targeted #jod_date / #social_date, which don't
+   exist. The date field stayed hidden even when the box was ticked.
+   --------------------------------------------------------------- */
+function bindDateToggles(){
+  $('#form1_jod').on('change', function(){
+    $('.jod-date').toggleClass('hide', !this.checked);
+  }).trigger('change');
+
+  $('#form1_socialshares').on('change', function(){
+    $('.social-date').toggleClass('hide', !this.checked);
+  }).trigger('change');
+}
+
+function applyAdvertTypeVisibility(){
+  var type = $('#form1_advertType').val();
+  console.log(type);
+  $('.input.logo').hide();
+  if(type == 'long' || type == 'enhanced'){
+    $('.input.standard').show();
+    $('.input.long').show();
+    $('.logo.standard').show();
+    $('.logo.long').show();
+    $('.hide.basic').hide();
+    $('#form1_submit').show();
+  }
+  if(type == 'standard'){
+    $('.input.standard').show();
+    $('.logo.standard').show();
+    $('.hide.basic').hide();
+    $('#form1_submit').show();
+  }
+  if(type == 'basic'){
+    $('.hide.basic').show();
+    $('#form1_submit').show();
+  }
+}
+
+$(document).ready(function(){
+  restoreSavedValues();   // must run before the toggles, so they see the state
+  bindDateToggles();
+  applyAdvertTypeVisibility();
+});
+
+$('#form1_advertType').change(function(){
+
+$('#form1_logo').val('');
+$('#form1_logo2').val('');
+$('#form1_logo3').val('');
+$('#form1_logo4').val('');
+$('#form1_logo5').val('');
+
+$('p.error.basic').hide();
+$('p.error.standard').hide();
+
+applyAdvertTypeVisibility();
+});
+
+/* ---------------------------------------------------------------
+   CHANGED: removeFile now takes the file input and the hidden field
+   explicitly, and clears the matching preview image. The old version
+   built '#form1_logo1' for a field whose DOM id was 'form1_logo', and
+   looked for '_image' ids that were rendered with a form2_ prefix.
+
+   NOTE: the UPDATE in submitDailyAdvert() now treats an empty logo
+   value as "keep the stored image", so clearing the hidden field no
+   longer deletes a logo on save. See the removal-flag note if you need
+   deliberate removal to work.
+   --------------------------------------------------------------- */
+function removeFile(fileInput, hiddenInput){
+  $(fileInput).val('');
+  $(hiddenInput).val('');
+  $(fileInput + '_image').remove();
+}
+
+// In the following example, markers appear when the user clicks on the map.
+// The markers are stored in an array.
+// The user can then click an option to hide, show or delete the markers.
+let map;
+let markers = [];
+
+/* ---------------------------------------------------------------
+   CHANGED: initMap was never called (the call was commented out), and
+   with the dynamic loader google.maps.Map isn't available synchronously
+   anyway. It now awaits the library and restores any saved markers.
+   --------------------------------------------------------------- */
+async function initMap() {
+  const { Map } = await google.maps.importLibrary("maps");
+  const { Marker } = await google.maps.importLibrary("marker");
+
+  const centre = { lat: 53.419354, lng: -1.953678 };
+
+  map = new Map(document.getElementById("map"), {
+    zoom: 6,
+    center: centre,
+    mapTypeId: "terrain",
+  });
+
+  // This event listener will call addMarker() when the map is clicked.
+  map.addListener("click", (event) => {
+    addMarker(event.latLng);
+  });
+
+  // add event listeners for the buttons
+  document
+    .getElementById("delete-markers")
+    .addEventListener("click", deleteMarkers);
+
+  restoreMarkers();
+}
+
+// CHANGED: plot the saved lat/lng pairs when editing an existing advert.
+function restoreMarkers(){
+  var lats = ($('#form1_lat').val() || '').split(',').filter(Boolean);
+  var lngs = ($('#form1_lng').val() || '').split(',').filter(Boolean);
+
+  if (!lats.length || lats.length !== lngs.length) { return; }
+
+  var bounds = new google.maps.LatLngBounds();
+
+  for (var i = 0; i < lats.length; i++) {
+    var lat = parseFloat(lats[i]);
+    var lng = parseFloat(lngs[i]);
+    if (isNaN(lat) || isNaN(lng)) { continue; }
+
+    var marker = new google.maps.Marker({ position: { lat: lat, lng: lng }, map: map });
+    markers.push(marker);
+    bounds.extend(marker.getPosition());
+  }
+
+  if (markers.length) {
+    map.fitBounds(bounds);
+    if (markers.length === 1) { map.setZoom(10); }
+  }
+}
+
+// Adds a marker to the map and push to the array.
+function addMarker(position) {
+const marker = new google.maps.Marker({
+position,
+map,
+});
+
+markers.push(marker);
+
+writeMarkerFields();
+}
+
+// CHANGED: pulled out of addMarker so deleteMarkers can reuse it.
+function writeMarkerFields(){
+  let latArray = [];
+  let lngArray = [];
+
+  for (let i = 0; i < markers.length; i++) {
+    var position = markers[i].getPosition();
+    latArray.push(position.lat());
+    lngArray.push(position.lng());
+  }
+
+  $('#form1_lat').val(latArray.toString());
+  $('#form1_lng').val(lngArray.toString());
+}
+
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+for (let i = 0; i < markers.length; i++) {
+markers[i].setMap(map);
+}
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function hideMarkers() {
+setMapOnAll(null);
+}
+
+// Deletes all markers in the array by removing references to them.
+// CHANGED: also clears the hidden fields, which it previously left populated.
+function deleteMarkers() {
+hideMarkers();
+markers = [];
+writeMarkerFields();
+}
+
+initMap();
+
+// CHANGED: the map lives in a panel that starts hidden, so it needs a nudge
+// once that panel becomes visible or it renders as a grey box.
+function refreshMap(){
+  if (!map) { return; }
+  var centre = map.getCenter();
+  google.maps.event.trigger(map, 'resize');
+  map.setCenter(centre);
+}
+
+var activePanel = parseInt($('.form-panel.show').data('panel'));
+var totalPanels = $('.form-panel').length;
+$('#panel').text(activePanel+1);
+$('#totalPanels').text(totalPanels);
+
+const scrollIntoViewWithOffset = (selector, offset) => {
+  window.scrollTo({
+    behavior: 'smooth',
+    top:
+      document.querySelector(selector).getBoundingClientRect().top -
+      document.body.getBoundingClientRect().top -
+      offset,
+  })
+}
+
+// Function to validate current panel
+function validateCurrentPanel() {
+    var activePanel = parseInt($('.form-panel.show').data('panel'));
+    var currentPanelElement = $('.form-panel[data-panel=' + activePanel + ']');
+    var isValid = true;
+    var errorMessages = [];
+
+    // Word count validation on panel 0
+    if (activePanel === 0) {
+      var plain = $('<div>').html($('.redactor-in').html() || '').text().trim();
+      if (!plain) {
+        isValid = false;
+        errorMessages.push('Advert text');
+      }
+      if (!validateWordCount()) isValid = false;
+    }
+
+    // Find all required inputs in the current panel
+    currentPanelElement.find('input[required], select[required], textarea[required]').each(function() {
+        var $input = $(this);
+        var value = $input.val();
+        var label = $input.closest('section').find('label').first().text().replace('*', '').trim();
+
+        if (!value || value === '' || value === 'Please Select') {
+            isValid = false;
+            $input.addClass('error-field');
+            errorMessages.push(label || 'A required field');
+        } else {
+            $input.removeClass('error-field');
+        }
+    });
+
+    currentPanelElement.find('.validation-error:not(.word-count-error)').remove();
+
+    if (errorMessages.length > 0) {
+        var errorHtml = '<div class="validation-error" style="background: #ffebee; border: 1px solid #f44336; padding: 15px; margin: 20px 0; border-radius: 4px; color: #c62828;"><strong>Please complete the following required fields:</strong><ul style="margin: 10px 0 0 20px;">';
+        errorMessages.forEach(function(msg) {
+            errorHtml += '<li>' + msg + '</li>';
+        });
+        errorHtml += '</ul></div>';
+        currentPanelElement.prepend(errorHtml);
+        scrollIntoViewWithOffset("#form-header", 100);
+    }
+
+    if (!isValid) {
+        scrollIntoViewWithOffset("#form-header", 100);
+    }
+
+    return isValid;
+}
+
+// Add CSS for error highlighting
+$('<style>.error-field { border: 2px solid #f44336 !important; }</style>').appendTo('head');
+
+// Optional: Clear error styling when user starts typing
+$(document).on('input change', 'input, select, textarea', function() {
+  $(this).removeClass('error-field');
+});
+
+$('#prev').hide();
+/* FORM CONTROLS */
+$('#next').click(function(){
+  // Manually sync Redactor editor content to textarea
+  var editorContent = $('.redactor-in').html();
+  if (editorContent) {
+    $('#form1_form_text').val(editorContent);
+  }
+  
+  // Validate before moving forward
+  if (!validateCurrentPanel()) {
+    return false;
+  }
+  
+  var activePanel = parseInt($('.form-panel.show').data('panel'));
+  var totalPanels = $('.form-panel').length;
+  $('#panel').text(activePanel+2);
+  $('#totalPanels').text(totalPanels);
+  if(activePanel<totalPanels-1){
+    var nextPanel = activePanel+1;
+
+    scrollIntoViewWithOffset("#form-header", '100');
+    
+    $('.form-panel.show').removeClass('show');
+    $('.form-panel[data-panel=' + nextPanel + ']').addClass('show');
+    $('#next').show();
+    $('#prev').show();
+    if(activePanel==totalPanels-2){
+      $('#next').hide();  
+    }
+    if(nextPanel == 2){
+      refreshMap();
+    }
+    applyAdvertTypeVisibility();
+  }else{
+    $('#prev').show();
+    applyAdvertTypeVisibility();
+  }
+});
+
+$('#prev').click(function(){
+  var activePanel = parseInt($('.form-panel.show').data('panel'));
+  
+  // Manually sync Redactor editor content to textarea
+  var editorContent = $('.redactor-in').html();
+  if (editorContent) {
+    $('#form1_form_text').val(editorContent);
+  }
+ 
+  if(activePanel>0){
+    var nextPanel = activePanel-1;
+    $('#panel').text(activePanel);
+    $('#totalPanels').text(totalPanels);
+    const element = document.getElementById("form-header");
+    element.scrollIntoView();
+    
+    $('.form-panel.show').removeClass('show');
+    $('.form-panel[data-panel=' + nextPanel + ']').addClass('show');
+    $('#next').show();
+    if(nextPanel == 2){
+      refreshMap();
+    }
+    if(activePanel==1){
+      $('#prev').hide();
+    }
+  }else{
+    $('#next').show();
+    $('#prev').show();
+  }
+});
+
+function getWordCount() {
+  var t = $('<div>').html($('.redactor-in').html() || '').text().trim();
+  return t ? t.split(/\s+/).length : 0;
+}
+
+function validateWordCount() {
+    var type = $('#form1_advertType').val();
+    var words = getWordCount();
+    var isValid = true;
+    var errorMessage = '';
+
+    if (type == 'basic' && words > 230) {
+        isValid = false;
+        errorMessage = 'You have exceeded the 200 word limit for Basic adverts (' + words + ' words). Please reduce the number of words or upgrade your advert type.';
+    } else if (type == 'standard' && words > 460) {
+        isValid = false;
+        errorMessage = 'You have exceeded the 400 word limit for Standard adverts (' + words + ' words). Please reduce the number of words or upgrade to an Unlimited advert.';
+    }
+
+    // Remove existing word count error
+    $('.word-count-error').remove();
+
+    if (!isValid) {
+        var errorHtml = '<div class="word-count-error validation-error" style="background: #ffebee; border: 1px solid #f44336; padding: 15px; margin: 20px 0; border-radius: 4px; color: #c62828;">' + errorMessage + '</div>';
+        $('.form-panel[data-panel=0]').prepend(errorHtml);
+    }
+
+    return isValid;
+}
+
+</script>

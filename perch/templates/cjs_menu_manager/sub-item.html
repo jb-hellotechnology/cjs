@@ -1,0 +1,7 @@
+<perch:before>
+	<ul class="inline sub">
+</perch:before>
+	<li class="<perch:if id="bold" value="1" match="eq">bold </perch:if><perch:if id="italic" value="1" match="eq">italic </perch:if><perch:if id="alignLeft" value="1" match="eq">align-left </perch:if><perch:if id="alignRight" value="1" match="eq">align-right </perch:if><perch:if id="perch_page_path" match="eq" value="{pagePath}">active</perch:if> text"><a href="<perch:if exists="altURL"><perch:cjs id="altURL" /><perch:else /><perch:cjs id="pagePath" /></perch:if><perch:if id="page_path" match="eq" value="{perch_page_path}">active </perch:if>" <perch:if id="openNewTab" value="1" match="eq">target="_blank"</perch:if>><perch:cjs id="pageTitle" /></a></li><perch:if id="lineBreak" value="1" match="eq"><li class="break"></li></perch:if>
+<perch:after>
+	</ul>
+</perch:after>

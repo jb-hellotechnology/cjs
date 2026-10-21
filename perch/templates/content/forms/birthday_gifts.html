@@ -1,0 +1,69 @@
+<perch:form id="birthday_gifts" method="post" app="perch_forms" role="form">
+  
+  <section class="input">
+		<perch:label for="name">Your name: <span>*</span></perch:label>
+		<perch:input type="text" id="name" label="Name" required="true" />
+	</section>
+  <section class="input">
+		<perch:label for="email">Your email address - just in case we have any queries, and to let you know if you've won!: <span>*</span></perch:label>
+		<perch:input type="text" id="email" label="Email Address" required="true" />
+	</section>
+  <section class="input">
+    <perch:label for="enter"><perch:input type="checkbox" name="Enter" id="enter" value="yes" /> Please enter my details in the draw.</perch:label>
+  </section>
+  <p>
+    <strong>Entries close on 31 December. Draw will be made in January once the office open after the Christmas break.</strong>
+  </p>
+  <section class="input">
+    <perch:label for="cjssubscription"><perch:input type="radio" name="type" id="cjsmembership" label="CJS Subscription" value="Yes" selected /> CJS Subscription</perch:label>
+  </section>
+  <section class="input">
+		<perch:label for="birthdaywishes">If you would like to send us <strong>birthday wishes</strong> please type those in this box:</perch:label>
+		<perch:input type="textarea" id="birthdaywishes" label="Birthday Wishes" />
+    <p>
+      NB: Please include your name in your comment if you're happy for us to publish it, otherwise comments will be published anonymously.
+    </p>
+	</section>
+  <p>
+    <strong>For CJS information only:</strong>
+  </p>
+  <section class="input">
+    <label>Do you receive any of our email newsletters?</label>
+    <perch:label for="daily_update"><perch:input type="checkbox" label="Daily Update" id="daily_update" value="Yes" /> Daily Update</perch:label>
+    <perch:label for="cjs_weekly"><perch:input type="checkbox" label="CJS Weekly" id="cjs_weekly" value="Yes" /> CJS Weekly</perch:label>
+    <perch:label for="cjs_professional"><perch:input type="checkbox" label="CJS Professional (Monthly)" id="daily_update" value="Yes" /> CJS Professional (Monthly)</perch:label>
+  </section>
+  <section class="input">
+    <label>Where did you hear about our birthday gifts?</label>
+    <perch:label for="newsletters"><perch:input type="checkbox" label="Newsletters" id="newsletters" value="Yes" /> Newsletters</perch:label>
+    <perch:label for="cjswebsite"><perch:input type="checkbox" label="CJS Website" id="cjswebsite" value="Yes" /> CJS website</perch:label>
+    <perch:label for="anotherwebsite"><perch:input type="checkbox" label="Another Website" id="anotherwebsites" value="Yes" /> Mentioned on another website</perch:label>
+    <perch:label for="twitter"><perch:input type="checkbox" label="Twitter" id="twitter" value="Yes" /> Twitter</perch:label>
+    <perch:label for="facebook"><perch:input type="checkbox" label="Facebook" id="facebook" value="Yes" /> Facebook</perch:label>
+    <perch:label for="linkedin"><perch:input type="checkbox" label="LinkedIn" id="linkedin" value="Yes" /> LinkedIn</perch:label>
+  </section>
+  <p>
+     Your information will not be used for anything other than this draw and will be deleted once the draw has taken place.
+  </p>
+  <p>
+    Many thanks for your time and assistance, it is much appreciated.
+  </p>
+  <section class="input other">
+    <label>Are you human? If so, don't write in here.</label>
+    <perch:input type="text" id="enquiry" antispam="honeypot" />
+  </section>
+	<section class="input">
+		<perch:input type="submit" value="Submit" />
+	</section>
+  
+  <perch:success>
+    <div class="success">
+      <perch:content type="textarea" id="confirmation" label="Confirmation Message" html editor="redactor" />
+    </div>
+  </perch:success>
+
+  <p>
+    <span>*</span> = required field
+  </p>
+	
+</perch:form>

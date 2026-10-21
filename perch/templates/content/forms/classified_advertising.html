@@ -1,0 +1,357 @@
+<div class="restrict">
+  
+<perch:form id="classified_advertising" method="post" app="perch_forms" role="form" class="clear-form">
+  
+  <header id="form-header">
+    <h3>Create Your Advert</h3>
+  </header>
+  
+  <div class="form-panel flow show" data-panel="0">
+    <div class="form-columns">
+      <div>
+        <section class="input">
+          <perch:label for="name">Company Name: <span>*</span></perch:label>
+          <perch:input type="text" id="name" label="Company Name" required="true" />
+        </section>
+        <section class="input">
+		  <perch:label for="text">Advert Text: <span>*</span></perch:label>
+		  <perch:input type="textarea" id="text" label="Text" class="redactor" required />
+          <small>Free advert is strictly limited to 50 words, to include contact details. Longer listings WILL be charged.</small>
+	    </section>
+        <h3>Multiple Listings</h3>
+        <section class="input">
+          <perch:label for="edition">Please publish my advert in the edition published in: <span>*</span></perch:label>
+          <perch:input type="text" id="edition" label="Edition" required="true" />
+          <small>Enter which month(s) and year if appropriate</small>
+        </section>
+        <p>
+          Two basic adverts per year free of charge.<br />
+          Place a series of three or more paid adverts to receive a discount.
+        </p>
+      </div>
+      <div>
+        <h3>Enhanced Listing Options</h3>
+        <p><a href="/advertise/classified-information/class-sample">samples here</a></p>
+        <section class="input pill-labels">
+          <perch:label for="logo"><perch:input type="checkbox" id="logo" label="Logo" value="yes" /> Option 1: Add your logo <sup>2</sup> <strong>Price<sup>1</sup> &pound;20</strong></perch:label>
+          <perch:label for="longer"><perch:input type="checkbox" id="longer" label="Longer" value="yes" /> Option 2: Longer description: 100 words (incl. 50 free) additional words &pound;10 per 50 <strong>Price<sup>1</sup> from &pound;15</strong></perch:label>
+          <perch:label for="longerlogo"><perch:input type="checkbox" id="longerlogo" label="Longer and Logo" value="yes" /> Option 3: Longer description and your logo <strong>Price<sup>1</sup> from &pound;35</strong></perch:label>
+          <perch:label for="display"><perch:input type="checkbox" id="display" label="Display" value="yes" /> Option 4: Full display 13cm high x 8.5 cm wide (please supply camera ready artwork) <strong>Price<sup>1</sup> from &pound;135</strong></perch:label>
+        </section>
+        <p>
+          Other sizes accepted please ask for a quote, other options available please ask for details.<br />
+          NB: all prices quoted are net of VAT. <br />
+          <sup>1</sup> we will contact you to take payment, usually by phone for your card details.<br />
+          <sup>2</sup> we will contact you with details of how to supply logos and artwork.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="form-panel flow" data-panel="1">
+    <p><strong>Contact details for CJS use only:</strong></p>
+    <section class="input">
+      <perch:label for="name">Name: <span>*</span></perch:label>
+      <perch:input type="text" id="name" label="Name" required="true" />
+    </section>
+    <section class="input">
+      <perch:label for="email">Email - we will acknowledge your submission by email: <span>*</span></perch:label>
+      <perch:input type="text" id="email" label="Email Address" required="true" />
+    </section>
+    <section class="input">
+      <perch:label for="telephone">Telephone: <span>*</span></perch:label>
+      <perch:input type="text" id="telephone" label="Telephone" required="true" />
+    </section>
+    <section class="input">
+      <perch:label for="message">Any Message For CJS:</perch:label>
+      <perch:input type="text" id="message" label="Message" />
+    </section>
+    <section class="input other">
+      <label>Are you human? If so, don't write in here.</label>
+      <perch:input type="text" id="enquiry" antispam="honeypot" />
+    </section>
+    <section class="input">
+      <div class="g-recaptcha" data-sitekey="6LcKQNYfAAAAAKfvMMYcA6xI8d64c0oxSbIpoSuB" data-callback="enableBtn"></div>
+    </section>
+    <section class="input">
+      <perch:input type="submit" value="Submit Advert" id="submit" />
+    </section>
+  </div>
+  
+  <footer>
+    <div>
+      <button class="prev" id="prev" type="button">Previous</button>
+    </div>
+    <div>
+      <p class="progress">Section <span id="panel"></span> of <span id="totalPanels"></span></p>
+    </div>
+    <div>
+      <button class="next" id="next" type="button">Next</button>
+    </div>
+  </footer>
+  
+  <perch:success>
+    <div class="success">
+      <perch:content type="textarea" id="confirmation" label="Confirmation Message" html editor="redactor" />
+    </div>
+  </perch:success>
+
+</perch:form>
+
+</div>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="//jqueryui.com/resources/demos/style.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+function enableBtn(){
+  document.getElementById("form2_submit").disabled = false;
+}
+
+$( function() {
+  $( ".datefield" ).datepicker({ dateFormat: 'dd/mm/yy'});
+});
+
+$('#form1_type').change(function(){
+  let fType = $('#form1_type').val();
+  if(fType=='Event'){
+    $('.online input[type=checkbox]').prop("checked", false);
+    $('.online').hide();
+  }else{
+    $('.online').show();
+  }
+});
+
+$('.redactor').redactor({ 
+  plugins: ['counter', 'limiter'], 
+  buttons: [],
+  linkSize: 1000,
+  minHeight: '200px',
+  callbacks: {
+    keydown: function(data){
+      getContent();
+    },
+    enter: function(data){
+      getContent();
+    },
+    tab: function(data){
+      getContent();
+    },
+    blur: function(data){
+      getContent();
+    }
+  }
+});
+
+getContent();
+
+function getContent(){
+  var count = $('.redactor-statusbar li:first-child').text();
+  var res = count.split(" ");
+  var words = res[1];
+  
+  var type = $('#form1_advertType').val();
+  
+  $('p.error.basic').hide();
+  $('p.error.standard').hide();
+  
+  if(type == 'basic' && words>220){
+    $('p.error.basic').show();
+    $('#form1_submit').hide();
+  }
+  if(type == 'basic' && words<=220){
+    $('p.error.basic').hide();
+    $('#form1_submit').show();
+  }
+  if(type == 'standard' && words>400){
+    $('p.error.standard').show();
+    $('#form1_submit').hide();
+  }
+  if(type == 'standard' && words<=400){
+    $('p.error.standard').hide();
+    $('#form1_submit').show();
+  }
+}
+
+$(document).ready(function(){
+  var type = $('#form1_advertType').val(); 
+  if(type == 'long'){
+    $('.input.long').show();
+    $('.hide.basic').hide();
+    $('#form1_submit').show();
+  }
+  if(type == 'enhanced'){
+    $('.input.long').show();
+    $('.hide.basic').hide();
+    $('#form1_submit').show();
+  }
+  if(type == 'standard'){
+    $('.input.standard').show();
+    $('.hide.basic').hide();
+    $('#form1_submit').show();
+  }
+  if(type == 'basic'){
+    $('.hide.basic').show();
+    $('#form1_submit').show();
+  }
+})
+
+$('#form1_advertType').change(function(){
+
+$('#form1_logo').val('');
+$('#form1_logo2').val('');
+$('#form1_logo3').val('');
+$('#form1_logo4').val('');
+$('#form1_logo5').val('');
+
+$('p.error.basic').hide();
+$('p.error.standard').hide();
+
+var type = $('#form1_advertType').val(); 
+  if(type == 'basic'){
+    $('.logo.basic').show();
+    $('#form1_submit').show();
+  }else if(type == 'standard'){
+    $('.logo.standard').show();
+  }else{
+    $('.logo.standard').show();
+    $('.logo.long').show();
+  }
+});
+
+$('#form1_jod').click(function(){
+  if ($('#form1_jod').is(':checked')) {
+   $('#jod_date').addClass('show');
+  }else{
+   $('#jod_date').removeClass('show'); 
+  }
+})
+
+$('#form1_socialshares').click(function(){
+  if ($('#form1_socialshares').is(':checked')) {
+   $('#social_date').addClass('show');
+  }else{
+   $('#social_date').removeClass('show'); 
+  }
+})
+
+function removeFile(id){
+  $(id).val('');
+  $(id+'_image').remove();
+  $(id+'_hidden').val('');
+}
+
+var activePanel = parseInt($('.form-panel.show').data('panel'));
+var totalPanels = $('.form-panel').length;
+$('#panel').text(activePanel+1);
+$('#totalPanels').text(totalPanels);
+
+const scrollIntoViewWithOffset = (selector, offset) => {
+  window.scrollTo({
+    behavior: 'smooth',
+    top:
+      document.querySelector(selector).getBoundingClientRect().top -
+      document.body.getBoundingClientRect().top -
+      offset,
+  })
+}
+
+// Function to validate current panel
+function validateCurrentPanel() {
+  var activePanel = parseInt($('.form-panel.show').data('panel'));
+  var currentPanelElement = $('.form-panel[data-panel=' + activePanel + ']');
+  var isValid = true;
+  var errorMessages = [];
+  
+  // Find all required inputs in the current panel
+  currentPanelElement.find('input[required], select[required], textarea[required]').each(function() {
+    var $input = $(this);
+    var value = $input.val();
+    var label = $input.closest('section').find('label').first().text().replace('*', '').trim();
+    
+    // Check if field is empty
+    if (!value || value === '' || value === 'Please Select') {
+      isValid = false;
+      $input.addClass('error-field');
+      errorMessages.push(label || 'A required field');
+    } else {
+      $input.removeClass('error-field');
+    }
+  });
+  
+  // Remove any existing error message
+  currentPanelElement.find('.validation-error').remove();
+  
+  // Show error message if validation failed
+  if (!isValid) {
+    var errorHtml = '<div class="validation-error" style="background: #ffebee; border: 1px solid #f44336; padding: 15px; margin: 20px 0; border-radius: 4px; color: #c62828;"><strong>Please complete the following required fields:</strong><ul style="margin: 10px 0 0 20px;">';
+    errorMessages.forEach(function(msg) {
+      errorHtml += '<li>' + msg + '</li>';
+    });
+    errorHtml += '</ul></div>';
+    
+    currentPanelElement.prepend(errorHtml);
+    scrollIntoViewWithOffset("#form-header", 100);
+  }
+  
+  return isValid;
+}
+
+// Add CSS for error highlighting
+$('<style>.error-field { border: 2px solid #f44336 !important; }</style>').appendTo('head');
+
+// Optional: Clear error styling when user starts typing
+$(document).on('input change', 'input, select, textarea', function() {
+  $(this).removeClass('error-field');
+});
+
+$('#prev').hide();
+/* FORM CONTROLS */
+$('#next').click(function(){
+  
+  // Validate before moving forward
+  if (!validateCurrentPanel()) {
+    return false;
+  }
+  
+  var activePanel = parseInt($('.form-panel.show').data('panel'));
+  var totalPanels = $('.form-panel').length;
+  $('#panel').text(activePanel+2);
+  $('#totalPanels').text(totalPanels);
+  if(activePanel<totalPanels-1){
+    var nextPanel = activePanel+1;
+
+    scrollIntoViewWithOffset("#form-header", '100');
+    
+    $('.form-panel.show').removeClass('show');
+    $('.form-panel[data-panel=' + nextPanel + ']').addClass('show');
+    $('#next').show();
+    $('#prev').show();
+    if(activePanel==totalPanels-2){
+      $('#next').hide();  
+    }
+  }else{
+    $('#prev').show();
+  }
+});
+
+$('#prev').click(function(){
+  var activePanel = parseInt($('.form-panel.show').data('panel'));
+  console.log(activePanel);
+  if(activePanel>0){
+    var nextPanel = activePanel-1;
+    $('#panel').text(activePanel);
+    $('#totalPanels').text(totalPanels);
+    const element = document.getElementById("form-header");
+    element.scrollIntoView();
+    
+    $('.form-panel.show').removeClass('show');
+    $('.form-panel[data-panel=' + nextPanel + ']').addClass('show');
+    $('#next').show();
+    if(activePanel==1){
+      $('#prev').hide();
+    }
+  }else{
+    $('#next').show();
+    $('#prev').show();
+  }
+});
+</script>

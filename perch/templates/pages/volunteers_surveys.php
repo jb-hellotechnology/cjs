@@ -1,0 +1,26 @@
+<?php
+/*
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+*/
+?>
+<?php perch_layout('header'); ?>
+<?php perch_content('Hero'); ?>
+
+<main class="flow">
+    <?php
+      perch_content('Content');
+    ?>
+  <div class="textarea flow">
+  <?php
+	  advertiser_message_workdays();
+      volunteers_surveys_all($sector);
+    ?>
+  </div>
+	<?php
+      perch_content('Secondary Content');
+    ?>
+</main>
+
+<?php perch_layout('footer'); ?>

@@ -1,0 +1,108 @@
+<perch:form id="monthly_book" method="post" app="perch_forms" role="form">
+  
+  <p>
+    <strong>Your booking request details</strong>
+  </p>
+  <section class="input">
+		<perch:label for="option">I wish to book a: <span>*</span></perch:label>
+		<perch:input type="select" name="adverttype" label="Advert Type" options="Select Size of Advert,Basic Text (£85),Standard Listing (£135),Unlimited (£185)" />
+	</section>
+  <section class="input">
+		<perch:label>Enhancement options:</perch:label>
+	</section>
+  <section class="input">
+    <perch:label for="video"><perch:input type="checkbox" id="video" label="Add a Video" value="yes" /> Add a Video <strong>Price<sup>1</sup> &pound;40</strong></perch:label>
+  </section>
+  <section class="input">
+    <perch:label for="higherpromotion"><perch:input type="checkbox" id="higherlevel" label="Higher Promotion" value="yes" /> Higher Promotion <strong>Price<sup>1</sup> &pound;25/advert</strong></perch:label>
+  </section>
+  <section class="input">
+    <perch:label for="jod"><perch:input type="checkbox" id="jod" label="Job of Day" value="yes" /> 'Job of the Day' banner on CJS Online <strong>Price<sup>1</sup> &pound;50/day</strong></perch:label>
+  </section>
+  <section class="input">
+    <perch:label for="socialpackage"><perch:input type="checkbox" id="socialpackage" label="Social Package" value="yes" /> Social Package <strong>Price<sup>1</sup> &pound;75/advert</strong></perch:label>
+  </section>
+  <section class="input">
+    <perch:label for="featured"><perch:input type="checkbox" id="featured" label="Featured Job in CJS Professional" value="yes" /> Featured Job in CJS Professional <strong>Price<sup>1</sup> &pound;10</strong></perch:label>
+  </section>
+  <section class="input">
+		<perch:label>Publish dates:</perch:label>
+	</section>
+  <section class="input">
+    <perch:label for="january"><perch:input type="checkbox" id="january" label="January" value="yes" /> January</perch:label>
+    <perch:label for="february"><perch:input type="checkbox" id="february" label="February" value="yes" /> February</perch:label>
+    <perch:label for="march"><perch:input type="checkbox" id="march" label="March" value="yes" /> March</perch:label>
+    <perch:label for="april"><perch:input type="checkbox" id="april" label="April" value="yes" /> April</perch:label>
+    <perch:label for="may"><perch:input type="checkbox" id="may" label="May" value="yes" /> May</perch:label>
+    <perch:label for="june"><perch:input type="checkbox" id="june" label="June" value="yes" /> June</perch:label>
+    <perch:label for="july"><perch:input type="checkbox" id="july" label="July" value="yes" /> July</perch:label>
+    <perch:label for="august"><perch:input type="checkbox" id="august" label="August" value="yes" /> August</perch:label>
+    <perch:label for="september"><perch:input type="checkbox" id="september" label="September" value="yes" /> September</perch:label>
+    <perch:label for="october"><perch:input type="checkbox" id="october" label="October" value="yes" /> October</perch:label>
+    <perch:label for="november"><perch:input type="checkbox" id="november" label="November" value="yes" /> November</perch:label>
+    <perch:label for="december"><perch:input type="checkbox" id="december" label="December" value="yes" /> December</perch:label>
+  </section>
+  <p>
+    <strong>Order details</strong>
+  </p>
+  <section class="input">
+		<perch:label for="reference">Your reference for this advert:</perch:label>
+		<perch:input type="text" id="reference" label="Reference" />
+	</section>
+  <section class="input">
+		<perch:label for="po">Purchase order/reference number to be quoted on the invoice:</perch:label>
+		<perch:input type="text" id="po" label="PO" />
+	</section>
+  <section class="input">
+		<perch:label for="card"><perch:input type="checkbox" id="card" label="Card" value="yes" /> Please contact me and I will pay by card</perch:label>
+	</section>
+  <p>
+    <strong>Contact details for CJS use only:</strong>
+  </p>
+	<section class="input">
+		<perch:label for="name">Name: <span>*</span></perch:label>
+		<perch:input type="text" id="name" label="Name" required="true" />
+	</section>
+  <section class="input">
+		<perch:label for="organisation">Organisation: <span>*</span></perch:label>
+		<perch:input type="text" id="organisation" label="Organisation" required="true" />
+	</section>
+  <section class="input">
+		<perch:label for="email">Email - we will acknowledge your submission by email: <span>*</span></perch:label>
+		<perch:input type="text" id="email" label="Email Address" required="true" />
+	</section>
+	<section class="input">
+		<perch:label for="telephone">Telephone: <span>*</span></perch:label>
+		<perch:input type="text" id="telephone" label="Telephone" required="true" />
+	</section>
+  <section class="input">
+		<perch:label for="message">Any Message For CJS:</perch:label>
+		<perch:input type="text" id="message" label="Message" />
+	</section>
+  <section class="input other">
+    <label>Are you human? If so, don't write in here.</label>
+    <perch:input type="text" id="enquiry" antispam="honeypot" />
+  </section>
+	<section class="input">
+		<perch:input type="submit" value="Submit" />
+	</section>
+  
+  <p>Before you hit submit please read this (Sorry it's the legal bit) - By clicking submit you agree to CJS publishing your advert in CJS Professional, this is a binding booking, please note any failure to supply copy will result in full costs being invoiced. 
+    To read our full terms and conditions of publication please <a href="/information/terms-and-conditions">click here</a>.</p>
+
+  <p>If you have any problems using this form please email your request direct to CJS, ranger@countryside-jobs.com</p>
+
+  <p>NB: All prices quoted net of VAT which is chargeable at standard rates.<br />
+  <sup>1</sup> we will contact you to take payment, usually by phone for your card details.</p>
+  
+  <perch:success>
+    <div class="success">
+      <perch:content type="textarea" id="confirmation" label="Confirmation Message" html editor="redactor" />
+    </div>
+  </perch:success>
+  
+  <p>
+    <span>*</span> = required field
+  </p>
+	
+</perch:form>

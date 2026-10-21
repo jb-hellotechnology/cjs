@@ -1,0 +1,58 @@
+# Ignore everything in the web root by default...
+/*
+
+# ...except this file, the assets folder and the perch folder
+!/.gitignore
+!/.gitattributes
+!/assets/
+!/perch/
+
+# Inside /perch, ignore everything except addons and templates
+/perch/*
+!/perch/addons/
+!/perch/templates/
+
+# Perch's own apps are commercial, licensed code: don't republish them
+/perch/addons/apps/perch_*/
+
+# Old copies of apps
+*.bk/
+/perch/addons/apps/*.bk/
+
+# Data written by the apps at runtime. The contents never go in the repository, but each
+# folder's .htaccess does, so that deploying it keeps the files off the web.
+/perch/addons/apps/cjs_backup/backups/*
+/perch/addons/apps/cjs_daily/submissions/*
+/perch/addons/apps/**/upload_csv/uploads/*
+/perch/addons/apps/cjs_subscribers/import/files/*
+!/perch/addons/apps/cjs_backup/backups/.htaccess
+!/perch/addons/apps/cjs_daily/submissions/.htaccess
+!/perch/addons/apps/**/upload_csv/uploads/.htaccess
+!/perch/addons/apps/cjs_subscribers/import/files/.htaccess
+
+# Spreadsheets and lists are data, never code
+*.csv
+*.xls
+*.xlsx
+
+# Never commit database dumps or archives (they contain member/subscriber data)
+*.sql
+*.sql.gz
+*.zip
+*.gz
+*.tar
+
+# Server logs
+error_log
+*.log
+
+# Local/server-specific config and credentials, wherever they live
+config.local.php
+config.production.php
+.env
+
+# OS and editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*.bak

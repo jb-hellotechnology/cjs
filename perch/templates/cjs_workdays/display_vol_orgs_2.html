@@ -1,0 +1,26 @@
+<perch:before>
+
+</perch:before>	
+
+<perch:if exists="vorgName">
+	<section class="textarea flow survey listing">
+	  <p class="listing-title">
+	    <strong>
+	      <perch:cjs id="vorgName">
+	    </strong>
+	  </p>
+	  <perch:if exists="logo">
+	  	<img src="<perch:cjs id="logo" />" alt="" />
+	  </perch:if>
+	  <perch:cjs id="description" html /> <p><a href="mailto:<perch:cjs id="advertEmail" />?subject=Enquiry via CJS Volunteers Directory"><perch:cjs id="advertEmail" /></a> <perch:if id="advertDisplay" match="eq" value="1"><a href="<perch:cjs id="advertWebsiteShort" />" target="_blank"><perch:cjs id="advertWebsiteShort" replace="http://|,https://|" /></a><perch:else /><a href="<perch:cjs id="advertWebsite" />" target="_blank"><perch:cjs id="advertWebsite" replace="http://|,https://|" /></a></perch:if></p>
+	  <br />
+	  <p>Types of Volunteering Offered: <perch:if id="cVolPlace" value="1" match="eq">Placements&nbsp;&nbsp;&nbsp;</perch:if> <perch:if id="cVolOpps" value="1" match="eq">Occasional Requirement&nbsp;&nbsp;&nbsp;</perch:if> <perch:if id="cWorkDays" value="1" match="eq">Work Days&nbsp;&nbsp;&nbsp;</perch:if> <perch:if id="cSurveys" value="1" match="eq">Citizen Science&nbsp;&nbsp;&nbsp;</perch:if><perch:if id="cFromHome" value="1" match="eq">From Home&nbsp;&nbsp;&nbsp;</perch:if></p>
+	  <perch:if exists="organisationSlug">
+	  	<p><a href="/jobs/employer/<perch:cjs id="organisationSlug" />">Click here to see everything from this organisation</a></p>
+	  </perch:if>
+	</section>
+</perch:if>
+
+<perch:after>
+
+</perch:after>

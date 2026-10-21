@@ -1,0 +1,48 @@
+<perch:form id="profile" method="post" app="perch_members">
+	
+	<perch:success show-form="true">
+		<div class="success">
+			<p>Your details have been updated.</p>
+		</div>
+	</perch:success>
+	
+	<section class="input">
+		<perch:label for="first_name">First name</perch:label>
+		<perch:input type="text" id="first_name" required="true" label="First name" />
+		<perch:error for="first_name" type="required">Please add a your name</perch:error>
+	</section>
+
+	<section class="input">
+		<perch:label for="last_name">Last name</perch:label>
+		<perch:input type="text" id="last_name" required="true" label="Last name" />
+		<perch:error for="last_name" type="required">Please add a your name</perch:error>
+	</section>
+	
+	<section class="input">
+		<perch:label for="organisation">Organisation</perch:label>
+		<perch:input type="text" id="organisation" required="true" label="Organisation" options="" />
+	</section>
+	
+	<section class="input">
+		<perch:label for="telephone">Telephone</perch:label>
+		<perch:input type="text" id="telephone" required="true" label="Telephone" />
+	</section>
+	
+	<section class="input">
+		<perch:label for="telephone">Type of Account</perch:label>
+		<perch:input type="select" id="type" required="true" label="Type" options="Employer,Recruitment Agency" />
+	</section>
+
+	<section class="input">
+		<perch:label for="email">Email</perch:label>
+		<perch:input type="text" id="email" required="true" placeholder="you@company.com" />
+		<perch:error for="email" type="required">Please add a your email address</perch:error>
+		<perch:error for="email" type="format">Please check a your email address</perch:error>
+	</section>
+
+	<section class="input">
+		<perch:input type="submit" value="Save" />
+		<perch:input type="hidden" id="token" />
+	</section>
+
+</perch:form>

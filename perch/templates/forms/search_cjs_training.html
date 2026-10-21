@@ -1,0 +1,149 @@
+<div class="form-grid">
+
+<perch:form method="post" role="form" action="/training/search/results" class="search-form">
+  <h2>Search Term</h2>
+  <p>Choose options and enter your search query below then click 'Search':</p>
+  <section class="input pill-labels">
+    <h4>Type of Course</h4>
+    <label for="form1_term_short"><perch:input type="checkbox" id="term_short" name="term1" value="1"> Short Courses</label>
+    <label for="form1_term_long"><perch:input type="checkbox" id="term_long" name="term2" value="1"> Long Courses</label>
+    <label for="form1_term_distance"><perch:input type="checkbox" id="term_distance" name="term3" value="1"> Distance Learning</label>
+    <label for="form1_term_centres_providers"><perch:input type="checkbox" id="term_centres_providers" name="term4" value="1"> Centres & Providers</label>
+    <label for="form1_term_events"><perch:input type="checkbox" id="term_events" name="term5" value="1"> Events</label>
+  </section>
+  <section class="input">
+    <perch:label>Search Term</perch:label>
+	<perch:input type="text" id="search_term" label="Text Field" />
+  </section>
+  <section class="input">
+	<perch:input type="submit" value="Search" />
+  </section>
+  <perch:input type="hidden" id="type" value="specific_text" />
+</perch:form>
+
+<perch:form method="post" app="cjs_training" action="/training/search/results" class="search-form">
+
+  <h2>Short Courses</h2>
+  <p>Choose options from the drop-down menus then click 'Search', select as many options as needed:</p>
+
+  <div class="columns">
+    <section class="input">
+      <perch:label>Section</perch:label>
+      <perch:input type="select" id="select_section_short" class="select2" options="Any, Access and Rights of Way|row, Administrative and Office Skills|ad,Community Engagement and Environmental Education|ed, Country Craft Courses|craft, Countryside Management Techniques|cons,First Aid\, Risk Assessment and other Health & Safety Related Courses|1aid, Horticulture and Small Holding|hort, Identification and Field Survey Skills - Herpetology\, Fish and Invertebrates|invert, Identification and Field Survey Skills - Mammals|mammals, Identification and Field Survey Skills - Ornithology|birds, Identification and Field Survey Skills - Plants and Habitats|plants,Photography|photo, Practical Countryside Skills|skills, Practical Countryside Skills - Machinery|mach" label="Select Options" multiple/>
+    </section>
+    <section class="input">
+      <perch:label>Start Date (on or after)</perch:label>
+      <perch:input type="date" id="date_short"/>
+    </section>
+    <section class="input">
+      <perch:label>Location</perch:label>
+    <perch:input type="select" id="select_location_short[]" class="select2" options="Bedfordshire,Berkshire,Bristol,Buckinghamshire,Cambridgeshire,Cheshire,Cornwall,County Durham,Cumbria,Derbyshire,Devon,Dorset,East Riding of Yorkshire,East Sussex,Essex,Gloucestershire,Greater Manchester,Hampshire,Herefordshire,Hertfordshire,Humberside,Isle of Wight,Isles of Scilly,Kent,Lancashire,Leicestershire,Lincolnshire,London,Merseyside,Norfolk,North Somerset,North Yorkshire,Northamptonshire,Northumberland,Nottinghamshire,Oxfordshire,Rutland,Shropshire,Somerset,South Gloucestershire,South Yorkshire,Staffordshire,Suffolk,Surrey,Tyne & Wear,Warwickshire,West Midlands,West Sussex,West Yorkshire,Wiltshire,Worcestershire,Aberdeenshire,Angus,Argyll & Bute,Ayrshire,Banffshire,Berwickshire,Borders,Caithness,Clackmannanshire,Dumfries & Galloway,Dunbartonshire,East Ayrshire,East Dunbartonshire,East Lothian,East Renfrewshire,Fife,Highland,Inverclyde,Kincardineshire,Lanarkshire,Midlothian,Moray,North Ayrshire,North Lanarkshire,Orkney,Perth & Kinross,Renfrewshire,Shetland,South Ayrshire,South Lanarkshire,Stirlingshire,West Dunbartonshire,West Lothian,Western Isles,Blaenau Gwent,Bridgend,Caerphilly,Cardiff,Carmarthenshire,Ceredigion,Conwy,Denbighshire,Flintshire,Gwynedd,Isle of Anglesey,Merthyr Tydfil,Monmouthshire,Neath Port Talbot,Newport,Pembrokeshire,Powys,Rhondda Cynon Taff,Swansea,Torfaen,Vale of Glamorgan,Wrexham,Antrim,Armagh,Down,Fermanagh,Londonderry,Tyrone, UK Wide, England, Scotland, Wales, Northern Ireland, Jersey, Ireland, International" label="Select Options" multiple />
+    </section>
+    <section class="input">
+      <perch:label>Provider</perch:label>
+    <perch:input type="select" id="select_provider_short" class="select2" options="Please Select, <perch:forms id="shortproviders" />" label="Select Options"  multiple />
+    </section>
+    <section class="input pill-labels">
+      <h4>Type of Course</h4>
+      <label for="form2_free_shortcourse"><perch:input type="checkbox" id="free_shortcourse" name="courseType" value="free_shortcourse"> Free Courses Only</label>     
+    </section>
+  </div>
+  <section class="input">
+	<perch:input type="submit" value="Search" />
+  </section>
+  <perch:input type="hidden" id="type" value="shortcourse_advanced" />
+</perch:form>
+
+<perch:form method="post" role="form" action="/training/search/results" class="search-form">
+
+  <h2>Long Courses</h2>
+  <p>Choose options from the drop-down menus then click 'Search', select as many options as needed:</p>
+
+  <div class="columns">
+    <section class="input">
+      <perch:label>Section</perch:label>
+    <perch:input type="select" id="select_section_long" class="select2" options="Any, Agriculture|agriculture, Arboriculture|arboriculture, Botany and Horticulture|botany, Distance Learning|distance-leraning,Ecology|ecology, Environmental Education|enved, Hobby and Craft|craft, Land and Countryside Management|land,Marine and Coastal|marine, Planning, Sustainability" label="Select Options"  multiple />
+    </section>
+    <section class="input">
+      <perch:label>Qualification</perch:label>
+    <perch:input type="select" id="select_qualification_long[]" class="select2" options="Any, NVQ|cNvq, HND|cHnd, Diploma|cDiploma, HNC|cHnc, MSc|cMsc, Degree|cDegree, BTEC|cBtec, Foundation|cFoundation, PhD|cPhd, Apprenticeship|cApprenticeship" label="Select Options" multiple />
+    </section>
+    <section class="input">
+      <perch:label>Location</perch:label>
+    <perch:input type="select" id="select_location_long[]" class="select2" options="Bedfordshire,Berkshire,Bristol,Buckinghamshire,Cambridgeshire,Cheshire,Cornwall,County Durham,Cumbria,Derbyshire,Devon,Dorset,East Riding of Yorkshire,East Sussex,Essex,Gloucestershire,Greater Manchester,Hampshire,Herefordshire,Hertfordshire,Humberside,Isle of Wight,Isles of Scilly,Kent,Lancashire,Leicestershire,Lincolnshire,London,Merseyside,Norfolk,North Somerset,North Yorkshire,Northamptonshire,Northumberland,Nottinghamshire,Oxfordshire,Rutland,Shropshire,Somerset,South Gloucestershire,South Yorkshire,Staffordshire,Suffolk,Surrey,Tyne & Wear,Warwickshire,West Midlands,West Sussex,West Yorkshire,Wiltshire,Worcestershire,Aberdeenshire,Angus,Argyll & Bute,Ayrshire,Banffshire,Berwickshire,Borders,Caithness,Clackmannanshire,Dumfries & Galloway,Dunbartonshire,East Ayrshire,East Dunbartonshire,East Lothian,East Renfrewshire,Fife,Highland,Inverclyde,Kincardineshire,Lanarkshire,Midlothian,Moray,North Ayrshire,North Lanarkshire,Orkney,Perth & Kinross,Renfrewshire,Shetland,South Ayrshire,South Lanarkshire,Stirlingshire,West Dunbartonshire,West Lothian,Western Isles,Blaenau Gwent,Bridgend,Caerphilly,Cardiff,Carmarthenshire,Ceredigion,Conwy,Denbighshire,Flintshire,Gwynedd,Isle of Anglesey,Merthyr Tydfil,Monmouthshire,Neath Port Talbot,Newport,Pembrokeshire,Powys,Rhondda Cynon Taff,Swansea,Torfaen,Vale of Glamorgan,Wrexham,Antrim,Armagh,Down,Fermanagh,Londonderry,Tyrone, UK Wide, England, Scotland, Wales, Northern Ireland, Jersey, Ireland, International" label="Select Options" multiple />
+    </section>
+    <section class="input">
+      <perch:label>Provider</perch:label>
+    <perch:input type="select" id="select_provider_long" class="select2" options="Please Select, <perch:forms id="longproviders" />" label="Select Options" multiple />
+    </section>
+  </div>
+  <section class="input">
+	<perch:input type="submit" value="Search" />
+  </section>
+  <perch:input type="hidden" id="type" value="longcourse_advanced" />
+</perch:form>
+
+<perch:form method="post" role="form" action="/training/search/results" class="search-form">
+
+  <h2>Distance Learning</h2>
+  <p>Choose options from the drop-down menus then click 'Search', select as many options as needed:</p>
+  <div class="columns">
+    <section class="input">
+      <perch:label>Course Type</perch:label>
+    <perch:input type="select" id="select_course_type" class="select2" options="Any" label="Select Options"/>
+    </section>
+    <section class="input">
+      <perch:label>Qualification</perch:label>
+    <perch:input type="select" id="select_qualification_distance" class="select2" options="Any, NVQ|cNvq, HND|cHnd, Diploma|cDiploma, HNC|cHnc, MSc|cMsc, Degree|cDegree, BTEC|cBtec, Foundation|cFoundation, PhD|cPhd, Apprenticeship|cApprenticeship" label="Select Options" multiple />
+    </section>
+    <section class="input">
+      <perch:label>Provider</perch:label>
+    <perch:input type="select" id="select_provider_distance" class="select2" options="Please Select, <perch:forms id="distanceproviders" />" label="Select Options" multiple />
+    </section>
+  </div>
+  <section class="input">
+	<perch:input type="submit" value="Search" />
+  </section>
+  <perch:input type="hidden" id="type" value="distance" />
+</perch:form>
+
+<perch:form method="post" role="form" action="/training/search/results" class="search-form">
+
+  <h2>Centres & Providers</h2>
+  <p>Choose options from the drop-down menus then click 'Search', select as many options as needed:</p>
+
+  <div class="columns">
+    <section class="input">
+      <perch:label>Qualification Offered</perch:label>
+    <perch:input type="select" id="select_qualification_centres_providers" class="select2" options="Any, NVQ|cNvq, HND|cHnd, Diploma|cDiploma, HNC|cHnc, MSc|cMsc, Degree|cDegree, BTEC|cBtec, Foundation|cFoundation, PhD|cPhd, Apprenticeship|cApprenticeship" label="Select Options" multiple />
+    </section>
+    <section class="input">
+      <perch:label>Location</perch:label>
+    <perch:input type="select" id="select_location_centres_providers[]" class="select2" options="Bedfordshire,Berkshire,Bristol,Buckinghamshire,Cambridgeshire,Cheshire,Cornwall,County Durham,Cumbria,Derbyshire,Devon,Dorset,East Riding of Yorkshire,East Sussex,Essex,Gloucestershire,Greater Manchester,Hampshire,Herefordshire,Hertfordshire,Humberside,Isle of Wight,Isles of Scilly,Kent,Lancashire,Leicestershire,Lincolnshire,London,Merseyside,Norfolk,North Somerset,North Yorkshire,Northamptonshire,Northumberland,Nottinghamshire,Oxfordshire,Rutland,Shropshire,Somerset,South Gloucestershire,South Yorkshire,Staffordshire,Suffolk,Surrey,Tyne & Wear,Warwickshire,West Midlands,West Sussex,West Yorkshire,Wiltshire,Worcestershire,Aberdeenshire,Angus,Argyll & Bute,Ayrshire,Banffshire,Berwickshire,Borders,Caithness,Clackmannanshire,Dumfries & Galloway,Dunbartonshire,East Ayrshire,East Dunbartonshire,East Lothian,East Renfrewshire,Fife,Highland,Inverclyde,Kincardineshire,Lanarkshire,Midlothian,Moray,North Ayrshire,North Lanarkshire,Orkney,Perth & Kinross,Renfrewshire,Shetland,South Ayrshire,South Lanarkshire,Stirlingshire,West Dunbartonshire,West Lothian,Western Isles,Blaenau Gwent,Bridgend,Caerphilly,Cardiff,Carmarthenshire,Ceredigion,Conwy,Denbighshire,Flintshire,Gwynedd,Isle of Anglesey,Merthyr Tydfil,Monmouthshire,Neath Port Talbot,Newport,Pembrokeshire,Powys,Rhondda Cynon Taff,Swansea,Torfaen,Vale of Glamorgan,Wrexham,Antrim,Armagh,Down,Fermanagh,Londonderry,Tyrone, UK Wide, England, Scotland, Wales, Northern Ireland, Jersey, Ireland, International" label="Select Options" multiple />     
+    </section>
+  </div>
+  <section class="input">
+	<perch:input type="submit" value="Search" />
+  </section>
+  <perch:input type="hidden" id="type" value="providers" />
+</perch:form>
+    
+<perch:form method="post" role="form" action="/training/search/results" class="search-form">
+
+  <h2>Events</h2>
+  <p>Choose options from the drop-down menus then click 'Search', select as many options as needed:</p>
+  <div class="columns">
+    <section class="input">
+      <perch:label>Start Date (on or after)</perch:label>
+      <perch:input type="date" id="date_events"/>
+    </section>
+    <section class="input">
+      <perch:label>Location</perch:label>
+    <perch:input type="select" id="select_location_events[]" class="select2" options="Bedfordshire,Berkshire,Bristol,Buckinghamshire,Cambridgeshire,Cheshire,Cornwall,County Durham,Cumbria,Derbyshire,Devon,Dorset,East Riding of Yorkshire,East Sussex,Essex,Gloucestershire,Greater Manchester,Hampshire,Herefordshire,Hertfordshire,Humberside,Isle of Wight,Isles of Scilly,Kent,Lancashire,Leicestershire,Lincolnshire,London,Merseyside,Norfolk,North Somerset,North Yorkshire,Northamptonshire,Northumberland,Nottinghamshire,Oxfordshire,Rutland,Shropshire,Somerset,South Gloucestershire,South Yorkshire,Staffordshire,Suffolk,Surrey,Tyne & Wear,Warwickshire,West Midlands,West Sussex,West Yorkshire,Wiltshire,Worcestershire,Aberdeenshire,Angus,Argyll & Bute,Ayrshire,Banffshire,Berwickshire,Borders,Caithness,Clackmannanshire,Dumfries & Galloway,Dunbartonshire,East Ayrshire,East Dunbartonshire,East Lothian,East Renfrewshire,Fife,Highland,Inverclyde,Kincardineshire,Lanarkshire,Midlothian,Moray,North Ayrshire,North Lanarkshire,Orkney,Perth & Kinross,Renfrewshire,Shetland,South Ayrshire,South Lanarkshire,Stirlingshire,West Dunbartonshire,West Lothian,Western Isles,Blaenau Gwent,Bridgend,Caerphilly,Cardiff,Carmarthenshire,Ceredigion,Conwy,Denbighshire,Flintshire,Gwynedd,Isle of Anglesey,Merthyr Tydfil,Monmouthshire,Neath Port Talbot,Newport,Pembrokeshire,Powys,Rhondda Cynon Taff,Swansea,Torfaen,Vale of Glamorgan,Wrexham,Antrim,Armagh,Down,Fermanagh,Londonderry,Tyrone, UK Wide, England, Scotland, Wales, Northern Ireland, Jersey, Ireland, International" label="Select Options" multiple />     
+    </section>
+  </div>
+  <section class="input">
+	<perch:input type="submit" value="Search" />
+  </section>
+  <perch:input type="hidden" id="type" value="events" />
+</perch:form>    

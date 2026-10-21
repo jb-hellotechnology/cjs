@@ -1,0 +1,46 @@
+<perch:if exists="shortTitle">
+<section class="flow listing green <perch:if id="displayAd" match="eq" value="1">displayad</perch:if>" id="course_<perch:cjs id="shortID" />"  data-lat="<perch:cjs id="lat" />" data-lng="<perch:cjs id="lng" />" data-title="<perch:cjs id="shortTitle">, <perch:cjs id="provider" />" data-url="#course_<perch:cjs id="shortID"/>" id="course_<perch:cjs id="shortID">">
+  <article class="job training">
+    <div class="flow">
+      <p><perch:if exists="startText">
+          <perch:cjs id="startText" />
+        <perch:else />
+          <perch:cjs id="startDate" format="d/m/Y" />
+        </perch:if> <perch:if exists="numberDays">&bull; 
+          <perch:cjs id="numberDays" /> <perch:if id="numberDays" match="gt" value="1">Days<perch:else>Day</perch:if>
+        </perch:if></p>
+      <h2 class="listing-title">
+        <perch:cjs id="shortTitle">
+      </h2>
+      <perch:if exists="logo">
+        <img src="<perch:cjs id="logo" />" alt="" />
+      </perch:if>
+      <p><strong>
+        <perch:if exists="location"><perch:cjs id="location"  /><br /></perch:if>
+        <perch:if exists="provider"><perch:cjs id="provider" /><br /></perch:if>
+        <perch:if exists="advertTelephone"><perch:cjs id="advertTelephone" /><br /></perch:if>
+        <perch:if exists="advertEmail"><a href="mailto:<perch:cjs id="advertEmail" />?subject=<perch:cjs id="shortTitle" /> advertised in CJS Training Directory"><perch:cjs id="advertEmail" /></a></perch:if> 
+        <perch:if id="advertLink" match="eq" value="1">
+          <perch:if exists="advertWebsiteShort">
+            <a href="<perch:cjs id="advertWebsiteShort" />" target="_blank"><perch:cjs id="advertWebsiteShort" replace="http://|,https://|" /></a>
+          <perch:else />
+            <a href="<perch:cjs id="advertWebsite" />" target="_blank"><perch:cjs id="advertWebsite" replace="http://|,https://|" /></a>
+          </perch:if>
+        <perch:else />
+          <a href="<perch:cjs id="advertWebsite" />" target="_blank"><perch:cjs id="advertWebsite" replace="http://|,https://|" /></a>
+        </perch:if>
+      </strong></p>
+      <perch:cjs id="description" html />
+      <perch:if id="courseCost" match="gt" value="0.00">
+        <p>
+          <strong>Cost &pound;<perch:cjs id="courseCost" /></strong>
+        </p>
+      <perch:else />
+        <perch:if id="freeCourse" match="eq" value="1">
+          <p><strong>Free Course</strong></p>
+        </perch:if>
+      </perch:if>
+    </div>
+  </article>
+</section>
+</perch:if>

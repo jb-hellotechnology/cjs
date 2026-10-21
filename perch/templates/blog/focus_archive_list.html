@@ -1,0 +1,9 @@
+<perch:before>
+  <ul class="hfeed list focus-archive">
+</perch:before>
+    <li class="hentry flow <perch:blog id="postTags" replace="&amp;|&" format="LC" />">
+        <a href="<perch:blog id="postURL" />"><perch:blog id="postTitle" /></a> by <perch:if exists="organisationURL"><a href="<perch:blog id="organisationURL" type="text" label="Organisation URL">"></perch:if><perch:blog id="organisationName" /><perch:if exists="organisationURL"></a></perch:if><br />Published on <perch:blog id="postDateTime" format="d/m/Y" />
+    </li>
+<perch:after>
+  </ul>
+</perch:after>

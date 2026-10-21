@@ -1,0 +1,15 @@
+<section class="listing jobofday">
+	<div class="text">
+		<p><strong>Job of the Day: <perch:cjs id="jobOfDayDate" format="l jS F" /></strong></p>
+		<h3>
+			  <a href="<perch:cjs id="advertURL"/>">
+			    <perch:cjs id="title"> - <perch:cjs id="employerDisplay" />
+			  </a>
+		</h3>
+	</div>
+	<div>
+		<perch:if exists="imageLogo">
+			<img src="<perch:cjs id="imageLogo" />" alt="" />
+		</perch:if>
+	</div>
+</section>

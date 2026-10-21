@@ -1,0 +1,112 @@
+<div class="form-grid">
+  <perch:form method="post" role="form" action="/jobs/search/results" class="search-form">
+    <h2>Search Jobs</h2>
+    <section class="input">
+      <perch:label>Text Search</perch:label>
+      <perch:input type="text" id="textSearch" label="Text Field" />
+    </section>
+    <section class="input submit">
+      <perch:input type="submit" value="Search" class="ajax" />
+      <button class="text hide search" onclick="clearResults('search')" type="button">Clear Results</button>
+    </section>
+    <section class="input">
+      <perch:input type="hidden" id="type" value="text" />
+    </section>
+    <div class="results search"></div>
+  </perch:form>
+  
+  <perch:form method="post" role="form" action="/jobs/search/results" class="search-form">
+    <h2>Advanced Search - Jobs</h2>
+    <p>Search our Daily Jobs list using the advanced filtering options below, select as many options as needed:</p>
+    <div class="columns">
+      <section class="input">
+        <perch:label>Region</perch:label>
+        <perch:input type="select" id="select_region_daily[]" class="select2" options="National|rNational, International|rInternational, Scotland|rScotland, Scotland North|rScotlandNorth, Scotland South|rScotlandSouth, Wales|rWales, Northern Ireland|rNorthernIreland,England|rEngland, Anglia|rAnglia, Midlands|rMidlands, North East|rNorthEast, North West|rNorthWest, South|rSouth,South West|rSouthWest" 
+        label="Select Options" multiple />
+      </section>
+    
+      <section class="input">
+        <perch:label>Location (County)</perch:label>    
+        <perch:input type="select" id="select_county_daily[]" class="select2" options="Bedfordshire,Berkshire,Bristol,Buckinghamshire,Cambridgeshire,Cheshire,Cornwall,County Durham,Cumbria,Derbyshire,Devon,Dorset,East Riding of Yorkshire,
+        East Sussex,Essex,Gloucestershire,Greater London,Greater Manchester,Hampshire,Herefordshire,Hertfordshire,Humberside,Isle of Wight,Isles of Scilly,Kent,Lancashire,Leicestershire,Lincolnshire,Merseyside,Norfolk,North Somerset,North Yorkshire,Northamptonshire,Northumberland,Nottinghamshire,Oxfordshire,Rutland,Shropshire,Somerset,South Gloucestershire,South Yorkshire,Staffordshire,Suffolk,Surrey,Tyne & Wear,Warwickshire,West Midlands,West Sussex,West Yorkshire,Wiltshire,Worcestershire,Aberdeenshire,Angus,Argyll & Bute,Ayrshire,Banffshire,Berwickshire,Borders,Caithness,Clackmannanshire,Dumfries & Galloway,Dunbartonshire,East Ayrshire,East Dunbartonshire,East Lothian,East Renfrewshire,Fife,Highland,Inverclyde,Kincardineshire,Lanarkshire,Midlothian,Moray,North Ayrshire,North Lanarkshire,Orkney,Perth & Kinross,Renfrewshire,Shetland,South Ayrshire,South Lanarkshire,Stirlingshire,West Dunbartonshire,West Lothian,Western Isles,Blaenau Gwent,Bridgend,Caerphilly,Cardiff,Carmarthenshire,Ceredigion,Conwy,Denbighshire,Flintshire,
+        Gwynedd,Isle of Anglesey,Merthyr Tydfil,Monmouthshire,Neath Port Talbot,Newport,Pembrokeshire,Powys,Rhondda Cynon Taff,Swansea,Torfaen,Vale of Glamorgan,Wrexham,Antrim,Armagh,Down,Fermanagh,Londonderry,Tyrone" 
+        label="Select Options" multiple />
+      </section>
+    
+      <section class="input">
+        <perch:label>Sector</perch:label>
+        <perch:input type="select" id="select_sector_daily[]" class="select2" options="Any, Administration\, support and IT|sAdminIT,
+        Arboriculture|sArbo, Community and Volunteers|sComVol,Countryside|sCountry, Ecology|sEco, Environmental and Outdoor Education|sEnvOE,Horticulture|sHorti, Publicity and Fundraising|sPubF, Rights of Way|sRoW,Visitor Management|sVisMan, Wildlife Work and Animal Care|sWiWoAnC, Sustainability|sSustainability, Policy and Advice|sPolicy, Fieldwork and Research|sFieldwork, Practical Land Management|sPractical, Forestry|sForestry" 
+        label="Select Options" multiple />
+      </section>
+    
+      <section class="input">
+        <perch:label>Grade</perch:label>
+        <perch:input type="select" id="select_grade[]" class="select2" options="Any, Apprentice/Intern, Entry/Graduate,
+        Main, Management, Senior, Volunteer" 
+        label="Select Options" multiple />
+      </section>
+    
+      <section class="input">
+        <perch:label>Contract</perch:label>
+        <perch:input type="select" id="select_contract[]" class="select2" options="Any|Any, Full Time|cfullTime, Part Time|cpartTime, Permanent|cpermanent, Temporary/Fixed Term Contract|cTempFixed, Seasonal|cseasonal" 
+        label="Select Options" multiple />
+      </section>
+    </div>
+  
+    <section class="input submit">
+      <perch:input type="submit" value="Search" class="ajax" />
+      <button class="text hide cjs" onclick="clearResults('cjs')" type="button">Clear Results</button>
+    </section>
+    
+    <perch:input type="hidden" id="type" value="daily" />
+    
+    <div class="results cjs"></div>
+  </perch:form>
+  
+  <perch:form method="post" role="form" action="/jobs/search/results" id="vol" class="search-form">
+  
+    <h2>Advanced Search - Volunteers</h2>
+    <p>Search our Volunteer Jobs list using the advanced filtering options below, select as many options as needed:</p>
+    <div class="columns">
+      <section class="input">
+        <perch:label>Time Commitment</perch:label>
+        <perch:input type="select" id="select_role[]" class="select2" options="Any, Occasional|tcOccasional, Once or Twice a Week|tcOnceorTwiceWeek, Part Time|tcPartTime,Full Time|tcFullTime, Up to Six Months|tcSixMonths, Six Months to One Year|tcSixMonthYear,One Year or More|tcOneYearMore"
+        label="Select Options" multiple />
+      </section>
+  
+      <section class="input">
+        <perch:label>Sector</perch:label>
+        <perch:input type="select" id="select_sector_volunteers[]" class="select2" options="Any, Administration\, support and IT|sAdminIT,
+        Arboriculture|sArbo, Community and Volunteers|sComVol,Countryside|sCountry, Ecology|sEco, Environmental and Outdoor Education|sEnvOE,Horticulture|sHorti, Publicity and Fundraising|sPubF, Rights of Way|sRoW,Visitor Management|sVisMan, Wildlife Work and Animal Care|sWiWoAnC"  
+        label="Select Options" multiple />
+      </section>
+  
+      <section class="input">
+        <perch:label>Region</perch:label>
+        <perch:input type="select" id="select_region_volunteers[]" class="select2" options="National|rNational, International|rInternational, Scotland|rScotland, Wales|rWales, Northern Ireland|rNorthernIreland,England|rEngland, Anglia|rAnglia,Midlands|rMidlands,North East|rNorthEast, North West|rNorthWest, South|rSouth,South West|rSouthWest" 
+        label="Select Options" multiple />
+      </section>
+  
+      <section class="input">
+        <perch:label>Location (County)</perch:label>    
+        <perch:input type="select" id="select_county_volunteers[]" class="select2" options="Bedfordshire,Berkshire,Bristol,Buckinghamshire,Cambridgeshire,Cheshire,Cornwall,County Durham,Cumbria,Derbyshire,Devon,Dorset,East Riding of Yorkshire,
+        East Sussex,Essex,Gloucestershire,Greater London,Greater Manchester,Hampshire,Herefordshire,Hertfordshire,Humberside,Isle of Wight,Isles of Scilly,Kent,Lancashire,Leicestershire,Lincolnshire,Merseyside,Norfolk,North Somerset,North Yorkshire,Northamptonshire,Northumberland,Nottinghamshire,Oxfordshire,Rutland,Shropshire,Somerset,South Gloucestershire,South Yorkshire,Staffordshire,Suffolk,Surrey,Tyne & Wear,Warwickshire,West Midlands,West Sussex,West Yorkshire,Wiltshire,Worcestershire,Aberdeenshire,Angus,Argyll & Bute,Ayrshire,Banffshire,Berwickshire,Borders,Caithness,Clackmannanshire,Dumfries & Galloway,Dunbartonshire,East Ayrshire,East Dunbartonshire,East Lothian,East Renfrewshire,Fife,Highland,Inverclyde,Kincardineshire,Lanarkshire,Midlothian,Moray,North Ayrshire,North Lanarkshire,Orkney,Perth & Kinross,Renfrewshire,Shetland,South Ayrshire,South Lanarkshire,Stirlingshire,West Dunbartonshire,West Lothian,Western Isles,Blaenau Gwent,Bridgend,Caerphilly,Cardiff,Carmarthenshire,Ceredigion,Conwy,Denbighshire,Flintshire,Gwynedd,Isle of Anglesey,Merthyr Tydfil,Monmouthshire,Neath Port Talbot,Newport,Pembrokeshire,Powys,Rhondda Cynon Taff,Swansea,Torfaen,Vale of Glamorgan,Wrexham,Antrim,Armagh,Down,Fermanagh,Londonderry,Tyrone" 
+        label="Select Options" multiple />
+      </section>  
+  
+      <section class="input pill-labels">
+      <h4>Benefits Offered</h4>
+        <label for="form3_accommodation"><perch:input type="checkbox" id="accommodation" name="accommodation" value="1"> Accommodation</label>
+        <label for="form3_expenses"><perch:input type="checkbox" id="expenses" name="expenses" value="1"> Expenses</label>
+        <label for="form3_formalTraining"><perch:input type="checkbox" id="formalTraining" name="fTraining" value="1"> Formal Training</label>
+      </section>
+    </div>
+    <section class="input submit">
+    <perch:input type="submit" value="Search" class="ajax" />
+    <button class="text hide volunteers" onclick="clearResults('volunteers')" type="button">Clear Results</button>
+    </section>
+    <perch:input type="hidden" id="type" value="volunteers" />
+    <div class="results volunteers"></div>
+  </perch:form>
+</div>

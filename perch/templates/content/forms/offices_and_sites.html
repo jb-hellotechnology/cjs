@@ -1,0 +1,51 @@
+<perch:form id="offices_and_sites" method="post" app="perch_forms" role="form">
+  
+  <p>
+    <strong>Offices and sites</strong>
+  </p>
+  <p>
+    Add your office details to our mailing list to receive the next edition. Or if you have decided you no longer want to receive the publication you can unsubscribe here.
+  </p>
+  <section class="input">
+    <perch:label for="type">Please add my office to the mailing list <perch:input type="radio" name="type" value="Add" id="type" /> or</perch:label>
+    <perch:label for="type">No thank you, I no longer want to receive CJS Professional <perch:input type="radio" name="type" value="Remove" id="type" /></perch:label>
+  </section>
+	<section class="input">
+		<perch:label for="name">Name: <span>*</span></perch:label>
+		<perch:input type="text" id="name" label="Name" required="true" />
+	</section>
+  <section class="input">
+		<perch:label for="email">Email: <span>*</span></perch:label>
+		<perch:input type="text" id="email" label="Email Address" required="true" />
+	</section>
+  <section class="input">
+		<perch:label for="organisation">Organisation, and which office is helpful: <span>*</span></perch:label>
+		<perch:input type="textarea" id="organisation" label="organisation" required="true" />
+	</section>
+  <section class="input">
+		<perch:label for="job">Job title or function (optional field this is for readership analysis): <span></span></perch:label>
+		<perch:input type="text" id="job" label="Job"  />
+	</section>
+  <section class="input">
+		<perch:label for="reason">If you're unsubscribing it would be helpful if you could give a reason:</perch:label>
+		<perch:input type="text" id="reason" label="Reason" />
+	</section>
+  <section class="input other">
+    <label>Are you human? If so, don't write in here.</label>
+    <perch:input type="text" id="enquiry" antispam="honeypot" />
+  </section>
+	<section class="input">
+		<perch:input type="submit" value="Send Request" />
+	</section>
+  
+  <perch:success>
+    <div class="success">
+      <perch:content type="textarea" id="confirmation" label="Confirmation Message" html editor="redactor" />
+    </div>
+  </perch:success>
+
+  <p>
+    <span>*</span> = required field
+  </p>
+	
+</perch:form>

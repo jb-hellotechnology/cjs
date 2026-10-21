@@ -1,0 +1,25 @@
+<perch:before>
+
+</perch:before>
+
+<div class="textarea flow volunteer-job listing <perch:if exists="displayAd">displayad</perch:if>" id="vol_<perch:cjs id="volunteerID" />">
+	<perch:if exists="imageLogo">
+		<a href="<perch:cjs id="advertURL"/>" <perch:if id="newWindow" value="1" match="eq">target="_blank"</perch:if>><img src="<perch:cjs id="imageLogo" />" alt="" /></a>
+	</perch:if>
+	<perch:if exists="imageLogo2">
+		<a href="<perch:cjs id="advertURL"/>" <perch:if id="newWindow" value="1" match="eq">target="_blank"</perch:if>><img src="<perch:cjs id="imageLogo2" />" alt="" /></a>
+	</perch:if>
+	<p>JOB: <strong><perch:cjs id="title"></strong><br />
+	BE4: <perch:cjs id="closingDateT" /><br />
+	<perch:if id="intDate" value="0000-00-00" match="neq">
+	IV: <perch:cjs id="intDate" /><br />
+	</perch:if>
+	LOC: <perch:cjs id="location" /><br />
+	PAY: <perch:cjs id="payBenefits" /><br />
+	FOR: <perch:cjs id="employerDisplay" /><br />
+	<perch:cjs id="advertText" html />
+</div>
+
+<perch:after>
+
+</perch:after>

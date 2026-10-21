@@ -1,0 +1,182 @@
+<perch:form id="cjs_organisation" method="post" app="cjs_organisation" role="form">
+	<p><strong>Organisation details</strong></p>
+
+	<section class="input">
+	    <perch:label>Organisation Name</perch:label>
+		<perch:input id="name" type="text" />
+	</section>
+	
+	<section class="input">
+	    <perch:label>Organisation Website</perch:label>
+		<perch:input id="websiteURL" type="text" />
+	</section>
+	
+	<section class="input">
+	    <perch:label>Logo URL (leave blank if unsure)</perch:label>
+		<perch:input id="logoURL" type="text" />
+	</section>
+	
+	<section class="input">
+	    <perch:label>Strapline</perch:label>
+		<perch:input id="strapLine" type="text" label="Strap Line" />
+	</section>
+	
+	<section class="input">
+	    <perch:label>Mission Statement</perch:label>
+	    <perch:input id="missionStatement" type="textarea" class="redactor" />
+	</section>
+	
+	<section class="input">
+		<p><strong>Sectors Your Organisation Operates Within</strong></p>
+		<perch:label><perch:input id="sAdmin" type="checkbox" value="1" />Administration, Support and IT</perch:label>
+		<perch:label><perch:input id="sArboriculture" type="checkbox" value="1" />Arboriculture</perch:label>
+		<perch:label><perch:input id="sCommunity" type="checkbox" value="1" />Community and Volunteers</perch:label>
+		<perch:label><perch:input id="sCountryside" type="checkbox" value="1" />Countryside</perch:label>
+		<perch:label><perch:input id="sEcology" type="checkbox" value="1" />Ecology</perch:label>
+		<perch:label><perch:input id="sEnvironmentEducation" type="checkbox" value="1" />Environmental and Outdoor Education</perch:label>
+		<perch:label><perch:input id="sFieldwork" type="checkbox" value="1" />Fieldwork and Research</perch:label>
+		<perch:label><perch:input id="sForestry" type="checkbox" value="1" />Forestry</perch:label>
+		<perch:label><perch:input id="sHorticulture" type="checkbox" value="1" />Horticulture</perch:label>
+		<perch:label><perch:input id="sPolicy" type="checkbox" value="1" />Policy and Advice</perch:label>
+		<perch:label><perch:input id="sPractical" type="checkbox" value="1" />Practical Land Management</perch:label>
+		<perch:label><perch:input id="sPublicity" type="checkbox" value="1" />Publicity and Fundraising</perch:label>
+		<perch:label><perch:input id="sRights" type="checkbox" value="1" />Rights of Way</perch:label>
+		<perch:label><perch:input id="sSustainability" type="checkbox" value="1" />Sustainability</perch:label>
+		<perch:label><perch:input id="sVisitors" type="checkbox" value="1" />Visitor Management</perch:label>
+		<perch:label><perch:input id="sWildlife" type="checkbox" value="1" />Wildlife</perch:label>
+	</section>
+
+	<section class="input">
+		<p><strong>Regions Your Organisation Operates Within</strong></p>
+		<perch:label><perch:input id="rNational" type="checkbox" value="1" />National</perch:label>
+		<perch:label><perch:input id="rInternational" type="checkbox" value="1" />International</perch:label>
+		<perch:label><perch:input id="rScotlandNorth" type="checkbox" value="1" />Scotland (North)</perch:label>
+		<perch:label><perch:input id="rScotlandSouth" type="checkbox" value="1" />Scotland (South)</perch:label>
+		<perch:label><perch:input id="rWales" type="checkbox" value="1" />Wales</perch:label>
+		<perch:label><perch:input id="rNorthernIreland" type="checkbox" value="1" />North Ireland</perch:label>
+		<perch:label><perch:input id="rEngland" type="checkbox" value="1" />England</perch:label>
+		<perch:label><perch:input id="rEastAnglia" type="checkbox" value="1" />East Anglia</perch:label>
+		<perch:label><perch:input id="rMidlands" type="checkbox" value="1" />Midlands</perch:label>
+		<perch:label><perch:input id="rNorthEast" type="checkbox" value="1" />North East</perch:label>
+		<perch:label><perch:input id="rNorthWest" type="checkbox" value="1" />North West</perch:label>
+		<perch:label><perch:input id="rSouth" type="checkbox" value="1" />South</perch:label>
+		<perch:label><perch:input id="rSouthWest" type="checkbox" value="1" />South West</perch:label>
+		<perch:label><perch:input id="rHome" type="checkbox" value="1" />Home Based</perch:label>
+	</section>
+
+	<section class="input">
+	    <perch:label>HQ or Primary Location</perch:label>
+	    <perch:input id="hq" type="text" />
+	</section>
+
+	<section class="input">
+	    <perch:label>Does Your Organisation Offer Volunteering Opportunities?</perch:label>
+		<perch:input id="volunteerOpportunities" type="select" options="no,yes" label="Volunteer Opportunities" />
+	</section>
+		
+	<section class="input">
+	    <perch:label>Does Your Organisation Offer Apprenticeships or Internships?</perch:label>
+		<perch:input id="apprenticeshipOpportunities" type="select" options="no,yes" label="Apprenticeship/Intern Opportunities" />
+	</section>
+	
+	<section class="input">
+	    <perch:label>Organisation Size</perch:label>
+		<perch:input id="organisationSize" type="select" options="Micro (1-9 employees), Small (10-49 employees), Medium (50-249), Large (250+)" label="Organisation Size" />
+	</section>
+	
+	<section class="input">
+	    <perch:label>Overview</perch:label>
+		<perch:input id="organisationOverview" type="textarea" class="redactor" />
+	</section>
+	
+	<section class="input">
+	    <perch:label>Can Readers Contact Your Organisation Directly (Other than via Your Website)?</perch:label>
+		<perch:input id="directContact" type="select" options="no,yes" label="Can Readers Contact You Directly?" />
+	</section>
+	
+	<section class="input">
+	    <perch:label>Organisation Phone Number</perch:label>
+		<perch:input id="directPhone" type="text" label="Direct Contact Phone Number" />
+	</section>
+	
+	<section class="input">
+	    <perch:label>Organisation Email Address</perch:label>
+		<perch:input id="directEmail" type="text" label="Direct Contact Email Address" />
+	</section>
+	
+	<section class="input">
+	    <perch:label>Your Name</perch:label>
+		<perch:input id="contactName" type="text" label="Contact Name" />
+	</section>
+	
+	<section class="input">
+	    <perch:label>Your Organisation/Site</perch:label>
+		<perch:input id="contactOrganisation" type="text" label="Contact Organisation/Site" />
+	</section>
+	
+	<section class="input">
+	    <perch:label>Your Email Address</perch:label>
+		<perch:input id="contactEmail" type="text" label="Contact Email" />
+	</section>
+  
+    <section class="input">
+		<div class="g-recaptcha" data-sitekey="6LcKQNYfAAAAAKfvMMYcA6xI8d64c0oxSbIpoSuB" data-callback="enableBtn"></div>
+	</section>
+	<section class="input">
+		<perch:input type="submit" value="Submit Organisation" id="submit" disabled="disabled" />
+	</section>
+	
+  <p>If you have any problems using this form please email your request direct to CJS, <a href="mailto:ranger@countryside-jobs.com">ranger@countryside-jobs.com</a></p>
+  
+  <perch:success>
+    <div class="success">
+      <perch:content type="textarea" id="confirmation" label="Confirmation Message" html editor="redactor" />
+      <perch:if exists="form_memberID">
+      	<p>If you have submitted a draft advert you can check, update and submit for publication through your advertisers profile, <a href="/advertisers">click here</a>.</p>
+      </perch:if>
+    </div>
+  </perch:success>
+  
+  <p>
+    <span>*</span> = required field
+  </p>
+	<perch:if id="memberID"></div></perch:if>
+</perch:form>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="//jqueryui.com/resources/demos/style.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+	function enableBtn(){
+		document.getElementById("form1_submit").disabled = false;
+	}
+
+	$( function() {
+		$( ".datefield" ).datepicker({ dateFormat: 'dd/mm/yy'});
+  	});
+  
+	$('.redactor').redactor(
+  	{ 
+	  	plugins: ['counter', 'limiter'], 
+	  	buttons: ['ul', 'link'],
+	  	linkSize: 1000,
+	  	callbacks: {
+        	keydown: function(data)
+	        {
+	        	getContent();
+	        },
+	        enter: function(data)
+	        {
+	        	getContent();
+	        },
+	        tab: function(data)
+	        {
+	        	getContent();
+	        },
+	        blur: function(data)
+	        {
+	        	getContent();
+	        }
+	    }
+	}
+  );
+</script>

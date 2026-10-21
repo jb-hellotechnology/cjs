@@ -1,0 +1,42 @@
+<perch:if exists="title">
+<div class="flow listing <perch:if id="displayAd" value="1" match="eq">displayad</perch:if>" data-lat="<perch:cjs id="lat" />" data-lng="<perch:cjs id="lng" />" data-title="<perch:cjs id="title" data-title="<perch:cjs id="title">, <perch:cjs id="employerDisplay" />" data-url="<perch:cjs id="advertURL"/>" data-location="<perch:if id="rNational" value="1" match="eq">national </perch:if><perch:if id="rInternational" value="1" match="eq">international </perch:if><perch:if id="rHome" value="1" match="eq">home </perch:if>">
+<article class="job">
+  <div class="flow">
+    <h2 class="listing-title">
+        <a href="<perch:cjs id="advertURL"/>" <perch:if id="newWindow" value="1" match="eq">target="_blank"</perch:if>>
+          <perch:cjs id="title"> - <perch:cjs id="employerDisplay" />
+        </a>
+    </h2>
+    <perch:if exists="text">
+      <perch:cjs id="text" html />
+    </perch:if>
+    <perch:if exists="displayAdURL">
+      <a href="<perch:cjs id="advertURL"/>" <perch:if id="newWindow" value="1" match="eq">target="_blank"</perch:if>><img src="<perch:cjs id="displayAdURL" />" alt="<perch:cjs id="imageAlt" />"  loading="lazy" /></a>
+    </perch:if>
+    <p><a href="<perch:cjs id="advertURL"/>" class="button" <perch:if id="newWindow" value="1" match="eq">target="_blank"</perch:if>>
+      Read Advert
+    </a></p>
+  </div>
+  <div class="flow">
+  <perch:if exists="imageLogo">
+    <a href="<perch:cjs id="advertURL"/>" <perch:if id="newWindow" value="1" match="eq">target="_blank"</perch:if>><img src="<perch:cjs id="imageLogo" />" alt="<perch:cjs id="imageAlt" />"  loading="lazy" class="logo" /></a>
+  </perch:if>
+  <ul class="details">
+    <perch:if exists="closingDate">
+      <li><perch:if id="cDisplayDNotCDate" value="1" match="eq"><strong>Delete Date:</strong><perch:cjs id="deleteDate" format="d/m/Y" /><perch:else/><strong>Closing Date:</strong></perch:if> <perch:cjs id="closingDate" format="d/m/Y" /><perch:if id="cClosingDateEU" value="1" match="eq"> <span>updated</span></perch:if></li>
+    </perch:if>
+    <perch:if exists="location">
+      <li><strong>Location:</strong> <perch:cjs id="location"/></li>
+    </perch:if>
+    <perch:if exists="grade">
+      <li><strong>Level:</strong> <perch:cjs id="grade"/></li>
+    </perch:if>
+    <perch:if exists="postedDate">
+      <li><strong>Posted:</strong> <perch:cjs id="postedDate" format="d/m/Y" /></li>
+    </perch:if>
+  </ul>
+  </div>
+ 
+  </article>
+</div>
+</perch:if>

@@ -1,0 +1,22 @@
+<perch:before>
+
+</perch:before>	
+
+<perch:if exists="vorgName">
+	<section class="listing inline-p blue <perch:if exists="displayAd">displayad</perch:if>">
+	  <p class="listing-title">
+	    <strong>
+	      <perch:cjs id="vorgName">
+	    </strong>
+	  </p>
+	  <perch:cjs id="description" html />
+	  <p><a href="mailto:<perch:cjs id="advertEmail" />"><perch:cjs id="advertEmail" /></a></p>
+	  <perch:if id="advertWebsite" value="http://" match="neq">
+		  <p><a href="<perch:cjs id="advertWebsite"/>"><perch:cjs id="advertWebsite" replace="https://|,http://|" /></a></p>
+	  </perch:if>
+	</section>
+</perch:if>
+
+<perch:after>
+
+</perch:after>

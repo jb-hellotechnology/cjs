@@ -1,0 +1,12 @@
+<job id="<perch:cjs id="daily_jobID">">
+    <url><![CDATA[https://www.countryside-jobs.com<perch:cjs id="advertURL" />]]></url>
+    <name><![CDATA[<perch:cjs id="title">]]></name>
+    <region><![CDATA[<perch:if exists="streetAddress"><perch:cjs id="streetAddress">,</perch:if><perch:if exists="location"><perch:cjs id="location">, </perch:if><perch:if exists="rCounty"><perch:cjs id="rCounty"></perch:if><perch:if exists="postCode">, <perch:cjs id="postCode" /></perch:if>]]></region>
+    <country><![CDATA[GB]]></country>
+    <description><![CDATA[<perch:cjs id="fulltext" />]]></description>
+    <pubdate><perch:cjs id="postedDate" format="d.m.Y" /></pubdate>
+    <company><![CDATA[<perch:cjs id="employerDisplay">]]></company>
+    <expire><perch:cjs id="closingDate" format="d.m.Y" /></expire>
+    <jobtype><![CDATA[<perch:if id="cfullTime" value="1">Full Time</perch:if> <perch:if id="cpartTime" value="1">Part Time</perch:if> <perch:if id="cpermanent" value="1">Permanent</perch:if> <perch:if id="cTempFixed" value="1">Temporary/Fixed Term</perch:if> <perch:if id="cseasonal" value="1">Seasonal</perch:if>]]></jobtype>
+    <salary><![CDATA[<perch:cjs id="baseSalary" />]]></salary>
+</job>

@@ -1,0 +1,347 @@
+<div class="restrict">
+  
+  <perch:form id="cjs_free" method="post" app="cjs_daily" role="form" class="clear-form">
+    
+  <header id="form-header">
+    <h3>Create Your Advert</h3>
+  </header>
+  
+  <div class="form-panel flow show" data-panel="0">
+    <div class="form-columns">
+      <div>
+        <section class="input">
+          <perch:label>Job Title</perch:label>
+          <perch:input type="text" id="jobtitle" label="Job Title" value="<perch:content id="form_jobtitle" />" />
+        </section>
+        <section class="input">
+          <perch:label>Closing Date (And If Applicable Interview Date)</perch:label>
+          <perch:input type="text" id="closingdate" label="Closing Date" value="<perch:content id="form_closingdate" />" />
+        </section>
+        <section class="input">
+          <perch:label>Location/Based</perch:label>
+          <perch:input type="text" id="location" label="Location" value="<perch:content id="form_location" />" />
+        </section>
+        <section class="input">
+          <perch:label>Salary/Pay</perch:label>
+          <perch:input type="text" id="salary" label="Salary" value="<perch:content id="form_salary" />" />
+        </section>
+        <section class="input">
+          <perch:label>Employer</perch:label>
+          <perch:input type="text" id="employer" label="Employer" value="<perch:content id="form_employer" />" />
+        </section>
+        <section class="input">
+          <perch:label>Description and Contact Details - 150 Word Limit</perch:label>
+          <perch:input type="textarea" id="text" class="redactor" label="Linage" placeholder="Please enter your advert details here - including how applicants should apply and who to contact for more information." html value="<perch:content id="form_text" />" />
+          <p class="error basic">You've exceeded the 150 word limit for Basic adverts - please reduce the number of words</p>
+        </section>
+      </div>
+      <div>
+        <h3>
+          <strong>Enhance Your Advert</strong>
+        </h3>
+        <section class="input">
+          <perch:label>Logo File (If Required) (JPG) - &pound;20 + VAT</perch:label>
+          <perch:input type="file" id="logo" label="Logo #1" />
+          <perch:if exists="form_logo1">
+            <br /><img src="<perch:content id="form_logo1" />" alt="Logo 1" id="form2_logo_image" />
+          </perch:if>
+          <perch:input type="hidden" id="logo_hidden" value="<perch:content id="form_logo1" />" />
+          <p><a href="javascript:removeFile('#form1_logo');" class="remove">Click to Remove File</a></p>
+        </section>
+        <section class="input">
+          <perch:label><perch:input type="checkbox" id="enhanced" value="true" label="Enhanced Advert" /> Enhanced Listing For &pound;20 + VAT (We Will Contact You About Payment)</perch:label>
+        </section>
+        <perch:if id="form_enhanced" value="true">
+          <script>
+          $('#form1_enhanced').attr('checked','checked');    
+        </script>
+          </perch:if>
+      </div>
+    </div>
+  </div>
+  
+  <div class="form-panel flow" data-panel="1">
+    <div class="form-columns">
+      <div>
+        <p>
+          <strong>Contact details for CJS use only:</strong>
+        </p>
+        <perch:if exists="form_memberID">
+          <p><a href="/advertisers/sign-out?r=/advertisers">Sign out/use different account</a></p>
+        </perch:if>
+        <section class="input">
+          <perch:label for="name">Name: <span>*</span></perch:label>
+          <perch:input type="text" id="name" label="Name" required="true" value="<perch:content id="form_name" />" />
+        </section>
+        <section class="input">
+          <perch:label for="organisation">Organisation: <span>*</span></perch:label>
+          <perch:input type="text" id="organisation" label="Organisation" required="true" value="<perch:content id="form_organisation" />" />
+        </section>
+        <section class="input">
+          <perch:label for="email">Email - we will acknowledge your submission by email: <span>*</span></perch:label>
+          <perch:input type="text" id="email" label="Email Address" required="true" value="<perch:content id="form_email" />" />
+        </section>
+        <section class="input">
+          <perch:label for="telephone">Telephone: <span>*</span></perch:label>
+          <perch:input type="text" id="telephone" label="Telephone" required="true" value="<perch:content id="form_phone" />" />
+        </section>
+        <section class="input">
+          <perch:label for="message">Any Message For CJS:</perch:label>
+          <perch:input type="text" id="message" label="Message for CJS" value="<perch:content id="form_message" />" />
+        </section>
+      </div>
+      <div>
+        <section class="input other">
+          <label>Are you human? If so, don't write in here.</label>
+          <perch:input type="text" id="enquiry" antispam="honeypot" />
+          <perch:input type="text" id="cost" label="Cost" />
+        </section>
+        <section class="input">
+          <label>Ready to submit your advert?</label>
+          <p>
+            <strong>Cost:</strong> &pound;<span class="cost">0.00</span>
+          </p>
+        </section>
+        <perch:if exists="form_memberID">
+          <section class="input">
+            <label><strong>Type of Advert</strong></label>
+            <perch:input type="select" id="status" label="Status" options="<perch:content id="form_statusOptions" />" />
+          </section>
+        </perch:if>
+        <section class="input">
+          <perch:input type="submit" value="Submit Advert" id="submit" />
+        </section>
+        <perch:input type="hidden" id="memberID" value="<perch:content id="form_memberID" />" />
+        <perch:input type="hidden" id="advertID" value="<perch:content id="form_advertID" />" />
+      </div>
+    </div>
+  </div>
+  
+  <footer>
+    <div>
+      <button class="prev" id="prev" type="button">Previous</button>
+    </div>
+    <div>
+      <p class="progress">Section <span id="panel"></span> of <span id="totalPanels"></span></p>
+    </div>
+    <div>
+      <button class="next" id="next" type="button">Next</button>
+    </div>
+  </footer>
+  
+  <perch:success>
+    <div class="success">
+      <perch:content type="textarea" id="confirmation" label="Confirmation Message" html editor="redactor" />
+      <perch:if exists="form_memberID">
+      	<p>If you have submitted a draft advert you can check, update and submit for publication through your advertisers profile, <a href="/advertisers">click here</a>.</p>
+      </perch:if>
+    </div>
+  </perch:success>
+	
+</perch:form>
+<script>
+	$('.redactor').redactor(
+  	{ 
+	  	plugins: ['counter', 'limiter'], 
+	  	buttons: ['ul', 'link'],
+	  	linkSize: 1000,
+	  	callbacks: {
+        	keydown: function(data)
+	        {
+	        	getContent();
+	        },
+	        enter: function(data)
+	        {
+	        	getContent();
+	        },
+	        tab: function(data)
+	        {
+	        	getContent();
+	        },
+	        blur: function(data)
+	        {
+	        	getContent();
+	        }
+	    }
+	}
+  );
+  
+  function getContent(){
+	  var count = $('.redactor-statusbar li:first-child').text();
+	  var res = count.split(" ");
+	  var words = res[1];
+	  
+	  $('p.error').hide();
+	  
+	  if(words>150){
+		  $('p.error.basic').show();
+		  $('#form1_submit').hide();
+	  }else{
+		  $('p.error.basic').hide();
+		  $('#form1_submit').show();
+	  }
+  }
+	  
+	$('p.error.basic').hide();
+</script>
+<script>	
+
+			window.setInterval(function(){
+				calcVol();
+			}, 2000);
+			
+			function calcVol(){
+        var type = $('input[type="radio"]:checked').val();
+        cost = 0;
+        var Logo = $('#form1_logo').val();
+        if(Logo !== ''){
+          cost = cost + 20;
+        }
+        if ($('#form1_enhanced').is(':checked')) {
+          cost = cost+20;
+        }
+
+        cost = parseFloat(cost);
+        cost = cost.toFixed(2);
+
+        $('.cost').text(cost + " + VAT");
+        $('#form1_cost').val(cost);
+			}
+			
+
+function removeFile(id){
+    $(id).val('');
+    $(id+'_image').remove();
+    $(id+'_hidden').val('');
+}
+
+
+var activePanel = parseInt($('.form-panel.show').data('panel'));
+var totalPanels = $('.form-panel').length;
+$('#panel').text(activePanel+1);
+$('#totalPanels').text(totalPanels);
+
+const scrollIntoViewWithOffset = (selector, offset) => {
+  window.scrollTo({
+    behavior: 'smooth',
+    top:
+      document.querySelector(selector).getBoundingClientRect().top -
+      document.body.getBoundingClientRect().top -
+      offset,
+  })
+}
+
+// Function to validate current panel
+function validateCurrentPanel() {
+  var activePanel = parseInt($('.form-panel.show').data('panel'));
+  var currentPanelElement = $('.form-panel[data-panel=' + activePanel + ']');
+  var isValid = true;
+  var errorMessages = [];
+  
+  // Find all required inputs in the current panel
+  currentPanelElement.find('input[required], select[required], textarea[required]').each(function() {
+    var $input = $(this);
+    var value = $input.val();
+    var label = $input.closest('section').find('label').first().text().replace('*', '').trim();
+    
+    // Check if field is empty
+    if (!value || value === '' || value === 'Please Select') {
+      isValid = false;
+      $input.addClass('error-field');
+      errorMessages.push(label || 'A required field');
+    } else {
+      $input.removeClass('error-field');
+    }
+  });
+  
+  // Remove any existing error message
+  currentPanelElement.find('.validation-error').remove();
+  
+  // Show error message if validation failed
+  if (!isValid) {
+    var errorHtml = '<div class="validation-error" style="background: #ffebee; border: 1px solid #f44336; padding: 15px; margin: 20px 0; border-radius: 4px; color: #c62828;"><strong>Please complete the following required fields:</strong><ul style="margin: 10px 0 0 20px;">';
+    errorMessages.forEach(function(msg) {
+      errorHtml += '<li>' + msg + '</li>';
+    });
+    errorHtml += '</ul></div>';
+    
+    currentPanelElement.prepend(errorHtml);
+    scrollIntoViewWithOffset("#form-header", 100);
+  }
+  
+  return isValid;
+}
+
+// Add CSS for error highlighting
+$('<style>.error-field { border: 2px solid #f44336 !important; }</style>').appendTo('head');
+
+// Optional: Clear error styling when user starts typing
+$(document).on('input change', 'input, select, textarea', function() {
+  $(this).removeClass('error-field');
+});
+
+$('#prev').hide();
+/* FORM CONTROLS */
+$('#next').click(function(){
+  
+  // Manually sync Redactor editor content to textarea
+  var editorContent = $('.redactor-in').html();
+  if (editorContent) {
+    $('#form1_text').val(editorContent);
+  }
+  
+  // Validate before moving forward
+  if (!validateCurrentPanel()) {
+    return false;
+  }
+  
+  var activePanel = parseInt($('.form-panel.show').data('panel'));
+  var totalPanels = $('.form-panel').length;
+  $('#panel').text(activePanel+2);
+  $('#totalPanels').text(totalPanels);
+  if(activePanel<totalPanels-1){
+    var nextPanel = activePanel+1;
+
+    scrollIntoViewWithOffset("#form-header", '100');
+    
+    $('.form-panel.show').removeClass('show');
+    $('.form-panel[data-panel=' + nextPanel + ']').addClass('show');
+    $('#next').show();
+    $('#prev').show();
+    if(activePanel==totalPanels-2){
+      $('#next').hide();  
+    }
+  }else{
+    $('#prev').show();
+  }
+});
+
+$('#prev').click(function(){
+  
+  // Manually sync Redactor editor content to textarea
+  var editorContent = $('.redactor-in').html();
+  if (editorContent) {
+    $('#form1_text').val(editorContent);
+  }
+  
+  var activePanel = parseInt($('.form-panel.show').data('panel'));
+  console.log(activePanel);
+  if(activePanel>0){
+    var nextPanel = activePanel-1;
+    $('#panel').text(activePanel);
+    $('#totalPanels').text(totalPanels);
+    const element = document.getElementById("form-header");
+    element.scrollIntoView();
+    
+    $('.form-panel.show').removeClass('show');
+    $('.form-panel[data-panel=' + nextPanel + ']').addClass('show');
+    $('#next').show();
+    if(activePanel==1){
+      $('#prev').hide();
+    }
+  }else{
+    $('#next').show();
+    $('#prev').show();
+  }
+});
+</script>

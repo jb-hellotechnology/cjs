@@ -1,0 +1,3 @@
+<perch:repeater id="logos" label="Logos">
+<li><perch:content id="image_url" label="File URL" type="text" suppress="true" /><perch:if exists="url"><a href="<perch:content id="url" label="Link To URL" type="text" />"></perch:if><img src="<perch:if exists="image_url"><perch:content id="image_url" label="File URL" type="text" /><perch:else><perch:content id="image" label="Image" type="image" /></perch:if>" alt="<perch:content id="alt" label="Alt Text" type="text" />" /><perch:if exists="url"></a></perch:if></li>
+</perch:repeater>

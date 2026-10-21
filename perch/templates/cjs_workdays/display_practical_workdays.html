@@ -1,0 +1,27 @@
+<perch:before>
+
+</perch:before>	
+
+<section class="textarea flow volunteer-job listing <perch:if exists="displayAd">displayad</perch:if>">
+  <p class="listing-title">
+    <strong>
+      <perch:cjs id="Title"> <perch:if exists="location"> at <perch:cjs id="location"></perch:if>
+    </strong>
+  </p>
+  <ul class="details">
+    <perch:if exists="Title">
+      <li><strong>Title:</strong> <perch:cjs id="Title"/></li>
+    </perch:if>
+    <perch:if exists="description">
+      <li><strong>Description:</strong> <perch:cjs id="description" html/></li>
+    </perch:if>    <li class="right">
+      <a href="<perch:cjs id="advertWebsite"/>">
+        <perch:cjs id="advertWebsite"/>
+      </a>
+    </li>
+  </ul>
+</section>
+
+<perch:after>
+
+</perch:after>

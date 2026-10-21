@@ -1,0 +1,116 @@
+<perch:form id="standard_advert" method="post" app="cjs_daily" role="form">
+  
+  <p>
+    <strong>Advert details</strong>
+  </p>
+  <p>
+    Linage from &pound;75 <a href="#">more information on costs here</a> - 500 word limit  
+  </p>
+  <section class="input">
+	  <perch:input type="textarea" id="text" label="Text" />
+  </section>
+  <p>
+    <strong>Enhance Your Advert</strong>
+  </p>
+  <section class="input">
+		<perch:label for="image">Job title: <span>*</span></perch:label>
+		<perch:input type="text" id="title" label="Title" required="true" />
+	</section>
+  <section class="input">
+		<perch:label for="closingdate">Closing date and if applicable Interview date:</perch:label>
+		<perch:input type="text" id="closingdate" label="Closing Dates" />
+	</section>
+  <section class="input">
+		<perch:label for="location">Location/based:</perch:label>
+		<perch:input type="text" id="location" label="Location" />
+	</section>
+  <section class="input">
+		<perch:label for="benefits">Any benefits, training, expenses etc:</perch:label>
+		<perch:input type="text" id="benefits" label="Benefits" />
+	</section>
+  <section class="input">
+		<perch:label for="employer">Employer:</perch:label>
+		<perch:input type="text" id="employer" label="Employer" />
+	</section>
+  <section class="input">
+    <perch:label>Type of role:</perch:label>
+		<perch:label for="type"><perch:input type="radio" name="role" value="Full/Part" required="true" /> full or part time longer term placement</perch:label>
+    <perch:label for="type"><perch:input type="radio" name="role" value="Occasional/Regular Days" required="true" /> Occasional/regular days</perch:label>
+	</section>
+  <section class="input">
+		<perch:label for="time">Anticipated time committment:</perch:label>
+		<perch:input type="text" id="time" label="Time" />
+	</section>
+  <section class="input">
+		<perch:label for="text">Advert text:</perch:label>
+		<perch:input type="textarea" id="text" label="Advert Text" placeholder="A brief description of the job / duties involved and the qualifications, experience, attributes the applicants should / must have as well as the details of how candidates are to contact you for information / apply etc." />
+    <p>
+      NB: maximum for free linage is 150 words, please check your word count.
+    </p>
+	</section>
+  <section class="input">
+		<perch:label for="long">For long running campaigns - please run the advert until:</perch:label>
+		<perch:input type="text" id="long" label="Long Running" />
+    <p>
+      Adverts run until the closing date, if you don't have a closing date they are advertised for three weeks. However, for long running campaigns we can run adverts for up to six months.
+    </p>
+	</section>
+  <p>
+    <strong>Enhanced listing options - <a href="/cjs-focus/sample-adverts">samples here</a></strong>
+  </p>
+  <section class="input">
+    <perch:label for="logo"><perch:input type="checkbox" id="logo" label="Logo" value="yes" /> Add a logo to your free linage for &pound;10 + VAT.</perch:label>
+  </section>
+  <section class="input">
+    <perch:label for="qr"><perch:input type="checkbox" id="qr" label="QR" value="yes" /> Add a QR code for &pound;10 + VAT</perch:label>
+  </section>
+  <section class="input">
+    <perch:label for="enhanced"><perch:input type="checkbox" id="enhanced" label="Enhanced Listing" value="yes" /> Enhanced Listing for &pound;10 + VAT.</perch:label>
+  </section>
+  <p>
+    Please email your logo to <a href="mailto:focus@countryside-jobs.com">focus@countryside-jobs.com</a> quoting your job title as above.  We will contact you by email about payment. 
+  </p>
+  <p>
+    <strong>Contact details for CJS use only:</strong>
+  </p>
+	<section class="input">
+		<perch:label for="name">Name: <span>*</span></perch:label>
+		<perch:input type="text" id="name" label="Name" required="true" />
+	</section>
+  <section class="input">
+		<perch:label for="organisation">Organisation: <span>*</span></perch:label>
+		<perch:input type="text" id="organisation" label="Organisation" required="true" />
+	</section>
+  <section class="input">
+		<perch:label for="email">Email - we will acknowledge your submission by email: <span>*</span></perch:label>
+		<perch:input type="text" id="email" label="Email Address" required="true" />
+	</section>
+	<section class="input">
+		<perch:label for="telephone">Telephone: <span>*</span></perch:label>
+		<perch:input type="text" id="telephone" label="Telephone" required="true" />
+	</section>
+  <section class="input">
+		<perch:label for="message">Any Message For CJS:</perch:label>
+		<perch:input type="text" id="message" label="Message" />
+	</section>
+  <section class="input other">
+    <label>Are you human? If so, don't write in here.</label>
+    <perch:input type="text" id="enquiry" antispam="honeypot" />
+  </section>
+	<section class="input">
+		<perch:input type="submit" value="Send Message" />
+	</section>
+
+  <p>If you have any problems using this form please email your request direct to CJS, ranger@countryside-jobs.com</p>
+  
+  <perch:success>
+    <div class="success">
+      <perch:content type="textarea" id="confirmation" label="Confirmation Message" html editor="redactor" />
+    </div>
+  </perch:success>
+  
+  <p>
+    <span>*</span> = required field
+  </p>
+	
+</perch:form>

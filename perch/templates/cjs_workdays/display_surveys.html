@@ -1,0 +1,23 @@
+<perch:before>
+
+</perch:before>	
+
+<perch:if exists="Title">
+	<section class="textarea flow survey listing <perch:if exists="displayAd">displayad</perch:if>" id="S<perch:cjs id="surveyID" />">
+	  <p class="listing-title">
+	    <strong>
+	      <perch:cjs id="Title"> <perch:if exists="location"> at <perch:cjs id="location"></perch:if>
+	    </strong>
+	  </p>
+	  <perch:if exists="logo">
+	  	<img src="<perch:cjs id="logo" />" alt="" />
+	  </perch:if>
+	  <perch:cjs id="description" html/>
+	  <perch:cjs id="advertLink" />
+	  <p><perch:if id="advertDisplay" match="neq" value="l"><a href="<perch:cjs id="advertWebsiteShort" />" target="_blank"><perch:cjs id="advertWebsiteShort" replace="http://|,https://|" /></a><perch:else /><a href="<perch:cjs id="advertWebsite" />" target="_blank"><perch:cjs id="advertWebsite" replace="http://|,https://|" /></a></perch:if> <perch:if exists="advertEmail"><a href="mailto:<perch:cjs id="advertEmail"/>"><perch:cjs id="advertEmail"/></a></perch:if> <perch:cjs id="advertTelephone" /></p>
+	</section>
+</perch:if>
+
+<perch:after>
+
+</perch:after>

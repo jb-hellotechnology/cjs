@@ -1,0 +1,40 @@
+<?php
+	PerchUI::set_subnav([
+		[
+			'page'=>[
+					'cjs_daily',
+				], 
+			'label'=>'Home'
+		],
+    [
+      'page'=>[
+        'cjs_daily/daily',
+      ],
+      'label'=>'Daily'
+    ],
+    [
+      'page'=>[
+        'cjs_daily/volunteers',
+      ],
+      'label'=>'Volunteer'
+    ],
+    [
+      'page'=>[
+        'cjs_daily/employers',
+      ],
+      'label'=>'Employers'
+    ],
+    [
+      'page'=>[
+        'cjs_daily/advertiser_messages',
+      ],
+      'label'=>'Advertiser Messages'
+    ],
+    [
+      'page'=>[
+        'cjs_daily/email',
+      ],
+      'label'=>'Email'
+    ],
+
+	], $CurrentUser);

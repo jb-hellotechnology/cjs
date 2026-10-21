@@ -1,0 +1,71 @@
+<perch:if id="postTemplate" value="posts/other_sources_post.html">
+	<article class="news-post flow">
+		<h2>News from Other Sources</h2>
+		<perch:blog id="postDescHTML" editor="redactor" type="textarea" html label="Post" />
+	</article>
+<perch:else/>
+	<article class="news-post flow">
+	<perch:if exists="additionalHeadline">
+	<h2 class="additional-headline"><perch:blog id="additionalHeadline" type="text" label="Header Intro" size="xl autowidth" order="3" /></h2>
+	</perch:if>
+	<h2 class="headline">
+		<a href="<perch:blog id="postLink" type="text" label="Link" />" target="_blank">
+			<perch:blog id="postTitle" type="text" label="Title" required="true" size="xl autowidth" order="1" /> - <perch:blog id="postSource" type="text" label="Source" order="2" />
+		</a>
+	</h2>
+	
+	<perch:if exists="image">
+	<figure class="<perch:blog type="select" id="layout" options="left,right" label="Image Alignment" /> <perch:blog type="select" id="size" options="100|width-100,200|width-200,400|width-400,800|width-800" label="Image Width" />">
+		<img src="<perch:if id="size" value="100"><perch:blog type="image" id="image" label="Image" width="100" /></perch:if><perch:if id="size" value="200"><perch:blog type="image" id="image" label="Image" width="200" /></perch:if><perch:if id="size" value="400"><perch:blog type="image" id="image" label="Image" width="400" /></perch:if><perch:if id="size" value="800"><perch:blog type="image" id="image" label="Image" width="800" /></perch:if>" alt="<perch:blog type="text" id="alt" label="Alt Text" />" />
+		<perch:if exists="figcaption">
+		<figcaption><perch:blog type="text" id="figcaption" label="Image Caption" /></figcaption>
+		</perch:if>
+	</figure>
+	</perch:if>
+	<perch:if exists="imageURL">
+	<figure class="<perch:blog type="select" id="layout" options="left,right" label="Image Alignment" /> <perch:blog type="select" id="size" options="100,200,400,800" label="Image Width" />">
+		<img src="<perch:blog type="text" id="imageURL" label="Image URL" />" alt="" />
+		<perch:if exists="figcaption">
+		<figcaption><perch:blog type="text" id="figcaption" label="Image Caption" /></figcaption>
+		</perch:if>
+	</figure>
+	</perch:if>
+	
+	<perch:blog id="postDescHTML" editor="redactor" type="textarea" html label="Post" />
+	
+	<perch:blog type="image" id="image" label="Image" width="100" suppress="true" />
+	<perch:blog type="image" id="image" label="Image" width="200" suppress="true" />
+	<perch:blog type="image" id="image" label="Image" width="400" suppress="true" />
+	<perch:blog type="image" id="image" label="Image" width="800" suppress="true" />
+	
+	<perch:blocks>
+		<perch:block type="blogblock" label="Text with Image">
+		
+			<perch:if exists="blockimage">
+			<figure class="<perch:blog type="select" id="layout" options="left,right" label="Image Alignment" /> <perch:blog type="select" id="size" options="100|width-100,200|width-200,400|width-400,800|width-800" label="Image Width" />">
+				<img src="<perch:if id="size" value="100"><perch:blog type="image" id="image" label="Image" width="100" /></perch:if><perch:if id="size" value="200"><perch:blog type="image" id="image" label="Image" width="200" /></perch:if><perch:if id="size" value="400"><perch:blog type="image" id="blockimage" label="Image" width="400" /></perch:if><perch:if id="size" value="800"><perch:blog type="image" id="image" label="Image" width="800" /></perch:if>" alt="<perch:blog type="text" id="alt" label="Alt Text" />" />
+				<perch:if exists="figcaption">
+				<figcaption><perch:blog type="text" id="figcaption" label="Image Caption" /></figcaption>
+				</perch:if>
+			</figure>
+			</perch:if>
+			<perch:if exists="blockimageURL">
+			<figure class="<perch:blog type="select" id="layout" options="left,right" label="Image Alignment" /> <perch:blog type="select" id="size" options="100,200,400,800" label="Image Width" />">
+				<img src="<perch:blog type="text" id="blockimageURL" label="Image URL" />" alt="" />
+				<perch:if exists="figcaption">
+				<figcaption><perch:blog type="text" id="figcaption" label="Image Caption" /></figcaption>
+				</perch:if>
+			</figure>
+			</perch:if>    
+			<perch:blog type="textarea" id="blockpost" label="Post" html editor="redactor" /> 
+		
+		<perch:blog type="image" id="image" label="Image" width="100" suppress="true" />
+		<perch:blog type="image" id="image" label="Image" width="200" suppress="true" />
+		<perch:blog type="image" id="image" label="Image" width="400" suppress="true" />
+		<perch:blog type="image" id="image" label="Image" width="800" suppress="true" />
+		</perch:block>
+	</perch:blocks>
+	
+	<perch:blog type="datetime" id="postDateTime" suppress="true" label="Publish Date"/>
+	</article>
+</perch:if>

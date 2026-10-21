@@ -1,0 +1,9 @@
+<perch:before>
+<ul>
+</perch:before>
+
+<li><a href="/advert-preview/<perch:cjs id="daily_jobID" />" target="_blank"><perch:cjs id="title" /> (<perch:if id="advertStatus" value="pen">PENDING</perch:if><perch:if id="advertStatus" value="draft">DRAFT</perch:if><perch:if id="advertStatus" value="sus">SUSPENDED</perch:if><perch:if id="advertStatus" value="pub">PUBLISHED <perch:cjs id="postedDate" /></perch:if><perch:if id="advertStatus" value="over">PENDING OVERWRITE</perch:if>)</a> - <a href="/advertise/<perch:cjs id="daily_jobID" />">Amend</a></li>
+
+<perch:after>
+</ul>
+</perch:after>

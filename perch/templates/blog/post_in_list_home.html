@@ -1,0 +1,10 @@
+<perch:before>
+<ul class="<perch:if exists="class"><perch:blog id="class" /><perch:else/>panels</perch:if>">
+</perch:before>
+<li>
+	<perch:if exists="og_image"><img src="<perch:blog id="og_image" replace="staging.countryside-jobs.com|countryside-jobs.com" />" alt="<perch:blog id="postTitle" />" /></perch:if>
+	<a href="<perch:blog id="postURL" />"><perch:blog id="postTitle" /></a>
+</li>
+<perch:after>
+</ul>
+</perch:after>

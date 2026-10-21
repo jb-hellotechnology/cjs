@@ -1,0 +1,67 @@
+body{
+  background:#fffbe1;
+}
+
+header nav ul li.selected a,header nav ul li.ancestor a,header nav ul li:hover a{
+  color:#fff;
+  background:#a07247;
+}
+
+header nav ul li.selected ul,header nav ul li.ancestor ul{
+  background:#a07247;
+}
+
+header nav ul li.ancestor ul li.selected a,header nav ul li.ancestor ul li.ancestor a,header nav ul li.ancestor ul li:hover a{
+  background:#755134;
+  color:#fff;
+}
+
+header nav ul li.ancestor ul li.selected ul,header nav ul li.ancestor ul li.ancestor ul{
+  background:#755134;
+}
+
+header nav ul li.ancestor ul li.selected ul li a,header nav ul li.ancestor ul li.ancestor ul li a{
+  color:#fff;
+  background:#755134;
+}
+
+header nav ul li.ancestor ul li.ancestor ul li.selected a,header nav ul li.ancestor ul li.selected ul li a:hover,header nav ul li.ancestor ul li.ancestor ul li a:hover{
+  color:#ccc;
+}
+
+header .search input[type=text]{
+  border:3px solid #a07247;
+}
+
+header .search input[type=submit]{
+  background:#a07247;
+  border:3px solid #a07247;
+}
+
+header .search input[type=submit]:hover{
+  background:#755134;
+  border:3px solid #755134;
+}
+
+header a.button{
+  color:#a07247;
+  border:3px solid #a07247;
+}
+
+header a.button:hover{
+  border:3px solid #755134;
+  background:#a07247;
+  color:#fff;
+}
+
+header ul.social li a{
+  background:#a07247;
+}
+
+header ul.social li a:hover{
+  background:#755134;
+}
+
+header .text h2{
+  color:#755134;
+}

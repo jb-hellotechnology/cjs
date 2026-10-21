@@ -1,0 +1,88 @@
+<perch:form id="cjs_free_listing" method="post" app="perch_forms" role="form">
+  
+  <p>
+    <strong>Free listing advert details</strong>
+  </p>
+  <section class="input">
+		<perch:label for="company">Company, organisation or project name: <span>*</span></perch:label>
+		<perch:input type="text" id="company" label="Company" required="true" />
+	</section>
+  <section class="input">
+		<perch:label for="text">Free advert text, 50 words only (to include the contact details you would like us to publish): <span>*</span></perch:label>
+		<perch:input type="textarea" id="text" label="Text" required="true" />
+	</section>
+  <p>
+    <strong>Enhanced listing options - <a href="/cjs-focus/sample-adverts">samples here</a></strong>
+  </p>
+  <section class="input">
+    <perch:label for="logo"><perch:input type="checkbox" id="logo" label="Logo" value="yes" /> Option 1: Add your logo <sup>1</sup> <strong>Price<sup>1</sup> &pound;20</strong></perch:label>
+  </section>
+  <section class="input">
+    <perch:label for="longer"><perch:input type="checkbox" id="longer" label="Longer" value="yes" /> Option 2: Longer description: 100 words (incl. 50 free) additional words &pound;10 per 50 <strong>Price<sup>1</sup> from &pound;15</strong></perch:label>
+  </section>
+  <section class="input">
+    <perch:label for="longerlogo"><perch:input type="checkbox" id="longerlogo" label="Longer and Logo" value="yes" /> Option 3: Longer description and your logo<sup>2</sup> <strong>Price<sup>1</sup> from &pound;35</strong></perch:label>
+  </section>
+  <section class="input">
+    <perch:label for="display"><perch:input type="checkbox" id="display" label="Display" value="yes" /> Option 4: Full display 13cm high x 8.5 cm wide (please supply camera ready artwork)<sup>2</sup> <strong>Price<sup>1</sup> from &pound;135</strong></perch:label>
+  </section>
+  <p>
+    Please note: All paid adverts receive free hyperlinks to web and email addresses (no link on free adverts).
+  </p>
+  <p>
+    Other sizes available, if you're not sure then send your copy by email to <a href="mailto:focus@countryside-jobs">focus@countryside-jobs.com</a> for a quote.
+  </p>
+  <section class="input">
+    <perch:label for="moreinfo_this">If you would like more information about THIS edition of CJS Focus then please tick here: <perch:input type="checkbox" id="moreinfo_this" label="More Info About This Edition" value="yes" /></perch:label>
+  </section>
+  <section class="input">
+    <perch:label for="moreinfo_training">If you would like more information about advertising in the Training Directory then please tick here: <perch:input type="checkbox" id="moreinfo_training" label="More Info About Training Directory" value="yes" /></perch:label>
+  </section>
+  <p>
+    <strong>Contact details for CJS use only:</strong>
+  </p>
+	<section class="input">
+		<perch:label for="name">Name: <span>*</span></perch:label>
+		<perch:input type="text" id="name" label="Name" required="true" />
+	</section>
+  <section class="input">
+		<perch:label for="organisation">Organisation: <span>*</span></perch:label>
+		<perch:input type="text" id="organisation" label="Organisation" required="true" />
+	</section>
+  <section class="input">
+		<perch:label for="email">Email - we will acknowledge your submission by email: <span>*</span></perch:label>
+		<perch:input type="text" id="email" label="Email Address" required="true" />
+	</section>
+	<section class="input">
+		<perch:label for="telephone">Telephone: <span>*</span></perch:label>
+		<perch:input type="text" id="telephone" label="Telephone" required="true" />
+	</section>
+  <section class="input">
+		<perch:label for="message">Any Message For CJS:</perch:label>
+		<perch:input type="text" id="message" label="Message" />
+	</section>
+  <section class="input other">
+    <label>Are you human? If so, don't write in here.</label>
+    <perch:input type="text" id="enquiry" antispam="honeypot" />
+  </section>
+	<section class="input">
+		<perch:input type="submit" value="Submit Advert" />
+	</section>
+
+  <p>If you have any problems using this form please email your request direct to CJS, <a href="mailto:ranger@countryside-jobs.com">ranger@countryside-jobs.com</a></p>
+
+  <p>NB: All prices quoted net of VAT which is chargeable at standard rates.<br />
+  <sup>1</sup> we will contact you to take payment, usually by phone for your card details.<br />
+  <sup>2</sup> we will contact you with details of how to supply logos and artwork.</p>
+  
+  <perch:success>
+    <div class="success">
+      <perch:content type="textarea" id="confirmation" label="Confirmation Message" html editor="redactor" />
+    </div>
+  </perch:success>
+  
+  <p>
+    <span>*</span> = required field
+  </p>
+	
+</perch:form>

@@ -1,0 +1,20 @@
+<perch:before>
+
+</perch:before>
+
+<perch:if exists="longTitle">
+	<section class="listing blue <perch:if id="displayAd" value="1" match="eq">displayad</perch:if>">
+	  <p class="listing-title"> 
+		<perch:if id="categoryOne" value="distance-learning" match="eq">
+	    	<a href="/training/distance-learning#lc_<perch:cjs id="longID" />"><strong><perch:cjs id="longTitle" /></strong> at <perch:cjs id="provider" /></a><p>
+		<perch:else />
+		    <a href="/training/long-courses/<perch:cjs id="sector" />#lc_<perch:cjs id="longID" />"><strong><perch:cjs id="longTitle" /></strong> at <perch:cjs id="provider" /></a><p>
+	    </perch:if>
+	    <perch:cjs id="description" html/>
+	  <!--<p> <perch:if id="advertLink" match="eq" value="1"><a href="<perch:cjs id="advertWebsiteShort" />" target="_blank"><perch:cjs id="advertWebsiteShort" replace="http://|,https://|" /></a><perch:else /><a href="<perch:cjs id="advertWebsite" />" target="_blank"><perch:cjs id="advertWebsite" replace="http://|,https://|" /></a></perch:if> <perch:if exists="advertEmail"><a href="mailto:<perch:cjs id="advertEmail" />?subject=<perch:cjs id="longTitle"> advertised in CJS Training Directory"><perch:cjs id="advertEmail" /></a> </perch:if><perch:cjs id="advertTelephone" /></p>-->
+	</section>
+</perch:if>
+
+<perch:after>
+
+</perch:after>

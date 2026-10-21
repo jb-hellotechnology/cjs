@@ -1,0 +1,7 @@
+<item>
+	<title><perch:blog id="postTitle" /></title>
+	<description><perch:blog id="postTitle" /></description>
+	<link><perch:if id="postTemplate" value="focus_post.html" match="contains">https://www.countryside-jobs.com/article/<perch:blog id="postSlug" /><perch:else />https://www.countryside-jobs.com/news/</perch:if></link>
+	<guid isPermaLink="false">cjs_news_<perch:blog id="postID" /></guid>
+	<pubDate><perch:blog id="postDateTime" format="D, j M Y H:i:s O" /></pubDate>
+</item>

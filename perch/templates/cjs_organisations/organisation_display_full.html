@@ -1,0 +1,102 @@
+<div class="organisation_display flow">
+<h1>
+	<perch:cjs id="name" />
+</h1>
+
+<perch:if exists="logoURL">
+	<img src="<perch:cjs id="logoURL" />" alt="Logo: <perch:cjs id="name" />" />
+</perch:if>
+
+<perch:if exists="websiteURL">
+	<p><a href="<perch:cjs id="websiteURL" />" target="_blank"><perch:cjs id="websiteURL" replace="http://|,https://|"  /></a></p>
+</perch:if>
+
+<perch:if exists="strapLine">
+	<p><strong><perch:cjs id="strapLine" type="text" label="Strap Line" /></strong></p>
+</perch:if>
+
+<perch:if exists="missionStatement">
+	<perch:cjs id="missionStatement" html />
+</perch:if>
+
+<perch:if exists="sAdmin OR sArboriculture OR sCommunity OR sCountryside OR sEcology OR sEnvironmentEducation OR sFieldwork OR sForestry OR sHorticulture OR sPolicy OR sPractical OR sPublicity OR sRights OR sSustainability OR sVisitors OR sWildlife"><p class="span_commas"><strong>Sectors:</strong></perch:if>
+	<perch:if exists="sAdmin"><span>Administration, Support and IT</span></perch:if>
+	<perch:if exists="sArboriculture"><span>Arboriculture</span></perch:if>
+	<perch:if exists="sCommunity"><span>Community and Volunteers</span></perch:if>
+	<perch:if exists="sCountryside"><span>Countryside</span></perch:if>
+	<perch:if exists="sEcology"><span>Ecology</span></perch:if>
+	<perch:if exists="sEnvironmentEducation"><span>Environmental and Outdoor Education</span></perch:if>
+	<perch:if exists="sFieldwork"><span>Fieldwork and Research</span></perch:if>
+	<perch:if exists="sForestry"><span>Forestry</span></perch:if>
+	<perch:if exists="sHorticulture"><span>Horticulture</span></perch:if>
+	<perch:if exists="sPolicy"><span>Policy and Advice</span></perch:if>
+	<perch:if exists="sPractical"><span>Practical Land Management</span></perch:if>
+	<perch:if exists="sPublicity"><span>Publicity and Fundraising</span></perch:if>
+	<perch:if exists="sRights"><span>Rights of Way</span></perch:if>
+	<perch:if exists="sSustainability"><span>Sustainability</span></perch:if>
+	<perch:if exists="sVisitors"><span>Visitor Management</span></perch:if>
+	<perch:if exists="sWildlife"><span>Wildlife</span></perch:if>
+<perch:if exists="sAdmin OR sArboriculture OR sCommunity OR sCountryside OR sEcology OR sEnvironmentEducation OR sFieldwork OR sForestry OR sHorticulture OR sPolicy OR sPractical OR sPublicity OR sRights OR sSustainability OR sVisitors OR sWildlife"></p></perch:if>
+
+<perch:if exists="rNational OR rInternational OR rScotlandNorth OR rScotlandSouth OR rWales OR rNorthernIreland OR rEngland OR rEastAnglia OR rMidlands OR rNorthEast OR rNorthWest OR rSouth OR rSouthWest OR rHome"><p class="span_commas"><strong>Regions:</strong></perch:if>
+	<perch:if exists="rNational"><span>National</span></perch:if>
+	<perch:if exists="rInternational"><span>International</span></perch:if>
+	<perch:if exists="rScotlandNorth"><span>Scotland (North)</span></perch:if>
+	<perch:if exists="rScotlandSouth"><span>Scotland (South)</span></perch:if>
+	<perch:if exists="rWales"><span>Wales</span></perch:if>
+	<perch:if exists="rNorthernIreland"><span>Northern Ireland</span></perch:if>
+	<perch:if exists="rEngland"><span>England</span></perch:if>
+	<perch:if exists="rEastAnglia"><span>East Anglia</span></perch:if>
+	<perch:if exists="rMidlands"><span>Midlands</span></perch:if>
+	<perch:if exists="rNorthEast"><span>North East</span></perch:if>
+	<perch:if exists="rNorthWest"><span>North West</span></perch:if>
+	<perch:if exists="rSouth"><span>South</span></perch:if>
+	<perch:if exists="rSouthWest"><span>South West</span></perch:if>
+	<perch:if exists="rHome"><span>Home Based</span></perch:if>
+<perch:if exists="rNational OR rInternational OR rScotlandNorth OR rScotlandSouth OR rWales OR rNorthernIreland OR rEngland OR rEastAnglia OR rMidlands OR rNorthEast OR rNorthWest OR rSouth OR rSouthWest OR rHome"></p></perch:if>
+
+<perch:if exists="hq">
+	<p><strong>HQ or Main Location:</strong> <perch:cjs id="hq" type="text" label="HQ" /></p>
+</perch:if>
+
+<perch:if id="volunteerOpportunities" value="yes">
+	<p>This organisation offers <a href="https://www.countryside-jobs.com/volunteers/intro">Voluntary Opportunities</a>.</p>
+</perch:if>
+
+<perch:if id="apprenticeshipOpportunities" value="yes">
+	<p>This organisation may have <a href="https://www.countryside-jobs.com/volunteers/apprenticeships-and-interns">apprenticeships or internship</a> vacancies.</p>
+</perch:if>
+
+<perch:if exists="organisationSize">
+	<p><strong>Organisation Size:</strong> <perch:cjs id="organisationSize" /></p>
+</perch:if>
+
+<perch:if exists="organisationOverview">
+	<p><strong>Overview</strong></p>
+	<perch:cjs id="organisationOverview" type="textarea" html editor="redactor" label="Overview" />
+</perch:if>
+
+<perch:if exists="description">
+	<p><strong>Description</strong></p>
+	<perch:cjs id="description" html />
+</perch:if>
+
+<perch:if exists="testimonials">
+	<p><strong>Testimonials/Partnership Info</strong></p>
+	<perch:cjs id="testimonials" type="textarea" html />
+</perch:if>
+
+<perch:if id="directContact" value="yes">
+	<perch:if exists="directPhone OR directEmail">
+		<p><strong>Contact Details:</strong></p>
+		<p>
+		<perch:if exists="directPhone">
+			<strong>Phone:</strong> <perch:cjs id="directPhone" /><br />
+		</perch:if>
+		<perch:if exists="directEmail">
+			<strong>Email:</strong> <a href="mailto:<perch:cjs id="directEmail" />"><perch:cjs id="directEmail" /></a>
+		</perch:if>
+		</p>
+	</perch:if>
+</perch:if>
+</div>

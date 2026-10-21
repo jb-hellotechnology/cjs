@@ -1,0 +1,20 @@
+<perch:before>
+
+</perch:before>	
+
+<section class="listing blue <perch:if id="displayAd" value="1" match="eq">displayad</perch:if>">
+  <p class="listing-title">
+    <perch:cjs id="startDate" format="d/m/Y"> 
+    <strong>
+      <perch:cjs id="eventTitle"> <perch:if exists="location"> at <perch:cjs id="location"></perch:if>
+    </strong>
+    <perch:cjs id="numberDays" /> Day<perch:if id="numberDays" match="gt" value="1">s</perch:if>
+  </p>
+  <perch:if exists="logo"><img src="<perch:cjs id="logo" />" alt="<perch:cjs id="logoAlt" />" /></perch:if>
+  <p><perch:cjs id="provider" /> Contact: <perch:if id="advertLink" match="eq" value="0"><perch:if exists="advertWebsite"><a href="<perch:cjs id="advertWebsite">" target="_blank"><perch:cjs id="advertWebsite" replace="https://|,http://"></a></perch:if><perch:else/><perch:if exists="advertWebsiteShort"><a href="<perch:cjs id="advertWebsiteShort">" target="_blank"><perch:cjs id="advertWebsiteShort" replace="https://|,http://"></a></perch:if></perch:if> <perch:if exists="advertEmail"><a href="mailto:<perch:cjs id="advertEmail">?subject=<perch:cjs id="eventTitle"> advertised in CJS Training Directory"><perch:cjs id="advertEmail"></a></perch:if> <perch:if exists="advertTelephone"><perch:cjs id="advertTelephone"></perch:if></p>
+  <perch:cjs id="description" html />
+</section>
+
+<perch:after>
+
+</perch:after>

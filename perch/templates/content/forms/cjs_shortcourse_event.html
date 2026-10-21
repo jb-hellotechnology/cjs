@@ -1,0 +1,525 @@
+<div class="restrict">
+  
+  <perch:form id="cjs_shortcourse_event" method="post" app="perch_forms cjs_training" role="form" class="clear-form">
+  
+    <header id="form-header">
+      <h3>Create Your Advert</h3>
+    </header>
+  
+    <div class="form-panel flow show" data-panel="0">
+      <section class="input">
+        <perch:label>Advert Type</perch:label>
+        <perch:input type="select" id="type" label="Advert Type" options="Please Select|,Short Course/Webinar|short,Event|event" required />
+      </section>
+      <div class="form-columns">
+        <div>
+          <section class="input">
+            <perch:label>Start Date (Format dd/mm/yyyy) <span>*</span></perch:label>
+            <perch:input type="text" id="startdate" label="Start Date" placeholder="dd/mm/yyyy" class="datefield" required="true" />
+          </section>
+          <section class="input">
+            <perch:label>Runs For (Number Of Days) <span>*</span></perch:label>
+            <perch:input type="text" id="runsfor" label="Runs For" required="true" />
+          </section>
+          <section class="input">
+            <perch:label>Title <span>*</span></perch:label>
+            <perch:input type="text" id="title" label="Title" required="true" />
+          </section>
+          <section class="input">
+            <perch:label>Cost <span>*</span></perch:label>
+            <perch:input type="text" id="cost" label="Cost" required="true" />
+          </section>
+          <section class="input">
+            <perch:label>Location/Based <span>*</span></perch:label>
+            <perch:input type="text" id="location" label="Location" required="true" />
+          </section>
+          <section class="input">
+            <perch:label>County</perch:label>
+            <perch:input type="select" id="county" label="County" options="National,Bedfordshire,Berkshire,Bristol,Buckinghamshire,Cambridgeshire,Cheshire,Cornwall,County Durham,Cumbria,Derbyshire,Devon,Dorset,East Riding of Yorkshire,East Sussex,Essex,Gloucestershire,Greater London,Greater Manchester,Hampshire,Herefordshire,Hertfordshire,Humberside,Isle of Wight,Isles of Scilly,Kent,Lancashire,Leicestershire,Lincolnshire,Merseyside,Norfolk,North Somerset,North Yorkshire,Northamptonshire,Northumberland,Nottinghamshire,Oxfordshire,Rutland,Shropshire,Somerset,South Gloucestershire,South Yorkshire,Staffordshire,Suffolk,Surrey,Tyne & Wear,Warwickshire,West Midlands,West Sussex,West Yorkshire,Wiltshire,Worcestershire,Aberdeenshire,Angus,Argyll & Bute,Ayrshire,Banffshire,Berwickshire,Borders,Caithness,Clackmannanshire,Dumfries & Galloway,Dunbartonshire,East Ayrshire,East Dunbartonshire,East Lothian,East Renfrewshire,Fife,Highland,Inverclyde,Kincardineshire,Lanarkshire,Midlothian,Moray,North Ayrshire,North Lanarkshire,Orkney,Perth & Kinross,Renfrewshire,Shetland,South Ayrshire,South Lanarkshire,Stirlingshire,West Dunbartonshire,West Lothian,Western Isles,Blaenau Gwent,Bridgend,Caerphilly,Cardiff,Carmarthenshire,Ceredigion,Conwy,Denbighshire,Flintshire,Gwynedd,Isle of Anglesey,Merthyr Tydfil,Monmouthshire,Neath Port Talbot,Newport,Pembrokeshire,Powys,Rhondda Cynon Taff,Swansea,Torfaen,Vale of Glamorgan,Wrexham,Antrim,Armagh,Down,Fermanagh,Londonderry,Tyrone" />
+          </section>
+        </div>
+        <div>
+          <section class="input">
+            <perch:label>Map Markers</perch:label>
+            <p>Click to drop one or more map markers onto appropriate locations for this course. For online courses or webinars please drop a pin on your organisation's head office.</p>
+            <div id="map"></div>
+            <input id="delete-markers" type="button" value="Delete Markers" class="button small delete" />
+            <perch:input type="hidden" id="lat" label="Lat" value="<perch:content id="form_lat" />" />
+            <perch:input type="hidden" id="lng" label="Lng" value="<perch:content id="form_lng" />" />
+          </section>
+        </div>
+      </div>
+      <section class="input online pill-labels" style="display:none;">
+        <h4>Please tick if you are advertising an online course or webinar</h4>
+        <perch:label><perch:input type="checkbox" id="online" label="Online" value="1" /> Online</perch:label>
+        <perch:label><perch:input type="checkbox" id="webinar" label="Webinar" value="1" /> Webinar</perch:label>
+      </section>
+    </div>
+    <div class="form-panel flow" data-panel="1">
+      <div class="form-columns">
+        <section class="input">
+          <perch:label>Run By <span>*</span></perch:label>
+          <perch:input type="text" id="runby" label="Run By" required="true" />
+        </section>
+        <section class="input">
+          <perch:label>Contact Name <span>*</span></perch:label>
+          <perch:input type="text" id="contactname" label="Contact Name" required="true" />
+        </section>
+        <section class="input">
+          <perch:label>Contact Telephone <span>*</span></perch:label>
+          <perch:input type="text" id="contacttelephone" label="Contact Telephone" required="true" />
+        </section>
+        <section class="input">
+          <perch:label>Contact Email <span>*</span></perch:label>
+          <perch:input type="text" id="contactemail" label="Contact Email" required="true" />
+        </section>
+        <section class="input">
+          <perch:label>Contact Website Address <span>*</span></perch:label>
+          <perch:input type="text" id="contactwebsite" label="Contact Website Address" required="true" />
+        </section>
+      </div>
+    </div>
+    <div class="form-panel flow" data-panel="2">
+      <div class="form-columns">
+        <div>
+          <section class="input">
+            <perch:label>Description</perch:label>
+            <p>
+              Basic listings are free (title, provider, date, location, contact details and a 50 word description) longer descriptions are &pound;15 for the first 50 words then &pound;10 per additional 50.
+            </p>
+            <perch:input type="textarea" id="text" label="Linage" class="redactor" />
+          </section>
+          <section class="input">
+            <h3>
+              Enhance Your Advert
+            </h3>
+            <perch:label>Logo File (If Required, Online Only) (JPG) - &pound;20* + VAT</perch:label>
+            <perch:input type="file" id="logo" label="Logo #1" />
+            <p><a href="javascript:removeFile('#form1_logo');" class="remove">Click to Remove File</a></p>
+          </section>
+        </div>
+        <div>
+          <h3>Promote Your Advert</h3>
+          <section class="input border">
+            <p>Additional promotion across our social media network, available on all listings including free.</p>
+            <p>More detailed information with link direct to your advert, posted to LinkedIn and Facebook included in the daily email plus detailed tweets.</p>
+            <p>Text promotion &pound;10</p>
+            <p>Text and graphics promotion £15 (unique banner image including your logo and some details) our free advert</p>
+            <perch:label><perch:input type="checkbox" id="promot" label="Contact Me About Promoting My Advert" value="true" /> Please contact me about promoting my advert</perch:label>
+          </section>
+          <section class="input border">
+            <perch:label><perch:input type="checkbox" id="contactme" label="Contact Me About Advertising In CJS Newsletters" value="true" /> Please contact me about advertising in CJS newsletters</perch:label>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="form-panel flow" data-panel="3">
+      <h3>Contact Details</h3>
+      <div class="form-columns">
+        <div>
+          <section class="input">
+            <perch:label for="name">Name: <span>*</span></perch:label>
+            <perch:input type="text" id="name" label="Name" required="true" />
+          </section>
+          <section class="input">
+            <perch:label for="organisation">Organisation: <span>*</span></perch:label>
+            <perch:input type="text" id="organisation" label="Organisation" required="true" />
+          </section>
+          <section class="input">
+            <perch:label for="email">Email - we will acknowledge your submission by email: <span>*</span></perch:label>
+            <perch:input type="text" id="email" label="Email Address" required="true" />
+          </section>
+          <section class="input">
+            <perch:label for="telephone">Telephone: <span>*</span></perch:label>
+            <perch:input type="text" id="telephone" label="Telephone" required="true" />
+          </section>
+          <section class="input">
+            <perch:label for="message">Any Message For CJS:</perch:label>
+            <perch:input type="text" id="message" label="Message" />
+          </section>
+        </div>
+        <div>
+          <section class="input other">
+            <label>Are you human? If so, don't write in here.</label>
+            <perch:input type="text" id="enquiry" antispam="honeypot" />
+          </section>
+          <section class="input">
+            <div class="g-recaptcha" data-sitekey="6LcKQNYfAAAAAKfvMMYcA6xI8d64c0oxSbIpoSuB" data-callback="enableBtn"></div>
+          </section>
+          <section class="input">
+            <perch:input type="submit" value="Submit Advert" id="submit" />
+          </section>
+          <p>If you have any problems using this form please email your request direct to CJS, <a href="mailto:ranger@countryside-jobs.com">ranger@countryside-jobs.com</a></p>
+        </div>
+      </div>
+    </div>
+    
+    <perch:success>
+      <div class="success">
+        <perch:content type="textarea" id="confirmation" label="Confirmation Message" html editor="redactor" />
+      </div>
+    </perch:success>
+    
+    <footer>
+      <div>
+        <button class="prev" id="prev" type="button">Previous</button>
+      </div>
+      <div>
+        <p class="progress">Section <span id="panel"></span> of <span id="totalPanels"></span></p>
+      </div>
+      <div>
+        <button class="next" id="next" type="button">Next</button>
+      </div>
+    </footer>
+    
+  </perch:form>
+</div>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="//jqueryui.com/resources/demos/style.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+key: "AIzaSyATUBEmTAVMlmQUpMKKD95ic8B62ECXOQo",
+v: "weekly",
+// Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
+// Add other bootstrap parameters as needed, using camel case.
+});
+</script>
+<script>
+function enableBtn(){
+  document.getElementById("form1_submit").disabled = false;
+}
+
+$( function() {
+  $( ".datefield" ).datepicker({ dateFormat: 'dd/mm/yy'});
+});
+
+$('#form1_type').change(function(){
+  let fType = $('#form1_type').val();
+  if(fType=='Event'){
+    $('.online input[type=checkbox]').prop("checked", false);
+    $('.online').hide();
+  }else{
+    $('.online').show();
+  }
+});
+
+$('.redactor').redactor({ 
+  plugins: ['counter', 'limiter'], 
+  buttons: [],
+  linkSize: 1000,
+  minHeight: '200px',
+  callbacks: {
+    keydown: function(data){
+      getContent();
+    },
+    enter: function(data){
+      getContent();
+    },
+    tab: function(data){
+      getContent();
+    },
+    blur: function(data){
+      getContent();
+    }
+  }
+});
+
+getContent();
+
+function getContent(){
+  var count = $('.redactor-statusbar li:first-child').text();
+  var res = count.split(" ");
+  var words = res[1];
+  
+  var type = $('#form1_advertType').val();
+  
+  $('p.error.basic').hide();
+  $('p.error.standard').hide();
+  
+  if(type == 'basic' && words>220){
+    $('p.error.basic').show();
+    $('#form1_submit').hide();
+  }
+  if(type == 'basic' && words<=220){
+    $('p.error.basic').hide();
+    $('#form1_submit').show();
+  }
+  if(type == 'standard' && words>400){
+    $('p.error.standard').show();
+    $('#form1_submit').hide();
+  }
+  if(type == 'standard' && words<=400){
+    $('p.error.standard').hide();
+    $('#form1_submit').show();
+  }
+}
+
+$(document).ready(function(){
+  var type = $('#form1_advertType').val(); 
+  if(type == 'long'){
+    $('.input.long').show();
+    $('.hide.basic').hide();
+    $('#form1_submit').show();
+  }
+  if(type == 'enhanced'){
+    $('.input.long').show();
+    $('.hide.basic').hide();
+    $('#form1_submit').show();
+  }
+  if(type == 'standard'){
+    $('.input.standard').show();
+    $('.hide.basic').hide();
+    $('#form1_submit').show();
+  }
+  if(type == 'basic'){
+    $('.hide.basic').show();
+    $('#form1_submit').show();
+  }
+})
+
+$('#form1_advertType').change(function(){
+
+$('#form1_logo').val('');
+$('#form1_logo2').val('');
+$('#form1_logo3').val('');
+$('#form1_logo4').val('');
+$('#form1_logo5').val('');
+
+$('p.error.basic').hide();
+$('p.error.standard').hide();
+
+var type = $('#form1_advertType').val(); 
+  if(type == 'basic'){
+    $('.logo.basic').show();
+    $('#form1_submit').show();
+  }else if(type == 'standard'){
+    $('.logo.standard').show();
+  }else{
+    $('.logo.standard').show();
+    $('.logo.long').show();
+  }
+});
+
+$('#form1_jod').click(function(){
+  if ($('#form1_jod').is(':checked')) {
+   $('#jod_date').addClass('show');
+  }else{
+   $('#jod_date').removeClass('show'); 
+  }
+})
+
+$('#form1_socialshares').click(function(){
+  if ($('#form1_socialshares').is(':checked')) {
+   $('#social_date').addClass('show');
+  }else{
+   $('#social_date').removeClass('show'); 
+  }
+})
+
+function removeFile(id){
+  $(id).val('');
+  $(id+'_image').remove();
+  $(id+'_hidden').val('');
+}
+
+// In the following example, markers appear when the user clicks on the map.
+// The markers are stored in an array.
+// The user can then click an option to hide, show or delete the markers.
+let map;
+let markers = [];
+
+function initMap() {
+const centre = { lat: 53.419354, lng: -1.953678 };
+
+map = new google.maps.Map(document.getElementById("map"), {
+zoom: 6,
+center: centre,
+mapTypeId: "terrain",
+});
+// This event listener will call addMarker() when the map is clicked.
+map.addListener("click", (event) => {
+addMarker(event.latLng);
+});
+// add event listeners for the buttons
+document
+.getElementById("delete-markers")
+.addEventListener("click", deleteMarkers);
+}
+
+
+let markersArray = [];
+
+// Adds a marker to the map and push to the array.
+function addMarker(position) {
+const marker = new google.maps.Marker({
+position,
+map,
+});
+
+markers.push(marker);
+
+
+let latArray = [];
+let lngArray = [];
+
+for (let i = 0; i < markers.length; i++) {
+var position = markers[i].getPosition();
+latArray.push(position.lat());
+lngArray.push(position.lng());
+}
+let latList = latArray.toString();
+$('#form1_lat').val(latList);
+let lngList = lngArray.toString();
+$('#form1_lng').val(lngList);
+}
+
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+for (let i = 0; i < markers.length; i++) {
+markers[i].setMap(map);
+}
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function hideMarkers() {
+setMapOnAll(null);
+}
+
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
+hideMarkers();
+markers = [];
+}
+
+//initMap();
+
+var activePanel = parseInt($('.form-panel.show').data('panel'));
+var totalPanels = $('.form-panel').length;
+$('#panel').text(activePanel+1);
+$('#totalPanels').text(totalPanels);
+
+const scrollIntoViewWithOffset = (selector, offset) => {
+  window.scrollTo({
+    behavior: 'smooth',
+    top:
+      document.querySelector(selector).getBoundingClientRect().top -
+      document.body.getBoundingClientRect().top -
+      offset,
+  })
+}
+
+// Function to validate current panel
+function validateCurrentPanel() {
+  var activePanel = parseInt($('.form-panel.show').data('panel'));
+  var currentPanelElement = $('.form-panel[data-panel=' + activePanel + ']');
+  var isValid = true;
+  var errorMessages = [];
+  
+  // Find all required inputs in the current panel
+  currentPanelElement.find('input[required], select[required], textarea[required]').each(function() {
+    var $input = $(this);
+    var value = $input.val();
+    var label = $input.closest('section').find('label').first().text().replace('*', '').trim();
+    
+    // Check if field is empty
+    if (!value || value === '' || value === 'Please Select') {
+      isValid = false;
+      $input.addClass('error-field');
+      errorMessages.push(label || 'A required field');
+    } else {
+      $input.removeClass('error-field');
+    }
+  });
+  
+  // Remove any existing error message
+  currentPanelElement.find('.validation-error').remove();
+  
+  // Show error message if validation failed
+  if (!isValid) {
+    var errorHtml = '<div class="validation-error" style="background: #ffebee; border: 1px solid #f44336; padding: 15px; margin: 20px 0; border-radius: 4px; color: #c62828;"><strong>Please complete the following required fields:</strong><ul style="margin: 10px 0 0 20px;">';
+    errorMessages.forEach(function(msg) {
+      errorHtml += '<li>' + msg + '</li>';
+    });
+    errorHtml += '</ul></div>';
+    
+    currentPanelElement.prepend(errorHtml);
+    scrollIntoViewWithOffset("#form-header", 100);
+  }
+  
+  return isValid;
+}
+
+// Add CSS for error highlighting
+$('<style>.error-field { border: 2px solid #f44336 !important; }</style>').appendTo('head');
+
+// Optional: Clear error styling when user starts typing
+$(document).on('input change', 'input, select, textarea', function() {
+  $(this).removeClass('error-field');
+});
+
+$('#prev').hide();
+/* FORM CONTROLS */
+$('#next').click(function(){
+  
+  // Manually sync Redactor editor content to textarea
+  var editorContent = $('.redactor-in').html();
+  if (editorContent) {
+    $('#form1_text').val(editorContent);
+  }
+  
+  // Validate before moving forward
+  if (!validateCurrentPanel()) {
+    return false;
+  }
+  
+  var activePanel = parseInt($('.form-panel.show').data('panel'));
+  var totalPanels = $('.form-panel').length;
+  $('#panel').text(activePanel+2);
+  $('#totalPanels').text(totalPanels);
+  if(activePanel<totalPanels-1){
+    var nextPanel = activePanel+1;
+
+    scrollIntoViewWithOffset("#form-header", '100');
+    
+    $('.form-panel.show').removeClass('show');
+    $('.form-panel[data-panel=' + nextPanel + ']').addClass('show');
+    $('#next').show();
+    $('#prev').show();
+    if(activePanel==totalPanels-2){
+      $('#next').hide();  
+    }
+  }else{
+    $('#prev').show();
+  }
+});
+
+$('#prev').click(function(){
+  
+  // Manually sync Redactor editor content to textarea
+  var editorContent = $('.redactor-in').html();
+  if (editorContent) {
+    $('#form1_text').val(editorContent);
+  }
+  
+  var activePanel = parseInt($('.form-panel.show').data('panel'));
+  console.log(activePanel);
+  if(activePanel>0){
+    var nextPanel = activePanel-1;
+    $('#panel').text(activePanel);
+    $('#totalPanels').text(totalPanels);
+    const element = document.getElementById("form-header");
+    element.scrollIntoView();
+    
+    $('.form-panel.show').removeClass('show');
+    $('.form-panel[data-panel=' + nextPanel + ']').addClass('show');
+    $('#next').show();
+    if(activePanel==1){
+      $('#prev').hide();
+    }
+  }else{
+    $('#next').show();
+    $('#prev').show();
+  }
+});
+</script>

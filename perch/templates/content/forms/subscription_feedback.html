@@ -1,0 +1,58 @@
+<perch:form id="subscription_feedback" method="post" app="perch_forms" role="form">
+  
+  <p>
+    Thanks for taking the time to let us know about your subscription, it's much appreciated.
+  </p>
+  <section class="input">
+		<perch:label for="cjsnumber">CJS Number: <span>*</span></perch:label>
+		<perch:input type="text" id="cjsnumber" label="CJSNumber" required="true" />
+	</section>
+  <section class="input">
+		<perch:label for="email">Your email address - so we can contact you if we have a query about your reply: <span>*</span></perch:label>
+		<perch:input type="text" id="email" label="Email Address" required="true" />
+	</section>
+  <section class="input">
+    <perch:label for="type">Please select one of these options:</perch:label>
+    <perch:label for="type" class="other"><perch:input type="radio" name="type" value="None selected" id="Type" /> Please choose an option.</perch:label>
+    <perch:label for="type"><perch:input type="radio" name="type" value="Got a permanent job" id="Type" /> Got a permanent job</perch:label>
+    <perch:label for="type"><perch:input type="radio" name="type" value="I'm sharing / reading some else's copy" id="Type" /> I'm sharing / reading some else's copy</perch:label>
+    <perch:label for="type"><perch:input type="radio" name="type" value="I find enough information on the CJS website" id="Type" /> I find enough information on the CJS website</perch:label>
+    <perch:label for="type"><perch:input type="radio" name="type" value="I find enough information on the internet" id="Type" /> I find enough information on the internet</perch:label>
+    <perch:label for="type"><perch:input type="radio" name="type" value="Stopped looking for a while: Got a seasonal post" id="Type" /> Stopped looking for a while: Got a seasonal post</perch:label>
+    <perch:label for="type"><perch:input type="radio" name="type" value="Stopped looking for a while: Got a voluntary post" id="Type" /> Stopped looking for a while: Got a voluntary post</perch:label>
+    <perch:label for="type"><perch:input type="radio" name="type" value="Stopped looking for a while: gone for further training" id="Type" /> Stopped looking for a while: gone for further training</perch:label>
+    <perch:label for="type"><perch:input type="radio" name="type" value="Stopped looking for a while: I'm staying put for now." id="Type" /> Stopped looking for a while: I'm staying put for now</perch:label>
+    <perch:label for="type"><perch:input type="radio" name="type" value="Too expensive" id="Type" /> Too expensive. If so, what would you consider a reasonable price?:</perch:label>
+    <perch:input type="text" id="price" label="Price" />
+    <perch:label for="other"><perch:input type="radio" name="type" value="Other" id="Type" /> Other, please specifiy:</perch:label>
+    <perch:input type="text" id="other" label="Other" />
+  </section>
+  <section class="input">
+		<perch:label for="comments">Any other comments:</perch:label>
+		<perch:input type="textarea" id="comments" label="Comments" />
+	</section>
+  <section class="input other">
+    <label>Are you human? If so, don't write in here.</label>
+    <perch:input type="text" id="enquiry" antispam="honeypot" />
+  </section>
+	<section class="input">
+		<perch:input type="submit" value="Send Feedback" />
+	</section>
+  
+  <perch:success>
+    <div class="success">
+      <perch:content type="textarea" id="confirmation" label="Confirmation Message" html editor="redactor" />
+    </div>
+  </perch:success>
+
+  <p>
+    If you've not got round to renewing yet but want to restart your subscription <a href="/shop/cjsweekly">click here to renew now</a>.
+  </p>
+  <p>
+    If you have any comments on the service CJS offers please don't hesitate to <a href="mailto:ranger@countryside-jobs.com">contact us</a>; likewise if you have any queries we're happy to help.
+  </p>
+  <p>
+    <span>*</span> = required field
+  </p>
+	
+</perch:form>

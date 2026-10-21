@@ -1,0 +1,386 @@
+<div class="restrict">
+
+  <perch:form id="cjs_volunteer" method="post" app="cjs_daily" role="form" class="clear-form">
+    
+    <header id="form-header">
+      <h3>Create Your Advert</h3>
+    </header>
+   
+    <div class="form-panel flow show" data-panel="0">
+      <div class="form-columns">
+        <div>
+          <section class="input">
+            <perch:label>Job Title</perch:label>
+          <perch:input type="text" id="jobtitle" label="Job Title" value="<perch:content id="form_jobtitle" />" required />
+          </section>
+          <section class="input">
+            <perch:label>Closing Date (And If Applicable Interview Date)</perch:label>
+            <perch:input type="text" id="closingdate" label="Closing Date" value="<perch:content id="form_closingdate" />" />
+          </section>
+          <section class="input">
+            <perch:label>Location/Based</perch:label>
+            <perch:input type="text" id="location" label="Location" value="<perch:content id="form_location" />" required />
+          </section>
+          <section class="input">
+            <perch:label>Any Benefits, Training, Expenses etc.</perch:label>
+            <perch:input type="text" id="benefits" label="Benefits" value="<perch:content id="form_benefits" />" />
+          </section>
+          <section class="input">
+            <perch:label>Employer</perch:label>
+            <perch:input type="text" id="employer" label="Employer" value="<perch:content id="form_employer" />" required />
+          </section>
+        </div>
+        <div>
+          <section class="input">
+            <perch:label>Description and Contact Details - 150 Word Limit</perch:label>
+            <perch:input type="textarea" id="form_text" label="Linage" class="redactor" html />
+            <p class="error words">You've exceeded the 150 word limit for Volunteer adverts - please reduce the number of words</p>
+          </section>
+          <section class="input">
+            <h4>Type of Role - <a href="javascript:alert('CJS classifies a voluntary placement as one which is totally unpaid or has only out of pocket expenses. Whereas an apprenticeship has some remuneration in addition to a significant level of training leading to a recognised qualification.')">Click Here to Clarify</a></h4>
+            <div class="radio-inputs">
+              <perch:input id="role" type="radio" options="Voluntary Role,Apprenticeship" label="Role"  value="<perch:if exists="form_role"><perch:content id="form_role" /><perch:else/>Voluntary Role</perch:if>" />
+            </perch:input>
+          </section>
+          <section class="input">
+            <perch:label>Time Commitment</perch:label>
+            <perch:input type="text" id="timecommitment" label="Time Commitment" value="<perch:content id="form_time" />" />
+          </section>
+          <section class="input">
+            <perch:label>For Long Running Campaigns Please Enter an End Date</perch:label>
+            <perch:input type="text" id="enddate" label="End Date" value="<perch:content id="form_enddate" />" />
+            <p>Adverts run until the closing date, if you don't have a closing date they are advertised for three weeks. However, for long running campaigns we can run adverts for up to six months.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-panel flow" data-panel="1">
+      <div class="form-columns">
+        <div>
+          <p>
+            <strong>Enhance Your Advert</strong>
+          </p>
+          <section class="input">
+            <perch:label>Logo File (If Required) (JPG) - &pound;10* + VAT</perch:label>
+            <perch:input type="file" id="logo" label="Logo #1" />
+            <perch:if exists="form_logo1">
+              <br /><img src="<perch:content id="form_logo1" />" alt="Logo 1" id="form2_logo_image" />
+            </perch:if>
+            <perch:input type="hidden" id="logo_hidden" value="<perch:content id="form_logo1" />" />
+            <p><a href="javascript:removeFile('#form1_logo');" class="remove">Click to Remove File</a></p>
+          </section>
+          <section class="input">
+            <perch:label>Logo File #2 (If Required) (JPG) - &pound;10* + VAT</perch:label>
+            <perch:input type="file" id="logo2" label="Logo #2" />
+            <perch:if exists="form_logo2">
+              <br /><img src="<perch:content id="form_logo2" />" alt="Logo 2" id="form2_logo2_image" />
+            </perch:if>
+            <perch:input type="hidden" id="logo2_hidden" value="<perch:content id="form_logo2" />" />
+            <p><a href="javascript:removeFile('#form1_logo2');" class="remove">Click to Remove File</a></p>
+          </section>
+          <section class="input">
+            <perch:label><perch:input type="checkbox" id="enhanced" value="true" label="Enhanced" /> Enhanced Listing For &pound;10* + VAT (Includes Free Online Listing)</perch:label>
+            <perch:if id="form_enhanced" value="true">
+            <script>
+            $('#form1_enhanced').attr('checked','checked');    
+          </script>
+            </perch:if>
+            <p>We will contact you by email about payment.<br />*rates include your 50% discount for advertising apprenticeships, voluntary or unpaid posts.<br />We can also host more detailed documentation e.g. full job role profile, starting from £10, ask us about this.</p>
+          </section>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-panel flow" data-panel="2">
+      <div class="form-columns">
+        <div>
+          <p>
+            <strong>Contact details for CJS use only:</strong>
+          </p>
+          <perch:if exists="form_memberID">
+            <p><a href="/advertisers/sign-out?r=/advertisers">Sign out/use different account</a></p>
+          </perch:if>
+          <section class="input">
+            <perch:label for="name">Name: <span>*</span></perch:label>
+            <perch:input type="text" id="name" label="Name" required="true" value="<perch:content id="form_name" />" />
+          </section>
+          <section class="input">
+            <perch:label for="organisation">Organisation: <span>*</span></perch:label>
+            <perch:input type="text" id="organisation" label="Organisation" required="true" value="<perch:content id="form_organisation" />" />
+          </section>
+          <section class="input">
+            <perch:label for="email">Email - we will acknowledge your submission by email: <span>*</span></perch:label>
+            <perch:input type="text" id="email" label="Email Address" required="true" value="<perch:content id="form_email" />" />
+          </section>
+          <section class="input">
+            <perch:label for="telephone">Telephone: <span>*</span></perch:label>
+            <perch:input type="text" id="telephone" label="Telephone" required="true" value="<perch:content id="form_phone" />" />
+          </section>
+          <section class="input">
+            <perch:label for="message">Any Message For CJS:</perch:label>
+            <perch:input type="text" id="message" label="Message" value="<perch:content id="form_message" />" />
+          </section>
+          <section class="input other">
+            <label>Are you human? If so, don't write in here.</label>
+            <perch:input type="text" id="enquiry" antispam="honeypot" />
+            <perch:input type="text" id="cost" label="Cost" value="0.00" />
+          </section>
+          <section class="input">
+            <p>
+              <strong>Cost:</strong> &pound;<span class="cost">0.00</span>
+            </p>
+          </section>
+          <section class="input">
+            <div class="g-recaptcha" data-sitekey="6LcKQNYfAAAAAKfvMMYcA6xI8d64c0oxSbIpoSuB" data-callback="enableBtn"></div>
+          </section>
+          <perch:if exists="form_memberID">
+            <section class="input">
+              <label><strong>Type of Advert</strong></label>
+              <perch:input type="select" id="status" label="Status" options="<perch:content id="form_statusOptions" />" />
+            </section>
+          </perch:if>
+          <section class="input">
+            <perch:input type="submit" id="submit" value="Submit Advert" disabled="disabled" />
+          </section>
+          <perch:input type="hidden" id="memberID" value="<perch:content id="form_memberID" />" />
+          <perch:input type="hidden" id="advertID" value="<perch:content id="form_advertID" />" />
+          <perch:input type="hidden" id="advertRef" value="<perch:content id="form_advertRef" />" />
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <div>
+        <button class="prev" id="prev" type="button">Previous</button>
+      </div>
+      <div>
+        <p class="progress">Section <span id="panel"></span> of <span id="totalPanels"></span></p>
+      </div>
+      <div>
+        <button class="next" id="next" type="button">Next</button>
+      </div>
+    </footer>
+    
+    <perch:success>
+      <div class="success">
+        <perch:content type="textarea" id="confirmation" label="Confirmation Message" html editor="redactor" />
+        <perch:if exists="form_memberID">
+          <p>If you have submitted a draft advert you can check, update and submit for publication through your advertisers profile, <a href="/advertisers">click here</a>.</p>
+        </perch:if>
+      </div>
+    </perch:success>
+    
+  </perch:form>
+</div>
+<script>
+	function enableBtn(){
+	   document.getElementById("form1_submit").disabled = false;
+	 }
+		$('.redactor').redactor(
+  	{ 
+	  	plugins: ['counter', 'limiter'], 
+	  	buttons: ['ul', 'link'],
+	  	linkSize: 1000,
+	  	callbacks: {
+        	keydown: function(data)
+	        {
+	        	getContent();
+	        },
+	        enter: function(data)
+	        {
+	        	getContent();
+	        },
+	        tab: function(data)
+	        {
+	        	getContent();
+	        },
+	        blur: function(data)
+	        {
+	        	getContent();
+	        }
+	    }
+	}
+  );
+  
+  $('p.error.words').hide();
+  
+  function getContent(){
+	  var count = $('.redactor-statusbar li:first-child').text();
+	  var res = count.split(" ");
+	  var words = res[1];
+	  
+	  $('p.error.words').hide();
+	  
+	  if(words>150){
+		  $('p.error.words').show();
+		  $('#form1_submit').hide();
+	  }else{
+		  $('p.error.words').hide();
+		  $('#form1_submit').show();
+	  }
+  }
+</script>
+<script>	
+
+			window.setInterval(function(){
+				calcVol();
+			}, 2000);
+			
+			function calcVol(){
+        var type = $('input[type="radio"]:checked').val();
+        cost = 0;
+        var Logo = $('#form1_logo').val();
+        var Logo2 = $('#form1_logo2').val();
+        if(Logo !== ''){
+          cost = cost + 10;
+        }
+        if(Logo2 !== ''){
+          cost = cost + 10;
+        }
+        if ($('#form1_enhanced').is(':checked')) {
+          cost = cost+10;
+        }
+
+        cost = parseFloat(cost);
+        cost = cost.toFixed(2);
+
+        $('.cost').text(cost + " + VAT");
+        $('#form1_cost').val(cost);
+			}
+			
+function removeFile(id){
+    $(id).val('');
+    $(id+'_image').remove();
+    $(id+'_hidden').val('');
+}
+
+var activePanel = parseInt($('.form-panel.show').data('panel'));
+var totalPanels = $('.form-panel').length;
+$('#panel').text(activePanel+1);
+$('#totalPanels').text(totalPanels);
+
+const scrollIntoViewWithOffset = (selector, offset) => {
+  window.scrollTo({
+    behavior: 'smooth',
+    top:
+      document.querySelector(selector).getBoundingClientRect().top -
+      document.body.getBoundingClientRect().top -
+      offset,
+  })
+}
+
+// Function to validate current panel
+function validateCurrentPanel() {
+  var activePanel = parseInt($('.form-panel.show').data('panel'));
+  var currentPanelElement = $('.form-panel[data-panel=' + activePanel + ']');
+  var isValid = true;
+  var errorMessages = [];
+  
+  // Find all required inputs in the current panel
+  currentPanelElement.find('input[required], select[required], textarea[required]').each(function() {
+    var $input = $(this);
+    var value = $input.val();
+    var label = $input.closest('section').find('label').first().text().replace('*', '').trim();
+    
+    // Check if field is empty
+    if (!value || value === '' || value === 'Please Select') {
+      isValid = false;
+      $input.addClass('error-field');
+      errorMessages.push(label || 'A required field');
+    } else {
+      $input.removeClass('error-field');
+    }
+  });
+  
+  // Remove any existing error message
+  currentPanelElement.find('.validation-error').remove();
+  
+  // Show error message if validation failed
+  if (!isValid) {
+    var errorHtml = '<div class="validation-error" style="background: #ffebee; border: 1px solid #f44336; padding: 15px; margin: 20px 0; border-radius: 4px; color: #c62828;"><strong>Please complete the following required fields:</strong><ul style="margin: 10px 0 0 20px;">';
+    errorMessages.forEach(function(msg) {
+      errorHtml += '<li>' + msg + '</li>';
+    });
+    errorHtml += '</ul></div>';
+    
+    currentPanelElement.prepend(errorHtml);
+    scrollIntoViewWithOffset("#form-header", 100);
+  }
+  
+  return isValid;
+}
+
+// Add CSS for error highlighting
+$('<style>.error-field { border: 2px solid #f44336 !important; }</style>').appendTo('head');
+
+// Optional: Clear error styling when user starts typing
+$(document).on('input change', 'input, select, textarea', function() {
+  $(this).removeClass('error-field');
+});
+
+$('#prev').hide();
+/* FORM CONTROLS */
+$('#next').click(function(){
+  
+  // Manually sync Redactor editor content to textarea
+  var editorContent = $('.redactor-in').html();
+  if (editorContent) {
+    $('#form1_form_text').val(editorContent);
+  }
+  
+  // Validate before moving forward
+  if (!validateCurrentPanel()) {
+    return false;
+  }
+  
+  var activePanel = parseInt($('.form-panel.show').data('panel'));
+  var totalPanels = $('.form-panel').length;
+  $('#panel').text(activePanel+2);
+  $('#totalPanels').text(totalPanels);
+  if(activePanel<totalPanels-1){
+    var nextPanel = activePanel+1;
+
+    scrollIntoViewWithOffset("#form-header", '100');
+    
+    $('.form-panel.show').removeClass('show');
+    $('.form-panel[data-panel=' + nextPanel + ']').addClass('show');
+    $('#next').show();
+    $('#prev').show();
+    if(activePanel==totalPanels-2){
+      $('#next').hide();  
+    }
+  }else{
+    $('#prev').show();
+  }
+});
+
+$('#prev').click(function(){
+  
+  // Manually sync Redactor editor content to textarea
+  var editorContent = $('.redactor-in').html();
+  if (editorContent) {
+    $('#form1_form_text').val(editorContent);
+  }
+  
+  var activePanel = parseInt($('.form-panel.show').data('panel'));
+  console.log(activePanel);
+  if(activePanel>0){
+    var nextPanel = activePanel-1;
+    $('#panel').text(activePanel);
+    $('#totalPanels').text(totalPanels);
+    const element = document.getElementById("form-header");
+    element.scrollIntoView();
+    
+    $('.form-panel.show').removeClass('show');
+    $('.form-panel[data-panel=' + nextPanel + ']').addClass('show');
+    $('#next').show();
+    if(activePanel==1){
+      $('#prev').hide();
+    }
+  }else{
+    $('#next').show();
+    $('#prev').show();
+  }
+});
+</script>

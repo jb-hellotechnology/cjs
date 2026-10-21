@@ -1,0 +1,31 @@
+<div class="organisation_display flow">
+	<h1><perch:cjs id="name" /></h1>
+	
+	<perch:if exists="logoURL">
+		<img src="<perch:cjs id="logoURL" />" alt="Logo: <perch:cjs id="name" />" />
+	</perch:if>
+	
+	<perch:if exists="strapLine">
+		<p><strong><perch:cjs id="strapLine" type="text" label="Strap Line" /></strong></p>
+	</perch:if>
+	
+	<perch:if exists="missionStatement">
+		<perch:cjs id="missionStatement" html />
+	</perch:if>
+	
+	<perch:if id="volunteerOpportunities" value="yes">
+		<p>This organisation offers <a href="https://www.countryside-jobs.com/volunteers/intro">Voluntary Opportunities</a>.</p>
+	</perch:if>
+	
+	<perch:if id="apprenticeshipOpportunities" value="yes">
+		<p>This organisation may have <a href="https://www.countryside-jobs.com/volunteers/apprenticeships-and-interns">apprenticeships or internship</a> vacancies.</p>
+	</perch:if>
+	
+	<perch:if exists="websiteURL">
+		<p><a href="<perch:cjs id="websiteURL" />" target="_blank"><perch:cjs id="websiteURL" replace="http://|,https://|"  /></a></p>
+	</perch:if>
+	
+	<perch:if id="displayProfile" value="yes">
+		<p><a href="/jobs/employer/<perch:cjs id="slug" />/profile">Click here</a> to view the full organisation profile</a></p>
+	</perch:if>
+</div>

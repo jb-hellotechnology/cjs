@@ -1,0 +1,23 @@
+<perch:before>
+  <ul class="hfeed list focus-archive">
+</perch:before>
+    <li class="hentry flow <perch:blog id="postTags" replace="&amp;|&" format="LC" />">
+        <p><a href="<perch:blog id="postURL" />"><perch:blog id="postTitle" /></a></p>
+        <p>By <perch:if exists="organisationURL"><a href="<perch:blog id="organisationURL" type="text" label="Organisation URL">"></perch:if><perch:blog id="organisationName" /><perch:if exists="organisationURL"></a></perch:if><br />Published on <perch:blog id="postDateTime" format="d/m/Y" />. 
+        </p>
+        <p><perch:if id="sectionID" value="3" match="eq">
+            <a class="button article-type" href="/job-sectors/profiles">Job Profile</a>
+          </perch:if>
+          <perch:if id="sectionID" value="8" match="eq">
+            <a class="button article-type" href="/in-depth/full-index-of-articles/opinion-piece">Opinion Piece</a>
+          </perch:if>
+          <perch:if id="sectionID" value="5" match="eq">
+            <a class="button article-type" href="/in-depth/full-index-of-articles/organisation-profile">Organisation Profile</a>
+          </perch:if>
+          <perch:if id="sectionID" value="7" match="eq">
+            <a class="button article-type" href="/in-depth/full-index-of-articles/project-profile">Project Profile</a>
+          </perch:if></p>
+    </li>
+<perch:after>
+  </ul>
+</perch:after>

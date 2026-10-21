@@ -1,0 +1,42 @@
+<article class="h-entry flow">
+  <h1><perch:blog id="postTitle" type="text" label="Title" required="true" size="xl autowidth" order="1" /></h1>
+  <perch:if id="postDateTime" match="lt" value="{today}">
+    <perch:if not-exists="showWarning">
+    <p>
+     <strong>This post is greater than 6 months old - links may be broken or out of date. Proceed with caution!</strong>
+    </p>
+    </perch:if>
+  </perch:if>
+  <perch:blog id="postDescHTML" type="textarea" label="Post" order="2" editor="redactor" html="true" size="xxl autowidth" required="true" />
+  <div class="flag">
+    <perch:if id="sectionID" value="3">
+      <p><strong>Post Type:</strong> Job Profile</p>
+    </perch:if>
+    <perch:if id="sectionID" value="8">
+      <p><strong>Post Type:</strong> Opinion Piece</p>
+    </perch:if>
+    <perch:if id="sectionID" value="5">
+      <p><strong>Post Type:</strong> Organisation Profile (<a href="<perch:blog id="organisationURL" type="text" label="Organisation URL" />"><perch:blog id="organisationName" label="Organisation Name" type="text" /></a>)</p>
+    </perch:if>
+    <perch:if id="sectionID" value="7">
+      <p><strong>Post Type:</strong> Project Profile</p>
+    </perch:if>
+  </div>
+  <perch:if exists="showEarlyAccess">
+  <p>
+   <strong><a href="https://www.countryside-jobs.com/jobs/cjs-weekly">Early Access</a></strong>
+  </p>
+  </perch:if>
+  <perch:if exists="organisationName">
+    <p>More from <a href="<perch:blog id="organisationURL" type="text" label="Organisation URL" />"><perch:blog id="organisationName" label="Organisation Name" type="text" /></a></p>
+  </perch:if>
+</article>
+
+<perch:blog id="postDateTime" type="date" time="true" format="%d %B %Y" suppress="true" label="Publish Date" /> 
+<perch:blog id="postFeedDate" type="date" time="true" format="%d %B %Y" suppress="true" label="Appear in Feed Date" /> 
+<perch:blog id="postPreviewDate" type="date" time="true" format="%d %B %Y" suppress="true" label="Preview Date" /> 
+
+<perch:blog id="showWarning" type="checkbox" value="on" label="Hide 6 Months Warning?" suppress="true" />
+<perch:blog id="showEarlyAccess" type="checkbox" value="on" label="Early Access?" suppress="true" />
+
+<perch:blog id="exploreTags" type="text" label="Explore More Tags" help="Use comma seperated list like: trees, people, birds" suppress="true" />

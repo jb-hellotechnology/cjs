@@ -1,0 +1,23 @@
+  <meta property="og:site_name" content="Countryside Jobs Service">
+    <meta property="og:url" content="<perch:pages id="url" type="hidden">">
+    <meta property="og:title" content="<perch:pages id="og_title" label="Social title" type="text" escape help="Title for this document with no branding or site name" divider-before="Facebook Open Graph Tags">">
+    <meta property="og:description" content="<perch:pages id="og_description" label="Social description" type="textarea" size="s" escape>">
+    <perch:if exists="og_image">
+    <meta property="og:image" content="<perch:pages id="domain" type="hidden"><perch:pages id="og_image" label="Image when shared" help="Should be at least 1200x630" type="image" width="1200">">
+    <meta property="og:image:alt" content="<perch:pages id="og_image_alt" label="Image alt text" type="text" escape help="Describe the image for screen readers. Max 420 characters.">">
+    <perch:else>
+    <meta property="og:image" content="<perch:pages id="domain" type="hidden"><perch:pages id="sharing_image" type="hidden">">
+    <meta property="og:image:alt" content="Countryside Jobs Service">
+    </perch:if>
+    <perch:if exists="og_type">
+    <meta property="og:type" content="<perch:pages id="og_type" label="Facebook type" type="select" options="article,book,profile,website,video,music" allowempty>">
+    </perch:if>
+    <perch:if exists="og_author">
+    <meta property="article:author" content="<perch:pages id="og_author" type="hidden">">
+    </perch:if>
+    
+    <perch:if exists="layout_og_description">
+    <meta property="og:description" content="<perch:pages id="layout_og_description" type="hidden" escape>">
+    <perch:else>
+    <meta property="og:description" content="<perch:pages id="og_description" label="Social description" type="textarea" size="s" escape>">
+    </perch:if>

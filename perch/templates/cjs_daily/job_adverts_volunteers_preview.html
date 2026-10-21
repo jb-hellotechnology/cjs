@@ -1,0 +1,17 @@
+<perch:before>
+
+</perch:before>
+<br />
+	<perch:if exists="imageLogo">
+		<img src="<perch:cjs id="imageLogo" />" alt="" style="float:right;margin-left:1rem;margin-bottom:1rem;" />
+	</perch:if>
+	<p>JOB: <strong><perch:cjs id="title"></strong><br />
+	BE4: <perch:cjs id="closingDateT" /><br />
+	LOC: <perch:cjs id="location" /><br />
+	PAY: <perch:cjs id="payBenefits" /><br />
+	FOR: <perch:cjs id="employerDisplay" /><br />
+	<perch:cjs id="advertText" html />
+
+<perch:after>
+
+</perch:after>

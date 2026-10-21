@@ -1,0 +1,27 @@
+<perch:if exists="longTitle">
+	<section class="flow listing green <perch:if id="displayAd" value="1" match="eq">displayad</perch:if>" id="lc_<perch:cjs id="longID" />" data-lat="<perch:cjs id="lat" />" data-lng="<perch:cjs id="lng" />" data-title="<perch:cjs id="longTitle">, <perch:cjs id="provider" />" data-url="#course_<perch:cjs id="longID" />">
+	  <article class="job training">
+	  <div class="flow">
+		<h2 class="listing-title"><perch:cjs id="longTitle" /> at <perch:cjs id="provider" /></h2>
+		<perch:if exists="logo">
+			<img src="<perch:cjs id="logo" />" alt="" />
+		</perch:if>
+	    <perch:cjs id="description" html/>
+		<p>
+			<perch:if id="advertLink" match="eq" value="1">
+				<perch:if exists="advertWebsiteShort">
+					<a href="<perch:cjs id="advertWebsiteShort" />" target="_blank"><perch:cjs id="advertWebsiteShort" replace="http://|,https://|" /></a>
+				<perch:else />
+					<a href="<perch:cjs id="advertWebsite" />" target="_blank"><perch:cjs id="advertWebsite" replace="http://|,https://|" /></a>
+				</perch:if>
+			<perch:else />
+				<a href="<perch:cjs id="advertWebsite" />" target="_blank"><perch:cjs id="advertWebsite" replace="http://|,https://|" /></a>
+			</perch:if>
+			<perch:if exists="advertEmail"><a href="mailto:<perch:cjs id="advertEmail" />?subject=<perch:cjs id="longTitle"> advertised in CJS Training Directory"><perch:cjs id="advertEmail" /></a>
+			</perch:if>
+			<perch:cjs id="advertTelephone" />
+		</p>
+	  </div>
+	  </article>	  
+	</section>
+</perch:if>

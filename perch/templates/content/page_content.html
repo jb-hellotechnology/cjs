@@ -1,0 +1,202 @@
+<perch:blocks>
+  
+  <perch:block type="hero" label="Hero Image">
+    <div class="hero">
+      <img src="<perch:content type="image" id="heroImageBanner" label="Image" width="1600" height="500" crop="true" bucket="hero" help="Upload or select an image">" alt="<perch:content type="text" id="alt" label="Description" required help="Description of this image" title>">
+      <div>
+        <h1><perch:content id="text" type="text" label="Text" title /></h1>
+      </div>
+    </div>
+  </perch:block>
+
+  <perch:block type="textarea" label="Textarea">
+    <div class="textarea flow <perch:content type="select" id="outline" label="Border?" options="No|,Yes|border" /> <perch:content type="select" id="other" label="Other Styles?" options=",christmas,professional,td" />">
+       <perch:content type="textarea" id="text" label="Textarea" html editor="redactor" /> 
+    </div> 
+  </perch:block>
+  
+  <perch:block type="code" label="Code">
+    <div class="textarea flow">
+      <perch:content type="textarea" id="text" label="HTML" html editor="markitup" /> 
+    </div>
+  </perch:block>
+  
+  <perch:block type="anchors" label="Anchors">
+    <ul class="anchors">
+      <perch:repeater id="items" label="Items"> 
+        <li><a href="<perch:content type="text" id="anchor" label="Anchor" />"><perch:content type="text" id="title" label="Title" /></a></li>
+      </perch:repeater>
+    </ul> 
+  </perch:block>
+  
+  <perch:block type="twocolumns" label="Two Columns">
+    <div class="columns">
+      <div>
+        <perch:content type="textarea" id="text" label="Left Column" html editor="redactor" imagewidth="600" />   
+      </div>
+      <div>
+        <perch:content type="textarea" id="textTwo" label="Right Column" html editor="redactor" imagewidth="600" /> 
+      </div>
+    </div>
+  </perch:block>
+  
+  <perch:block type="text" label="Textarea with Logo">
+    <div class="textarea image flow <perch:content type="select" label="Option" options=",center-left" id="option" />">
+      <perch:if exists="image">
+        <img src="<perch:content type="image" id="image" label="Image #1" width="400" order="1" />" alt="<perch:content type="text" id="alt" label="Alt Text #1" order="3" />" class="push-right" <perch:if exists="width1">width="<perch:content type="text" id="width1" label="Image #1 Width" order="4" />px"</perch:if> />
+      </perch:if>
+      <perch:if exists="imageTwo">
+        <img src="<perch:content type="image" id="imageTwo" label="Image #2" width="400" order="4" />" alt="<perch:content type="text" id="altTwo" label="Alt Text #2" order="6" />" class="push-right" <perch:if exists="width2">width="<perch:content type="text" id="width2" label="Image #2 Width" order="7" />px"</perch:if> />
+      </perch:if>
+      <perch:if exists="imageURL">
+        <img src="<perch:content type="text" id="imageURL" label="Image URL #1" order="2" />" alt="<perch:content type="text" id="alt" label="Alt Text" />" class="push-right" <perch:if exists="width1">width="<perch:content type="text" id="width1" />px"</perch:if> />
+      </perch:if>
+      <perch:if exists="imageURLTwo">
+        <img src="<perch:content type="text" id="imageURLTwo" label="Image URL #2" order="5" />" alt="<perch:content type="text" id="altTwo" label="Alt Text Two" />" class="push-right" <perch:if exists="width2">width="<perch:content type="text" id="width2" />px"</perch:if> />
+      </perch:if>
+      <perch:content type="textarea" id="text" label="Text" html editor="redactor" order="8" />  
+    </div>
+  </perch:block>
+  
+  <perch:block type="centered-logos" label="Text with Logos (Centered)">
+    <div class="row margin-bottom">
+      <ul class="centered-logos">
+        <li><perch:content type="text" id="text" label="Text" /></li>
+        <perch:repeater id="logos">
+        <li><span><img src="<perch:content type="text" id="imageurl" label="Image URL" />" alt="<perch:content type="text" id="alt" label="Alt Text" />" /></span></li>
+        </perch:repeater>
+      </ul> 
+    </div>
+  </perch:block>
+  
+  <perch:block type="textwithfile" label="Textarea with File">
+    <div class="row margin-bottom file <perch:content type="select" label="Border?" id="border" options="No|,Yes|border-bottom" order="1" />">
+      <perch:if exists="image">
+        <div class="file">
+          <a href="<perch:content type="text" id="file" label="File URL" order="2" />"><img src="<perch:content type="text" id="image" label="Image URL" order="3" />" alt="<perch:content type="text" id="alt" label="Alt Text" order="4" />" /></a>
+        </div>
+      </perch:if>
+      <div class="text">
+        <perch:content type="textarea" id="text" label="Text" html editor="redactor" order="5" /> 
+      </div>
+    </div>
+  </perch:block>
+  
+  <perch:block type="grid" label="Grid">
+  <div class="cards <perch:content type="select" label="Image Ratio?" id="ratio" options="Landscape|ratio-3-4,Square|ratio-1-1"> <perch:content type="select" label="Text always visible or only on hover?" id="text" options="Only on Hover|text-hover,Always Visible|text-visible">">
+    <perch:repeater id="grid" label="Grid Items">
+    <div class="card flow sector <perch:content type="select" label="Span?" id="span" options=",col-1-2,col-3-4">">
+      <h3>
+        <perch:if exists="url"><a href="<perch:content type="text" id="url" label="URL" />"></perch:if>
+          <perch:content type="text" id="title" label="Title" />
+        <perch:if exists="url"></a></perch:if>
+      </h3>
+        
+      
+        <perch:if exists="image">
+        <perch:if exists="url"><a href="<perch:content type="text" id="url" label="URL" />"></perch:if><img src="<perch:content type="image" id="image" label="Image" width="400" />" alt="<perch:content type="text" id="alt" label="Alt Text" />" />
+        </perch:if><perch:if exists="url"></a></perch:if>
+        <div class="card-text">
+        <perch:content type="textarea" id="description" label="Text" html editor="redactor" /> 
+        </div>
+      <perch:if exists="url"></a></perch:if>
+    </div>
+    </perch:repeater>
+  </div>
+  </perch:block>
+  
+  <perch:block type="textImage" label="Text with Image">
+    <div class="textarea image flow">
+      <perch:if exists="image">
+        <figure class="<perch:content type="select" id="layout" options="left,right" label="Image Alignment" /> <perch:content type="select" id="size" options="100,200,400,800" label="Image Width" />">
+          <img src="<perch:if id="size" value="100"><perch:content type="image" id="image" label="Image" width="100" /></perch:if><perch:if id="size" value="200"><perch:content type="image" id="image" label="Image" width="200" /></perch:if><perch:if id="size" value="400"><perch:content type="image" id="image" label="Image" width="400" /></perch:if><perch:if id="size" value="800"><perch:content type="image" id="image" label="Image" width="800" /></perch:if>" alt="<perch:content type="text" id="alt" label="Alt Text" />" />
+          <perch:if exists="figcaption">
+            <figcaption><perch:content type="text" id="figcaption" label="Image Caption" /></figcaption>
+          </perch:if>
+        </figure>
+        </perch:if>
+        <perch:if exists="imageURL">
+          <figure class="<perch:content type="select" id="layout" options="left,right" label="Image Alignment" /> <perch:content type="select" id="size" options="100,200,400,800" label="Image Width" />">
+            <img src="<perch:content type="text" id="imageURL" label="Image URL" />" alt="" width="<perch:content id="size" />" />
+            <perch:if exists="figcaption">
+              <figcaption><perch:content type="text" id="figcaption" label="Image Caption" /></figcaption>
+            </perch:if>
+          </figure>
+        </perch:if>
+        <perch:content type="textarea" id="text" label="Text" html editor="redactor" /> 
+    </div>
+    <perch:content type="image" id="image" label="Image" width="100" suppress="true" />
+    <perch:content type="image" id="image" label="Image" width="200" suppress="true" />
+    <perch:content type="image" id="image" label="Image" width="400" suppress="true" />
+    <perch:content type="image" id="image" label="Image" width="800" suppress="true" />
+  </perch:block>
+  
+  <perch:block type="blogpost" label="Blog Post">
+  	<section class="import imported-post" data-page-source="<perch:content id="url" type="text" label="URL of Post" /> article.h-entry.flow">
+		<div id="<perch:content id="unique" label="Unique ID (like 'abc')" />" class="flow"></div>
+  	</section>
+  </perch:block>
+  
+  <perch:block type="jobadvert" label="Job Advert">
+  	<section class="import imported-job" data-page-source="<perch:content id="url" type="text" label="URL of Job" /> .job">
+		<div id="<perch:content id="unique" label="Unique ID (like 'abc')" />" class="flow"></div>
+  	</section>
+  </perch:block>
+  
+  <perch:block type="pageimport" label="Page Import">
+  	<section class="import imported-page" data-page-source="<perch:content id="url" type="text" label="URL of Page" /> main">
+		<div id="<perch:content id="unique" label="Unique ID (like 'abc')" />" class="flow"></div>
+  	</section>
+  </perch:block>
+  
+  <perch:block type="tagslist" label="Tags List">
+  <div class="textarea flow">
+	<p>More on:</p>
+	<ul class="blog-tags">
+	<perch:repeater id="tags" label="Tags">
+	    <li><a href="/archive/<perch:content type="text" label="Tag Slug" id="tagSlug" urlify replace=" |-" />"><perch:if exists="tagDescription"><perch:content type="text" label="Tag Description" id="tagDescription" /><perch:else/><perch:content type="text" label="Tag Slug" id="tagSlug" /></perch:if></a></li>
+	</perch:repeater>
+	</ul>
+  </div>
+  </perch:block>
+  
+  <perch:block type="importarticles" label="Explore More">
+  <perch:if exists="heading">
+    <h2><perch:content type="text" id="heading" label="Heading" /></h2>
+  </perch:if>
+  <div class="import-articles" data-tag="<perch:content type="text" id="tag" label="Tag" help="Enter a single article tag like 'countryside'" />" data-count="<perch:content type="number" id="count" label="How many articles?" />">
+    
+  </div>
+  </perch:block>
+  
+  <perch:block type="email-signup" label="Daily Email Signup">
+    <div class="textarea flow">
+      <perch:form id="subscribe" method="post" app="cjs_daily" role="form" class="flow" action="/jobs/subscribe">
+      
+        <div class="input">
+          <perch:label for="email">Your Email Address</perch:label>
+          <perch:input type="text" id="email" label="email" placeholder="you@example.com" />
+        </div>
+      
+        <div class="input">
+        <perch:input type="submit" value="Sign Up" />
+        </div>
+        
+      </perch:form>
+    </div>
+  </perch:block>
+  
+  <perch:block type="social" label="Social Links">
+  <div class="textarea flow social-icons">
+    <h3>Connect with Us on Social Media</h3>
+    <ul class="inline connect">
+    <li><a href="https://www.facebook.com/countryside-jobs-service" target="_blank"><i class="fab fa-facebook"></i><span>Facebook</span></a></li>
+    <li><a href="https://bsky.app/profile/countrysidejobs.bsky.social" target="_blank"><i class="fab fa-bluesky"></i><span>Bluesky</span></a></li>
+    <li><a href="https://www.threads.com/@countrysidejobs" target="_blank"><i class="fab fa-threads"></i><span>Threads</span></a></li>
+    <li><a href="https://www.instagram.com/countrysidejobs/" target="_blank"><i class="fab fa-instagram"></i><span>Instagram</span></a></li>
+    <li><a href="https://www.linkedin.com/company/countryside-jobs-service/" target="_blank"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a></li>
+    <li><a href="https://x.com/CountrysideJobs" target="_blank"><i class="fab fa-x-twitter"></i><span>X</span></a></li>
+    </ul>
+  </div>
+  </perch:block>
+</perch:blocks>

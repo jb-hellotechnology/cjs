@@ -1,0 +1,145 @@
+<perch:if id="displayAd" value="1" match="eq">
+
+	<article class="job display">
+	
+		<div class="flow">
+			<perch:if exists="jobClosed">
+				<p class="job-closed"><strong>This vacancy has closed.</strong> It closed on <perch:cjs id="closingDate" format="j F Y" /> and is kept here for reference only. <a href="/jobs">Browse current vacancies</a>.</p>
+			</perch:if>
+			<h1><perch:cjs id="title"></h1>
+			<h2><perch:cjs id="employerDisplay"></h2>
+			<img src="<perch:cjs id="displayAdURL" />" alt="<perch:cjs id="displayalt" />" />
+			<perch:if not-exists="jobClosed">
+				<p><a href="https://countryside-careers.com/my-account/add/?title=<perch:cjs id="title" urlencode="true">%20-%20<perch:cjs id="employerDisplay" urlencode="true">&url=https://countryside-jobs.com<perch:cjs id="advertURL" />">
+					<img src="/assets/images/save_job.svg" alt="Save Job" />
+				</a></p>
+			</perch:if>
+		</div>
+		
+		<div>
+			<div class="flow sticky">
+				<perch:if exists="advertText">
+					<perch:cjs id="advertText" html />
+				</perch:if>
+				<p><strong><perch:if id="cDisplayDNotCDate" value="1">Delete Date:<perch:else/>Closing Date:</perch:if></strong> <perch:cjs id="closingDate" format="d/m/Y" />&nbsp;&nbsp;<strong>Location:</strong> <perch:cjs id="location" /></p>
+				<div style="width:100%;clear:both;"></div>
+			</div>
+		</div>
+	</article>
+	
+
+<perch:else />
+
+	<article class="job">
+	
+		<div class="flow">
+			<perch:if exists="jobClosed">
+				<p class="job-closed"><strong>This vacancy has closed.</strong> It closed on <perch:cjs id="closingDate" format="j F Y" /> and is kept here for reference only. <a href="/jobs">Browse current vacancies</a>.</p>
+			</perch:if>
+			<h1><perch:cjs id="title"></h1>
+			<h2><perch:cjs id="employerDisplay"></h2>
+			<perch:if exists="advertText">
+				<perch:cjs id="advertText" html replace="Â£|£,â€™|'" />
+			</perch:if>
+			<perch:if not-exists="jobClosed">
+				<p><a href="https://countryside-careers.com/my-account/add/?title=<perch:cjs id="title" urlencode="true">%20-%20<perch:cjs id="employerDisplay" urlencode="true">&url=https://countryside-jobs.com<perch:cjs id="advertURL" />">
+					<img src="/assets/images/save_job.svg" alt="Save Job" />
+				</a></p>
+			</perch:if>
+		</div>
+		
+		<div>
+			<div class="sticky flow">
+				<perch:if exists="imageLogo">
+					<img src="<perch:cjs id="imageLogo" />" alt="<perch:cjs id="imageAlt" />" class="logo" />
+				</perch:if>
+				
+				<perch:if id="cVolunteer" value="1" match="eq">
+					<p><a href="/volunteers">This is a voluntary role</a></p>
+				</perch:if>
+				<perch:if id="cApprentice" value="1" match="eq">
+					<p><a href="/jobs/apprenticeships-and-interns">This is an apprenticeship type role</a></p>
+				</perch:if>
+				<perch:if id="cIntern" value="1" match="eq">
+					<p><a href="/jobs/apprenticeships-and-interns">This is an internship type role</a></p>
+				</perch:if>
+				
+				
+				<p><strong><perch:if id="cDisplayDNotCDate" value="1">Delete Date:<perch:else/>Closing Date:</perch:if></strong> <perch:cjs id="closingDate" format="d/m/Y" /></p>
+				<p><strong>Location:</strong> <perch:cjs id="location" /></p>
+				
+				<perch:if exists="lat">
+					<div id="map"></div>
+					<script>
+					(function () {
+						var mapEl = document.getElementById('map');
+						if (!mapEl) return;
+					
+						var latList = "<perch:cjs id="lat" />".split(",");
+						var lngList = "<perch:cjs id="lng" />".split(",");
+					
+						// Build + filter out empty/invalid pairs
+						var markerData = [];
+						for (var i = 0; i < lngList.length; i++) {
+							var la = parseFloat(latList[i]);
+							var ln = parseFloat(lngList[i]);
+							if (!isNaN(la) && !isNaN(ln)) markerData.push([la, ln]);
+						}
+					
+						if (!markerData.length || typeof L === 'undefined') return; // stays 0px
+					
+						try {
+							// Height must be set BEFORE init so Leaflet sizes correctly
+							mapEl.style.height = '300px';
+					
+							var map = L.map('map').setView([54.5536467, -0.8851795], 10);
+					
+							L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+								attribution: '&copy; OpenStreetMap contributors'
+							}).addTo(map);
+					
+							// Dedupe by lat,lng
+							var seen = {};
+							var markers = [];
+							markerData.forEach(function (item) {
+								var key = item[0] + "," + item[1];
+								if (seen[key]) return;
+								seen[key] = true;
+								markers.push(L.marker([item[0], item[1]]).addTo(map));
+							});
+					
+							map.fitBounds(L.featureGroup(markers).getBounds(), { padding: [50, 50], maxZoom: 8 });
+							map.invalidateSize();
+						} catch (e) {
+							mapEl.style.height = '0px';
+							console.error('Map failed to load:', e);
+						}
+					})();
+					</script>
+				</perch:if>
+				
+				<perch:if exists="imageLogo2">
+					<img src="<perch:cjs id="imageLogo2" />" alt="<perch:cjs id="imageAlt2" />" />
+				</perch:if>
+				<perch:if exists="imageLogo3">
+					<img src="<perch:cjs id="imageLogo3" />" alt="<perch:cjs id="imageAlt3" />" />
+				</perch:if>
+				<perch:if exists="imageLogo4">
+					<img src="<perch:cjs id="imageLogo4" />" alt="<perch:cjs id="imageAlt4" />" />
+				</perch:if>
+				<perch:if exists="imageLogo5">
+					<img src="<perch:cjs id="imageLogo5" />" alt="<perch:cjs id="imageAlt5" />" />
+				</perch:if>
+				
+				<perch:if exists="videoEmbed">
+					<perch:cjs id="videoEmbed" html />
+				</perch:if>
+			</div>
+		</div>
+	</article>
+
+</perch:if>
+
+<perch:if exists="schemaJSONLD">
+	<script type="application/ld+json"><perch:cjs id="schemaJSONLD" html /></script>
+</perch:if>
