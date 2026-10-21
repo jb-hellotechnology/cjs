@@ -15,7 +15,7 @@
  *     clearButton: 'delete-markers', // optional: a button that removes every marker
  *     draggable:   false,            // let markers be dragged
  *     restore:     true,             // draw whatever is already in the lat / lng inputs
- *     syncFields:  false,            // single marker only: typing in the inputs moves the pin
+ *     syncFields:  false,            // typing in the lat / lng inputs redraws the markers
  *     center:      [53.419354, -1.953678],
  *     zoom:        6,
  *     focusZoom:   10,               // zoom used when there is a single saved marker
@@ -152,8 +152,7 @@
       }
 
       function clear() {
-        for (var i = 0; i < picker.markers.length; i++) { map.removeLayer(picker.markers[i]); }
-        picker.markers = [];
+        removeAll();
         writeFields();
       }
 
@@ -170,18 +169,30 @@
         }
       }
 
-      if (o.restore && latField && lngField) {
+      // Read the lat / lng inputs back into markers. Returns how many valid points they held.
+      function pointsFromFields() {
+        var points = [];
+        if (!latField || !lngField) { return points; }
         var lats = numbers(latField.value);
         var lngs = numbers(lngField.value);
-        if (lats.length && lats.length === lngs.length) {
-          for (var i = 0; i < lats.length; i++) {
-            var la = parseFloat(lats[i]);
-            var ln = parseFloat(lngs[i]);
-            if (isNaN(la) || isNaN(ln) || (la === 0 && ln === 0)) { continue; }
-            addMarker({ lat: la, lng: ln });
-            if (!o.multiple) { break; }
-          }
+        if (!lats.length || lats.length !== lngs.length) { return points; }
+        for (var i = 0; i < lats.length; i++) {
+          var la = parseFloat(lats[i]);
+          var ln = parseFloat(lngs[i]);
+          if (isNaN(la) || isNaN(ln) || (la === 0 && ln === 0)) { continue; }
+          points.push({ lat: la, lng: ln });
+          if (!o.multiple) { break; }
         }
+        return points;
+      }
+
+      function removeAll() {
+        for (var i = 0; i < picker.markers.length; i++) { map.removeLayer(picker.markers[i]); }
+        picker.markers = [];
+      }
+
+      if (o.restore) {
+        pointsFromFields().forEach(addMarker);
       }
       applyView();
 
@@ -193,14 +204,18 @@
       var button = byId(o.clearButton);
       if (button) { button.addEventListener('click', clear); }
 
-      // Typing coordinates into the inputs moves the single pin.
-      if (o.syncFields && !o.multiple && latField && lngField) {
+      // Typing in the inputs redraws the markers: every pair in the lists, or the first for a single
+      // pin. Blank inputs clear the map, and text that is not coordinates is ignored.
+      if (o.syncFields && latField && lngField) {
         var sync = function () {
-          var la = parseFloat(latField.value);
-          var ln = parseFloat(lngField.value);
-          if (isNaN(la) || isNaN(ln) || (la === 0 && ln === 0)) { return; }
-          addMarker({ lat: la, lng: ln });
-          map.panTo([la, ln]);
+          var points = pointsFromFields();
+          if (points.length) {
+            removeAll();
+            points.forEach(addMarker);
+            applyView();
+          } else if (!latField.value.trim() && !lngField.value.trim()) {
+            removeAll();
+          }
         };
         latField.addEventListener('change', sync);
         lngField.addEventListener('change', sync);
