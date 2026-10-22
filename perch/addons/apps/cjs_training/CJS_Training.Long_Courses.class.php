@@ -38,7 +38,26 @@ class CJS_Training_Long_Courses extends PerchAPI_Factory
                                 'logo', 'logoAlt', 'displayAd', 'cShort', 'cHnd', 'cDiploma', 'cNvq', 'cHnc', 'cMsc', 
                                 'cDegree', 'cBtec', 'cFoundation', 'cPhd', 'cApprenticeship', 'organisationID', 'organisationName',
                                 'contactName', 'contactTelephone', 'contactEmail' ,'firstOnline', 'checkDate', 'dateUpdated', 'displayUntil', 
-                                'advertType', 'advertPaid', 'advertCost', 'freeAd', 'advertStatus', 'longDynamicFields');	
+                                'advertType', 'advertPaid', 'advertCost', 'freeAd', 'advertStatus', 'longDynamicFields');
+
+  /*
+   * Column order for the Upload CSV screen, used to build the template offered for download
+   * there. The importer in modes/upload_csv_lc.pre.php reads cells by position, so this list
+   * and that mapping have to be kept in step with each other.
+   *
+   * advertWebsiteShort is generated from advertWebsite by Bitly, so leave its column empty.
+   * The last column takes the plain description text; the importer wraps it into
+   * longDynamicFields.
+   */
+  public $csv_columns = array('longTitle', 'startDate (dd/mm/yyyy)', 'categoryOne', 'categoryTwo', 'categoryThree',
+                              'location', 'webinar', 'county', 'provider', 'advertTelephone', 'advertEmail',
+                              'advertWebsite', 'advertWebsiteShort (leave empty)', 'advertLink', 'logo', 'logoAlt',
+                              'displayAd', 'cShort', 'cHnd', 'cDiploma', 'cNvq', 'cHnc', 'cMsc', 'cDegree', 'cBtec',
+                              'cFoundation', 'cPhd', 'cApprenticeship', 'organisationID', 'organisationName',
+                              'contactName', 'contactTelephone', 'contactEmail', 'firstOnline (dd/mm/yyyy)',
+                              'checkDate (dd/mm/yyyy)', 'dateUpdated (dd/mm/yyyy)', 'displayUntil (dd/mm/yyyy)',
+                              'advertType', 'advertPaid', 'advertCost', 'notes', 'freeAd', 'advertStatus',
+                              'description');
 
 	public function get_columns($table){
 		$data = $this->db->get_rows("SHOW COLUMNS FROM ".$table);
@@ -311,4 +330,56 @@ $today = date('Y-m-d');
     
   }
   
+  /*
+   * CSV import staging. A CSV upload writes its rows to perch3_long_courses_temp so the admin
+   * can look them over before anything reaches the live table, then import_temp_row() copies
+   * each one across. Same flow as Short Courses.
+   */
+  public function empty_temp(){
+
+	  $result = $this->db->execute("TRUNCATE perch3_long_courses_temp");
+
+  }
+
+  public function create_temp($data){
+
+	  $result = $this->db->insert('perch3_long_courses_temp',$data);
+
+  }
+
+  public function get_temp(){
+
+	  $result = $this->db->get_rows('SELECT * FROM perch3_long_courses_temp');
+	  return $result;
+
+  }
+
+  public function import_temp_row($data){
+
+	  $result = $this->db->insert('perch3_long_courses',$data);
+
+  }
+
+  /*
+   * Copy a course, marked so the new one can be told apart from the original. Built from the
+   * row itself rather than a column list, so any column added to perch3_long_courses later is
+   * carried over without this needing to change.
+   *
+   * The copy goes in as pending whatever the original's status was, so duplicating a live
+   * course doesn't put a second copy of it straight onto the site.
+   */
+  public function duplicate($id){
+
+	  $result = $this->db->get_row('SELECT * FROM perch3_long_courses WHERE longID='.$this->db->pdb($id).'');
+
+	  if (!$result) return false;
+
+	  unset($result['longID']);
+	  $result['longTitle'] = $result['longTitle'].' - DUPLICATE';
+	  $result['advertStatus'] = 'pen';
+
+	  return $this->db->insert('perch3_long_courses',$result);
+
+  }
+
 }

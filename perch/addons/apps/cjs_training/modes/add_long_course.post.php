@@ -118,6 +118,10 @@
 	      echo $HTML->heading2('Delete');
 	      echo '<p style="margin-left:36px"><a href="/perch/addons/apps/cjs_training/long_courses/delete/?id='.$_GET['id'].'">Click Here to Delete</a></p>';
 	  }
+      if($_GET['id']){
+	      echo $HTML->heading2('Duplicate');
+	      echo '<p style="margin-left:36px"><a href="/perch/addons/apps/cjs_training/long_courses/duplicate/?id='.$_GET['id'].'">Click Here to Duplicate Course</a></p>';
+      }
       
       echo '</div></div>';
 

@@ -64,6 +64,24 @@ class CJS_Training_Short_Courses extends PerchAPI_Factory
                                 'contactName', 'contactTelephone', 'contactEmail' ,'firstOnline', 'checkDate', 'displayUntil', 
                                 'advertType', 'advertPaid', 'advertCost', 'freeAd', 'advertStatus', 'shortDynamicFields');	
   
+  /*
+   * Column order for the Upload CSV screen, used to build the template offered for download
+   * there. The importer in modes/upload_csv_sc.pre.php reads cells by position, so this list
+   * and that mapping have to be kept in step with each other.
+   *
+   * advertWebsiteShort is generated from advertWebsite by Bitly, so leave its column empty.
+   * The last column takes the plain description text; the importer wraps it into
+   * shortDynamicFields.
+   */
+  public $csv_columns = array('shortTitle', 'startDate (dd/mm/yyyy)', 'startText', 'categoryOne', 'categoryTwo',
+                              'categoryThree', 'numberDays', 'location', 'webinar', 'online', 'county', 'provider',
+                              'advertTelephone', 'advertEmail', 'advertWebsite', 'advertWebsiteShort (leave empty)',
+                              'advertLink', 'freeCourse', 'logo', 'logoAlt', 'displayAd', 'organisationID',
+                              'organisationName', 'contactName', 'contactTelephone', 'contactEmail',
+                              'firstOnline (dd/mm/yyyy)', 'checkDate (dd/mm/yyyy)', 'dateUpdated (dd/mm/yyyy)',
+                              'displayUntil (dd/mm/yyyy)', 'advertType', 'advertPaid', 'advertCost', 'freeAd',
+                              'courseCost', 'concessionsAvailable', 'advertStatus', 'description');
+
   public function pending(){
     $results = $this->db->get_rows('SELECT * FROM perch3_short_courses WHERE advertStatus="pen" ');
     return $results;

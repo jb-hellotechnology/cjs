@@ -29,6 +29,8 @@
   # Main panel
   $HTML->main_panel_start();
   
+  echo '<p style="margin-left:36px">Your CSV needs its columns in the order the importer expects. <a href="'.$API->app_path().'/short_courses/upload_csv/template.php">Download a blank CSV template</a> to start from - fill in the rows underneath and leave its header row in place.</p>';
+  
   echo $Form->form_start();
   
   //Choose File Button

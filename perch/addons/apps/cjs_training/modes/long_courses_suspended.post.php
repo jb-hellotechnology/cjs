@@ -30,13 +30,11 @@
         'link'  => '/addons/apps/cjs_training/long_courses/suspended',
     ]);
   
-/*
   $Smartbar->add_item([
         'active' => false,
         'title' => 'Upload CSV',
         'link'  => '/addons/apps/cjs_training/long_courses/upload_csv/',
     ]);
-*/
 
   echo $Smartbar->render();
 

@@ -209,5 +209,7 @@
     "Delete all data for which the Short Course or Event is older than 6 months": "Delete all data for which the Short Course or Event is older than 6 months",
     "Date": "Date",
     "Lat": "Lat",
-    "Lng": "Lng"
+    "Lng": "Lng",
+    "Duplicate Long Course": "Duplicate Long Course",
+    "Are you sure you wish to duplicate the long course %s?": "Are you sure you wish to duplicate the long course %s?"
 }

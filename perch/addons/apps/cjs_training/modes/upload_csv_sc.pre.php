@@ -62,6 +62,13 @@
             // GET CSV ROW
             $csv_array = str_getcsv($csv_data[$i],',','"');
 
+            // The template offered on the upload screen comes with a header row, so skip it
+            // rather than importing it as a course. Files without one are unaffected.
+            if ($i==0 && strtolower(trim((string)$csv_array[0]))=='shorttitle') {
+              $i++;
+              continue;
+            }
+
             // CREATE DATA ARRAY
             $data = array();
             
