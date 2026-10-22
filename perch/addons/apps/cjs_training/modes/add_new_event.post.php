@@ -40,6 +40,8 @@
       echo $Form->text_field('startDate', 'Start Date', switchDate($details['startDate']), 'm input-simple datepicker');
       echo $Form->text_field('numberDays', 'Number of Days', isset($details['numberDays'])?$details['numberDays']:false, 'm input-simple');  
       echo $Form->text_field('location', 'Location', isset($details['location'])?$details['location']:false, 'm input-simple');
+      echo '<div id="location-map" style="width:100%; height:400px;"></div>';
+      echo '<p class="hint"><input type="button" id="clear-location-markers" value="Clear markers" class="button button-small action-alert" /> Click the map to add a marker and drag a marker to move it. Lat and Lng hold one number per marker, separated by commas.</p>';
       echo $Form->text_field('lat', 'Lat', isset($details['lat'])?$details['lat']:false, 'm input-simple');
       echo $Form->text_field('lng', 'Lng', isset($details['lng'])?$details['lng']:false, 'm input-simple');
       echo $Form->checkbox_field('webinar', 'Webinar?', '1', isset($details['webinar'])?$details['webinar']:false);
@@ -163,3 +165,20 @@
     }
     
     echo $HTML->main_panel_end();
+    echo "<script src='/assets/javascript/cjs-location-picker.js?v=2'></script>
+    <script>
+    // Location picker: click the map to add markers and drag them to adjust. Uses OpenStreetMap
+    // through Leaflet, so no Google account or API key is needed.
+    CJSLocationPicker({
+        map: 'location-map',
+        lat: 'lat',
+        lng: 'lng',
+        multiple: true,
+        draggable: true,
+        syncFields: true,
+        clearButton: 'clear-location-markers',
+        center: [54.5, -3.5],
+        zoom: 5,
+        focusZoom: 14
+    });
+    </script>";
