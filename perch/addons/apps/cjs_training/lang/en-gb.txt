@@ -218,5 +218,6 @@
     "Delete Selected Events": "Delete Selected Events",
     "Delete Selected Long Courses": "Delete Selected Long Courses",
     "Delete Selected Distance Courses": "Delete Selected Distance Courses",
-    "%s %s deleted.": "%s %s deleted."
+    "%s %s deleted.": "%s %s deleted.",
+    "Ticketing URL": "Ticketing URL"
 }
