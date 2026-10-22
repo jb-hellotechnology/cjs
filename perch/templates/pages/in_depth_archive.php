@@ -34,6 +34,15 @@ perch_layout('header', array(
             'sort-order' => 'ASC',
             ]);
         ?>
+        <?php
+            // Standard content pages carry their keywords in the "Archive Tags" field
+            // in Page Details. Only show the heading if something is tagged.
+            $taggedPages = cjs_page_tags(perch_get('tag'), array(), true);
+            if($taggedPages){
+                echo '<h2>Information Pages</h2>';
+                echo $taggedPages;
+            }
+        ?>
         
         <p>Links to many of the articles on these pages are no longer current, please proceed with caution. </p>
         <p>CJS is not responsible for content of external sites. Details believed correct but given without prejudice.<br />

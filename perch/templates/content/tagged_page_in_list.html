@@ -1,0 +1,10 @@
+<perch:before>
+  <ul class="hfeed list">
+</perch:before>
+    <li class="hentry">
+        <a href="<perch:content id="pageURL" />"><perch:content id="pageTitle" /></a>
+        <perch:if exists="excerpt"><p><perch:content id="excerpt" /></p></perch:if>
+    </li>
+<perch:after>
+  </ul>
+</perch:after>
