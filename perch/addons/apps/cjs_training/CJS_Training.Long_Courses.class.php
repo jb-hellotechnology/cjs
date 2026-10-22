@@ -116,9 +116,18 @@ class CJS_Training_Long_Courses extends PerchAPI_Factory
     return $results;  
   }
   
+  /*
+   * Distance courses for one office, for the Distance Courses table on the Edit Office page.
+   * These live in perch3_long_courses under categoryOne="distance-learning", same as the
+   * dl_* methods above - this used to read perch3_short_courses, where there are none, so the
+   * table was always empty. Filters match by_organisation() so both course tables on that
+   * page show the same slice.
+   */
   public function by_organisation_distance($organisationID){
-	$results = $this->db->get_rows('SELECT * FROM perch3_short_courses WHERE organisationID='.$this->db->pdb($organisationID).' AND categoryOne="distance-learning"');
-    return $results;  
+	  $today=date('Y-m-d');
+	$results = $this->db->get_rows('SELECT * FROM perch3_long_courses WHERE organisationID='.$this->db->pdb($organisationID).' AND categoryOne="distance-learning" AND advertStatus="pub"
+    AND (displayUntil="0000-00-00" OR (displayUntil<>"0000-00-00" AND displayUntil>='.$this->db->pdb($today).'))');
+    return $results;
   }
   
   public function dl_pending(){

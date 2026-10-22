@@ -46,18 +46,29 @@
       echo $Form->form_end();	
       
         if($organisationID AND !$message){
+
+          // Tick the rows to remove, then Delete Selected. One form per table, so a button
+          // only ever acts on the rows above it.
+          $BulkForms = array();
+          foreach (array('providers','scourses','events','lcourses','dcourses') as $bulk_key) {
+            $BulkForms[$bulk_key] = $API->get('Form');
+            $BulkForms[$bulk_key]->set_name('bulk_delete_'.$bulk_key);
+          }
+
+          if ($bulk_delete_message) echo $bulk_delete_message;
 	?>
 		<h2>Providers</h2>
+		<?php echo $BulkForms['providers']->form_start(false, 'bulk-delete-form'); ?>
 		<table class="d">
 		<thead>
 		<tr>
-		    <th class="first"><?php echo $Lang->get('ID'); ?></th>  
-		    <th><?php echo $Lang->get('Provider Name'); ?></th>  
+		    <th class="first"><?php echo $Lang->get('ID'); ?></th>
+		    <th><?php echo $Lang->get('Provider Name'); ?></th>
 		    <th><?php echo $Lang->get('Description'); ?></th>
 		    <th>View/Edit</th>
-		    <th><?php echo $Lang->get('Status'); ?></th>              
+		    <th><?php echo $Lang->get('Status'); ?></th>
 		    <th> <?php echo $Lang->get('Delete')?></th>
-		    <th class="action last"><?php echo $Lang->get('Bulk Update')?></th>
+		    <th class="action last"><?php echo $Lang->get('Bulk Delete')?></th>
 		</tr>
 		</thead>
 		<tbody>
@@ -72,15 +83,20 @@
 		    <td><a class="button button-small action-success" href="<?php echo $HTML->encode($API->app_path()); ?>/providers/add_new/?id=<?php echo $HTML->encode(urlencode($Provider['providerID'])); ?>">View/Edit</a></td>
 		    <td class="<?php if($Provider['advertStatus']=='pub'){echo 'published';}elseif($Provider['advertStatus']=='sus'){echo 'suspended';}else{echo 'pending';} ?>"><?php if($Provider['advertStatus']=='pub'){echo 'PUBLISHED';}elseif($Provider['advertStatus']=='sus'){echo 'SUSPENDED';}else{echo 'PENDING';} ?></td>
 		    <td><a href="<?php echo $HTML->encode($API->app_path()); ?>/providers/delete/?id=<?php echo $HTML->encode(urlencode($Provider['providerID'])); ?>" class="button button-small action-alert"><?php echo $Lang->get('Delete'); ?></a></td>
-		    <td><?php echo $Form->checkbox_field('select_'.$Provider['providerID'], '', '1', false); ?></td>
+		    <td><?php echo $BulkForms['providers']->checkbox_field('select_providers_'.$Provider['providerID'], '', '1', false); ?></td>
 		</tr>
-		<?php   
+		<?php
 		}
 		?>
 		</tbody>
 		</table>
-		
+		<?php
+		echo $BulkForms['providers']->submit_field('btnBulkDeleteProviders', 'Delete Selected Providers', false, 'button action-alert');
+		echo $BulkForms['providers']->form_end();
+		?>
+
 		<h2>Short Courses</h2>
+		<?php echo $BulkForms['scourses']->form_start(false, 'bulk-delete-form'); ?>
 		<table class="d">
 		<thead>
 		    <tr>
@@ -94,7 +110,7 @@
 		        <th>View/Edit</th>
 		        <th><?php echo $Lang->get('Status'); ?></th>
 		        <th> <?php echo $Lang->get('Delete')?></th>
-		        <th class="action last"><?php echo $Lang->get('Bulk Update')?></th>
+		        <th class="action last"><?php echo $Lang->get('Bulk Delete')?></th>
 		    </tr>
 		</thead>
 		<tbody>
@@ -112,15 +128,20 @@
 		        <td><a class="button button-small action-success" href="<?php echo $HTML->encode($API->app_path()); ?>/short_courses/add_new/?id=<?php echo $HTML->encode(urlencode($Scourse['shortID'])); ?>">View/Edit</a></td>
 		        <td class="<?php if($Scourse['advertStatus']=='pub'){echo 'published';}elseif($Scourse['advertStatus']=='sus'){echo 'suspended';}else{echo 'pending';} ?>"><?php if($Scourse['advertStatus']=='pub'){echo 'PUBLISHED';}elseif($Scourse['advertStatus']=='sus'){echo 'SUSPENDED';}else{echo 'PENDING';} ?></td>
 		        <td><a href="<?php echo $HTML->encode($API->app_path()); ?>/short_courses/delete/?id=<?php echo $HTML->encode(urlencode($Scourse['shortID'])); ?>" class="button button-small action-alert"><?php echo $Lang->get('Delete'); ?></a></td>
-		        <td><?php echo $Form->checkbox_field('select_'.$Scourse['shortID'], '', '1', false); ?></td>
+		        <td><?php echo $BulkForms['scourses']->checkbox_field('select_scourses_'.$Scourse['shortID'], '', '1', false); ?></td>
 		    </tr>
-		<?php   
+		<?php
 		}
 		?>
 		</tbody>
 		</table>
+		<?php
+		echo $BulkForms['scourses']->submit_field('btnBulkDeleteScourses', 'Delete Selected Short Courses', false, 'button action-alert');
+		echo $BulkForms['scourses']->form_end();
+		?>
 
 		<h2>Events</h2>
+		<?php echo $BulkForms['events']->form_start(false, 'bulk-delete-form'); ?>
 		<table class="d">
 	        <thead>
 	            <tr>
@@ -133,7 +154,7 @@
 	                <th>View/Edit</th>
 	                <th><?php echo $Lang->get('Status'); ?></th>
 	                <th> <?php echo $Lang->get('Delete')?></th>
-	                <th class="action last"><?php echo $Lang->get('Bulk Update')?></th>              
+	                <th class="action last"><?php echo $Lang->get('Bulk Delete')?></th>
 	            </tr>
 	        </thead>
 	        <tbody>
@@ -152,15 +173,20 @@
 	                <td><a class="button button-small action-success" href="<?php echo $HTML->encode($API->app_path()); ?>/events/add_new/?id=<?php echo $HTML->encode(urlencode($Event['eventID'])); ?>">View/Edit</a></td>
 	                <td class="<?php if($Event['advertStatus']=='pub'){echo 'published';}elseif($Event['advertStatus']=='sus'){echo 'suspended';}else{echo 'pending';} ?>"><?php if($Event['advertStatus']=='pub'){echo 'PUBLISHED';}elseif($Event['advertStatus']=='sus'){echo 'SUSPENDED';}else{echo 'PENDING';} ?></td>
 	                <td><a href="<?php echo $HTML->encode($API->app_path()); ?>/events/delete/?id=<?php echo $HTML->encode(urlencode($Event['eventID'])); ?>" class="button button-small action-alert"><?php echo $Lang->get('Delete'); ?></a></td>
-	                <td><?php echo $Form->checkbox_field('select_'.$Event['eventID'], '', '1', false); ?></td>
+	                <td><?php echo $BulkForms['events']->checkbox_field('select_events_'.$Event['eventID'], '', '1', false); ?></td>
 	            </tr>
-	<?php   
+	<?php
 	    }
 	?>
 	        </tbody>
 	    </table>
-		
+	    <?php
+	    echo $BulkForms['events']->submit_field('btnBulkDeleteEvents', 'Delete Selected Events', false, 'button action-alert');
+	    echo $BulkForms['events']->form_end();
+	    ?>
+
 		<h2>Long Courses</h2>
+		<?php echo $BulkForms['lcourses']->form_start(false, 'bulk-delete-form'); ?>
 		<table class="d">
 	        <thead>
 	            <tr>
@@ -173,7 +199,7 @@
 	                <th>View/Edit</th>
 	                <th><?php echo $Lang->get('Status'); ?></th>
 	                <th> <?php echo $Lang->get('Delete')?></th>
-	                <th class="action last"><?php echo $Lang->get('Bulk Update')?></th>                
+	                <th class="action last"><?php echo $Lang->get('Bulk Delete')?></th>                
 	            </tr>
 	        </thead>
 	        <tbody>
@@ -190,15 +216,20 @@
 	                <th><a href="<?php echo $HTML->encode($API->app_path()); ?>/long_courses/add_new/?id=<?php echo $HTML->encode(urlencode($Lcourse['longID'])); ?>" class="button button-small action-success">View/Edit</a>
 	                <td class="<?php if($Lcourse['advertStatus']=='pub'){echo 'published';}elseif($Lcourse['advertStatus']=='sus'){echo 'suspended';}else{echo 'pending';} ?>"><?php if($Lcourse['advertStatus']=='pub'){echo 'PUBLISHED';}elseif($Lcourse['advertStatus']=='sus'){echo 'SUSPENDED';}else{echo 'PENDING';} ?></td>
 	                <td><a href="<?php echo $HTML->encode($API->app_path()); ?>/long_courses/delete/?id=<?php echo $HTML->encode(urlencode($Lcourse['longID'])); ?>" class="button button-small action-alert"><?php echo $Lang->get('Delete'); ?></a></td>
-	                <td><?php echo $Form->checkbox_field('select_'.$Lcourse['longID'], '', '1', false); ?></td>
+	                <td><?php echo $BulkForms['lcourses']->checkbox_field('select_lcourses_'.$Lcourse['longID'], '', '1', false); ?></td>
 	            </tr>
 	<?php   
 	    }
 	?>
 	        </tbody>
 	    </table>
+	    <?php
+	    echo $BulkForms['lcourses']->submit_field('btnBulkDeleteLcourses', 'Delete Selected Long Courses', false, 'button action-alert');
+	    echo $BulkForms['lcourses']->form_end();
+	    ?>
 		
 		<h2>Distance Courses</h2>
+		<?php echo $BulkForms['dcourses']->form_start(false, 'bulk-delete-form'); ?>
 		<table class="d">
 	        <thead>
 	            <tr>
@@ -211,7 +242,7 @@
 	                <th>View/Edit</th>
 	                <th><?php echo $Lang->get('Status'); ?></th>
 	                <th> <?php echo $Lang->get('Delete')?></th>
-	                <th class="action last"><?php echo $Lang->get('Bulk Update')?></th>                
+	                <th class="action last"><?php echo $Lang->get('Bulk Delete')?></th>                
 	            </tr>
 	        </thead>
 	        <tbody>
@@ -228,17 +259,44 @@
 	                <th><a href="<?php echo $HTML->encode($API->app_path()); ?>/long_courses/add_new/?id=<?php echo $HTML->encode(urlencode($Lcourse['longID'])); ?>" class="button button-small action-success">View/Edit</a>
 	                <td class="<?php if($Lcourse['advertStatus']=='pub'){echo 'published';}elseif($Lcourse['advertStatus']=='sus'){echo 'suspended';}else{echo 'pending';} ?>"><?php if($Lcourse['advertStatus']=='pub'){echo 'PUBLISHED';}elseif($Lcourse['advertStatus']=='sus'){echo 'SUSPENDED';}else{echo 'PENDING';} ?></td>
 	                <td><a href="<?php echo $HTML->encode($API->app_path()); ?>/long_courses/delete/?id=<?php echo $HTML->encode(urlencode($Lcourse['longID'])); ?>" class="button button-small action-alert"><?php echo $Lang->get('Delete'); ?></a></td>
-	                <td><?php echo $Form->checkbox_field('select_'.$Lcourse['longID'], '', '1', false); ?></td>
+	                <td><?php echo $BulkForms['dcourses']->checkbox_field('select_dcourses_'.$Lcourse['longID'], '', '1', false); ?></td>
 	            </tr>
 	<?php   
 	    }
 	?>
 	        </tbody>
 	    </table>
+	    <?php
+	    echo $BulkForms['dcourses']->submit_field('btnBulkDeleteDcourses', 'Delete Selected Distance Courses', false, 'button action-alert');
+	    echo $BulkForms['dcourses']->form_end();
+	    ?>
 		  
 		<?php
 		    }    
     
     }
-    
+
     echo $HTML->main_panel_end();
+
+    /*
+     * Bulk delete can't be undone and the button sits right under a long table, so make the
+     * admin confirm, and say how many rows are going. Submitting with nothing ticked is
+     * stopped here too - the pre file reports it, but there's no point in the round trip.
+     */
+    ?>
+    <script>
+    document.querySelectorAll('form.bulk-delete-form').forEach(function(form){
+      form.addEventListener('submit', function(e){
+        var ticked = form.querySelectorAll('input[type=checkbox]:checked').length;
+        if (!ticked) {
+          e.preventDefault();
+          alert('Tick the rows you want to delete first.');
+          return;
+        }
+        if (!confirm('Delete ' + ticked + (ticked === 1 ? ' item' : ' items') + '? This cannot be undone.')) {
+          e.preventDefault();
+        }
+      });
+    });
+    </script>
+    <?php

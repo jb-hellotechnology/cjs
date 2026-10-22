@@ -211,5 +211,12 @@
     "Lat": "Lat",
     "Lng": "Lng",
     "Duplicate Long Course": "Duplicate Long Course",
-    "Are you sure you wish to duplicate the long course %s?": "Are you sure you wish to duplicate the long course %s?"
+    "Are you sure you wish to duplicate the long course %s?": "Are you sure you wish to duplicate the long course %s?",
+    "Bulk Delete": "Bulk Delete",
+    "Delete Selected Providers": "Delete Selected Providers",
+    "Delete Selected Short Courses": "Delete Selected Short Courses",
+    "Delete Selected Events": "Delete Selected Events",
+    "Delete Selected Long Courses": "Delete Selected Long Courses",
+    "Delete Selected Distance Courses": "Delete Selected Distance Courses",
+    "%s %s deleted.": "%s %s deleted."
 }
