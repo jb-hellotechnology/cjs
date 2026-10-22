@@ -161,11 +161,11 @@
   </perch:block>
   
   <perch:block type="importarticles" label="Explore More">
-  <perch:if exists="heading">
+  <div class="textarea flow">
+    <perch:if exists="heading">
     <h2><perch:content type="text" id="heading" label="Heading" /></h2>
-  </perch:if>
-  <div class="import-articles" data-tag="<perch:content type="text" id="tag" label="Tag" help="Enter a single article tag like 'countryside'" />" data-count="<perch:content type="number" id="count" label="How many articles?" />">
-    
+    </perch:if>
+    <div class="import-articles" data-tag="<perch:content type="text" id="tag" label="Tag" help="Enter a single article tag like 'countryside'" />" data-count="<perch:content type="number" id="count" label="How many articles?" />"></div>
   </div>
   </perch:block>
   
