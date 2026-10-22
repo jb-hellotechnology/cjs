@@ -83,6 +83,7 @@
       echo $Form->text_field('advertEmail', 'Advert Email', isset($details['advertEmail'])?$details['advertEmail']:false, 'm input-simple');
       echo $Form->text_field('advertWebsite', 'Advert Website (Long)', isset($details['advertWebsite'])?$details['advertWebsite']:false, 'm input-simple');
       echo $Form->text_field('advertWebsiteShort', 'Advert Website (Short)', isset($details['advertWebsiteShort'])?$details['advertWebsiteShort']:false, 'm input-simple');
+      echo $Form->text_field('ticketingURL', 'Ticketing URL', isset($details['ticketingURL'])?$details['ticketingURL']:false, 'm input-simple');
       echo $Form->select_field('advertLink', 'Advert Link Display', array(
                 array('label'=>'Short', 'value'=>'1'), array('label'=>'Long', 'value'=>'0')
       ), isset($details['advertLink'])?$details['advertLink']:'active'); 

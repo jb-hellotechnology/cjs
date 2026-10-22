@@ -11,7 +11,7 @@ class CJS_Training_Events extends PerchAPI_Factory
 	
   // THE STRUCTURE OF THE DATABASE TABLE
 	public $static_fields = array('eventID', 'eventTitle', 'startDate', 'numberDays', 'location', 'lat', 'lng', 'county', 'provider', 'advertTelephone',
-                          'advertEmail', 'advertWebsite', 'advertWebsiteShort', 'advertLink', 'logo', 'logoAlt', 'displayAd', 'cost', 
+                          'advertEmail', 'advertWebsite', 'advertWebsiteShort', 'ticketingURL', 'advertLink', 'logo', 'logoAlt', 'displayAd', 'cost', 
                           'organisationID', 'organisationName', 'contactName', 'contactTelephone', 'contactEmail', 'firstOnline',
                           'checkDate', 'dateUpdated', 'advertType', 'advertPaid', 'advertCost', 'freeAd', 'advertStatus','eventDynamicFields');	
   

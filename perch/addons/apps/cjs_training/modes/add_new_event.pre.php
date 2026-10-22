@@ -57,7 +57,7 @@
     if($Form->submitted()) {
         //FOR ITEMS PROGRAMMATICALLY ADDED TO FORM
         $postvars =  array('eventTitle', 'startDate', 'numberDays', 'location', 'lat', 'lng', 'webinar', 'county', 'provider', 'advertTelephone',
-                          'advertEmail', 'advertWebsite', 'advertWebsiteShort', 'advertLink', 'logo', 'logoAlt', 'displayAd', 'cost', 
+                          'advertEmail', 'advertWebsite', 'advertWebsiteShort', 'ticketingURL', 'advertLink', 'logo', 'logoAlt', 'displayAd', 'cost', 
                           'tOrganisationID', 'organisationName', 'contactName', 'contactTelephone', 'contactEmail', 'firstOnline',
                           'checkDate', 'advertType', 'advertPaid', 'advertCost', 'freeAd', 'advertStatus');	
     	  $data = $Form->receive($postvars);

@@ -10,6 +10,25 @@ perch_layout('header', array(
     <div class="textarea flow">
         <h1>Items Tagged '<?php echo ucwords(str_replace("-", " ", perch_get('tag'))); ?>'</h1>
         <?php perch_content('Content'); ?>
+        <?php
+            // Standard content pages carry their keywords in the "Archive Tags" field
+            // in Page Details. The helpers live in an add-on that config/apps.php
+            // can't register, because that file is server-specific and never
+            // deployed, so load it here instead.
+            $cjsPageTagsRuntime = PERCH_PATH.'/addons/apps/cjs_page_tags/runtime.php';
+            if(!function_exists('cjs_page_tags') && file_exists($cjsPageTagsRuntime)){
+                include_once($cjsPageTagsRuntime);
+            }
+        
+            // Only show the heading if something is tagged.
+            if(function_exists('cjs_page_tags')){
+                $taggedPages = cjs_page_tags(perch_get('tag'), array(), true);
+                if($taggedPages){
+                    echo '<h2>Information Pages</h2>';
+                    echo $taggedPages;
+                }
+            }
+        ?>
         <h2>Features</h2>
         <?php
             perch_blog_custom([
@@ -33,15 +52,6 @@ perch_layout('header', array(
             'sort'       => 'postDateTime',
             'sort-order' => 'ASC',
             ]);
-        ?>
-        <?php
-            // Standard content pages carry their keywords in the "Archive Tags" field
-            // in Page Details. Only show the heading if something is tagged.
-            $taggedPages = cjs_page_tags(perch_get('tag'), array(), true);
-            if($taggedPages){
-                echo '<h2>Information Pages</h2>';
-                echo $taggedPages;
-            }
         ?>
         
         <p>Links to many of the articles on these pages are no longer current, please proceed with caution. </p>

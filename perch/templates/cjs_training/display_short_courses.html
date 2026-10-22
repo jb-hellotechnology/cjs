@@ -40,6 +40,9 @@
           <p><strong>Free Course</strong></p>
         </perch:if>
       </perch:if>
+      <perch:if exists="ticketingURL">
+        <p><strong><a href="<perch:cjs id="ticketingURL" />" target="_blank">Book tickets</a></strong></p>
+      </perch:if>
     </div>
   </article>
 </section>

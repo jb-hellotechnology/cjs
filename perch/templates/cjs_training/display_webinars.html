@@ -8,6 +8,9 @@
   <perch:if exists="logo"><img src="<perch:cjs id="logo" />" alt="<perch:cjs id="logoAlt" />" /></perch:if>
   <p><perch:cjs id="location"  />, <perch:cjs id="provider" /> Contact: <perch:if id="advertLink" match="eq" value="0"><perch:if exists="advertWebsite"><a href="<perch:cjs id="advertWebsite">" target="_blank"><perch:cjs id="advertWebsite" replace="https://|,http://"></a></perch:if><perch:else/><perch:if exists="advertWebsiteShort"><a href="<perch:cjs id="advertWebsiteShort">" target="_blank"><perch:cjs id="advertWebsiteShort" replace="https://|,http://"></a></perch:if></perch:if> <perch:if exists="advertEmail"><a href="mailto:<perch:cjs id="advertEmail">?subject=<perch:cjs id="eventTitle"> advertised in CJS Training Directory"><perch:cjs id="advertEmail"></a></perch:if> <perch:if exists="advertTelephone"><perch:cjs id="advertTelephone"></perch:if></p>
   <perch:cjs id="description" html />
+  <perch:if exists="ticketingURL">
+    <p><strong><a href="<perch:cjs id="ticketingURL" />" target="_blank">Book tickets</a></strong></p>
+  </perch:if>
   </div>
 </article>
 </section>

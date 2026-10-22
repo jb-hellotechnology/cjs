@@ -58,7 +58,7 @@
         //FOR ITEMS PROGRAMMATICALLY ADDED TO FORM
         $postvars =  array('startDate', 'startText', 'shortTitle', 'categoryOne', 'categoryTwo', 'categoryThree',
                                 'numberDays','location', 'lat', 'lng', 'webinar', 'online', 'county', 'provider', 'advertTelephone', 'advertEmail', 'advertWebsite', 'advertWebsiteShort',
-                                'advertLink', 'freeCourse', 'logo', 'logoAlt', 'displayAd', 'tOrganisationID', 'organisationName',
+                                'ticketingURL', 'advertLink', 'freeCourse', 'logo', 'logoAlt', 'displayAd', 'tOrganisationID', 'organisationName',
                                 'contactName', 'contactTelephone', 'contactEmail' ,'firstOnline', 'checkDate', 'displayUntil', 
                                 'advertType', 'advertPaid', 'advertCost', 'freeAd', 'courseCost', 'concessionsAvailable', 'advertStatus');	
     	  $data = $Form->receive($postvars);

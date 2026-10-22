@@ -39,7 +39,7 @@ class CJS_Training_Short_Courses extends PerchAPI_Factory
   // THE STRUCTURE OF THE DATABASE TABLE
 	public $static_fields = array('shortID','startDate', 'startText', 'shortTitle', 'categoryOne', 'categoryTwo', 'categoryThree',
                                 'numberDays','location', 'lat', 'lng', 'county', 'provider', 'advertTelephone', 'advertEmail', 'advertWebsite', 'advertWebsiteShort',
-                                'advertLink', 'freeCourse', 'logo', 'logoAlt', 'displayAd', 'organisationID', 'organisationName',
+                                'ticketingURL', 'advertLink', 'freeCourse', 'logo', 'logoAlt', 'displayAd', 'organisationID', 'organisationName',
                                 'contactName', 'contactTelephone', 'contactEmail' ,'firstOnline', 'checkDate', 'displayUntil', 
                                 'advertType', 'advertPaid', 'advertCost', 'freeAd', 'advertStatus', 'shortDynamicFields');	
   
@@ -144,6 +144,7 @@ class CJS_Training_Short_Courses extends PerchAPI_Factory
       $contacttelephone = $this->cjs_esc($data->data['contacttelephone']);
       $contactemail = $this->cjs_esc($data->data['contactemail']);
       $contactwebsite = $this->cjs_esc($data->data['contactwebsite']);
+      $ticketingurl = $this->cjs_esc($data->data['ticketingurl'] ?? '');
       //$text = addslashes($data->data['text']);
       $courseCost = addslashes($data->data['cost']);
       $dates = explode("/",$startText);
@@ -154,8 +155,8 @@ class CJS_Training_Short_Courses extends PerchAPI_Factory
       $text = trim(preg_replace('/\s\s+/', ' ', $text));
       $text = addslashes($text);
       
-      $this->db->execute("INSERT INTO perch3_short_courses (shortTitle, startDate, startText, numberDays, location, online, webinar, county, provider, advertTelephone, advertEmail, advertWebsite, courseCost, advertStatus, shortDynamicFields) VALUES 
-      ('$title', '$startDate', '$startText', '$numberdays', '$location', '$online', '$webinar', '$county', '$runby', '$contacttelephone', '$contactemail', '$contactwebsite', '$courseCost', 'pen', '{\"description\":{\"_flang\":\"html\",\"raw\":\"$text\",\"processed\":\"$text\"}}')");
+      $this->db->execute("INSERT INTO perch3_short_courses (shortTitle, startDate, startText, numberDays, location, online, webinar, county, provider, advertTelephone, advertEmail, advertWebsite, ticketingURL, courseCost, advertStatus, shortDynamicFields) VALUES 
+      ('$title', '$startDate', '$startText', '$numberdays', '$location', '$online', '$webinar', '$county', '$runby', '$contacttelephone', '$contactemail', '$contactwebsite', '$ticketingurl', '$courseCost', 'pen', '{\"description\":{\"_flang\":\"html\",\"raw\":\"$text\",\"processed\":\"$text\"}}')");
       
       $to = 'trainingdirectory@countrysidejobs.com'; // note the comma
 
@@ -177,6 +178,7 @@ class CJS_Training_Short_Courses extends PerchAPI_Factory
 	  Contact Tel: ".addslashes($contacttelephone)."<br />
 	  Contact Email: ".addslashes($contactemail)."<br />
 	  Contact Website: ".addslashes($contactwebsite)."<br />
+	  Ticketing URL: ".addslashes($ticketingurl)."<br />
 	  Course Cost: ".addslashes($courseCost)."<br />
 	  Start Date: ".addslashes($startDate)."<br />
 	  Number of Days: ".addslashes($numberDays)."<br />
@@ -208,6 +210,7 @@ class CJS_Training_Short_Courses extends PerchAPI_Factory
       $contacttelephone = $this->cjs_esc($data->data['contacttelephone']);
       $contactemail = $this->cjs_esc($data->data['contactemail']);
       $contactwebsite = $this->cjs_esc($data->data['contactwebsite']);
+      $ticketingurl = $this->cjs_esc($data->data['ticketingurl'] ?? '');
       //$text = addslashes($data->data['text']);
       $courseCost = addslashes($data->data['cost']);
       
@@ -216,8 +219,8 @@ class CJS_Training_Short_Courses extends PerchAPI_Factory
       $text = trim(preg_replace('/\s\s+/', ' ', $text));
       $text = addslashes($text);
       
-      $this->db->execute("INSERT INTO perch3_events (eventTitle, startDate, numberDays, location, webinar, county, provider, advertTelephone, advertEmail, advertWebsite, cost, advertStatus, eventDynamicFields) VALUES 
-      ('$title', '$date', '$numberdays', '$location', '$online', '$county', '$runby', '$contacttelephone', '$contactemail', '$contactwebsite', '$courseCost', 'pen', '{\"description\":{\"_flang\":\"html\",\"raw\":\"$text\",\"processed\":\"$text\"}}')");
+      $this->db->execute("INSERT INTO perch3_events (eventTitle, startDate, numberDays, location, webinar, county, provider, advertTelephone, advertEmail, advertWebsite, ticketingURL, cost, advertStatus, eventDynamicFields) VALUES 
+      ('$title', '$date', '$numberdays', '$location', '$online', '$county', '$runby', '$contacttelephone', '$contactemail', '$contactwebsite', '$ticketingurl', '$courseCost', 'pen', '{\"description\":{\"_flang\":\"html\",\"raw\":\"$text\",\"processed\":\"$text\"}}')");
   		
   		$to = 'trainingdirectory@countrysidejobs.com'; // note the comma
 			
@@ -238,6 +241,7 @@ class CJS_Training_Short_Courses extends PerchAPI_Factory
 	  Contact Tel: ".addslashes($contacttelephone)."<br />
 	  Contact Email: ".addslashes($contactemail)."<br />
 	  Contact Website: ".addslashes($contactwebsite)."<br />
+	  Ticketing URL: ".addslashes($ticketingurl)."<br />
 	  Course Cost: ".addslashes($courseCost)."<br />
 	</body>
 	</html>
@@ -338,7 +342,7 @@ $today = date('Y-m-d');
   public function duplicate($id){
 	  
 	  $result = $this->db->get_row('SELECT * FROM perch3_short_courses WHERE shortID='.$this->db->pdb($id).'');
-	  $duplicate = $this->db->execute("INSERT INTO perch3_short_courses (shortTitle, startDate, startText, categoryOne, categoryTwo, categoryThree, numberDays, location, webinar, online, county, provider, advertTelephone, advertEmail, advertWebsite, advertWebsiteShort, advertLink, freeCourse, logo, logoAlt, displayAd, organisationID, organisationName, contactName, contactTelephone, contactEmail, firstOnline, checkDate, dateUpdated, displayUntil, advertType, advertPaid, advertCost, freeAd, courseCost, concessionsAvailable, advertStatus, shortDynamicFields) VALUES ('".addslashes($result['shortTitle'])." - DUPLICATE', '$result[startDate]', '".addslashes($result['startText'])."', '$result[categoryOne]', '$result[categoryTwo]', '$result[categoryThree]', '$result[numberDays]', '".addslashes($result['location'])."', '$result[webinar]', '$result[online]', '$result[county]', '".addslashes($result['provider'])."', '$result[advertTelephone]', '$result[advertEmail]', '$result[advertWebsite]', '$result[advertWebsiteShort]', '$result[advertLink]', '$result[freeCourse]', '$result[logo]', '$result[logoAlt]', '$result[displayAd]', '$result[organisationID]', '".addslashes($result['organisationName'])."', '".addslashes($result['contactName'])."', '$result[contactTelephone]', '$result[contactEmail]', '$result[firstOnline]', '$result[checkDate]', '$result[dateUpdated]', '$result[displayUntil]', '$result[advertType]', '$result[advertPaid]', '$result[advertCost]', '$result[freeAd]', '$result[courseCost]', '$result[concessionsAvailable]', '$result[advertStatus]', '".addslashes($result['shortDynamicFields'])."')");
+	  $duplicate = $this->db->execute("INSERT INTO perch3_short_courses (shortTitle, startDate, startText, categoryOne, categoryTwo, categoryThree, numberDays, location, webinar, online, county, provider, advertTelephone, advertEmail, advertWebsite, advertWebsiteShort, ticketingURL, advertLink, freeCourse, logo, logoAlt, displayAd, organisationID, organisationName, contactName, contactTelephone, contactEmail, firstOnline, checkDate, dateUpdated, displayUntil, advertType, advertPaid, advertCost, freeAd, courseCost, concessionsAvailable, advertStatus, shortDynamicFields) VALUES ('".addslashes($result['shortTitle'])." - DUPLICATE', '$result[startDate]', '".addslashes($result['startText'])."', '$result[categoryOne]', '$result[categoryTwo]', '$result[categoryThree]', '$result[numberDays]', '".addslashes($result['location'])."', '$result[webinar]', '$result[online]', '$result[county]', '".addslashes($result['provider'])."', '$result[advertTelephone]', '$result[advertEmail]', '$result[advertWebsite]', '$result[advertWebsiteShort]', '$result[ticketingURL]', '$result[advertLink]', '$result[freeCourse]', '$result[logo]', '$result[logoAlt]', '$result[displayAd]', '$result[organisationID]', '".addslashes($result['organisationName'])."', '".addslashes($result['contactName'])."', '$result[contactTelephone]', '$result[contactEmail]', '$result[firstOnline]', '$result[checkDate]', '$result[dateUpdated]', '$result[displayUntil]', '$result[advertType]', '$result[advertPaid]', '$result[advertCost]', '$result[freeAd]', '$result[courseCost]', '$result[concessionsAvailable]', '$result[advertStatus]', '".addslashes($result['shortDynamicFields'])."')");
 	  
   }
   
