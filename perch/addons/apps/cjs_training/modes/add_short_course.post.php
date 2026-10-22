@@ -59,9 +59,20 @@
       
       // MORE FIELDS
       echo $Form->text_field('startDate', 'Start Date', switchDate($details['startDate']), 'm input-simple datepicker');
-      echo $Form->select_field('startText', 'Start Text', array(
-                array('label'=>'', 'value'=>''), array('label'=>'TBC', 'value'=>'TBC'), array('label'=>'Various', 'value'=>'Various'), array('label'=>'Ad Hoc', 'value'=>'Ad Hoc'), array('label'=>'Contact For Details', 'value'=>'Contact For Details'), array('label'=>'By Arrangement', 'value'=>'By Arrangement')
-           ), isset($details['startText'])?$details['startText']:'active');
+      $StartTexts = [['label'=>'', 'value'=>''],
+                     ['label'=>'TBC', 'value'=>'TBC'],
+                     ['label'=>'Contact for Details', 'value'=>'Contact for Details'],
+                     ['label'=>'Instant Access', 'value'=>'Instant Access'],
+                     ['label'=>'Self-Paced', 'value'=>'Self-Paced'],
+                     ['label'=>'On Demand', 'value'=>'On Demand']];
+      // Older courses hold labels that are no longer offered (Various, Ad Hoc, By Arrangement) or
+      // free text typed in before this was a select. Keep whatever this course already has in the
+      // list, or Perch shows the blank option and saving the course wipes the value.
+      $startText = isset($details['startText']) ? $details['startText'] : '';
+      if ($startText!='' && !in_array($startText, array_column($StartTexts, 'value'))) {
+        $StartTexts[] = ['label'=>$startText.' (existing value)', 'value'=>$startText];
+      }
+      echo $Form->select_field('startText', 'Start Text', $StartTexts, $startText);
       //echo $Form->text_field('startText', 'Start Text', isset($details['startText'])?$details['startText']:false, 'm input-simple');
       echo $Form->select_field('categoryOne', 'Category 1', $Categories, 
                                isset($details['categoryOne'])?$details['categoryOne']:'active');

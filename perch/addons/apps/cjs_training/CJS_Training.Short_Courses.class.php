@@ -30,6 +30,27 @@ class CJS_Training_Short_Courses extends PerchAPI_Factory
   {
     return preg_match('/^[A-Za-z_][A-Za-z0-9_]{0,63}$/', (string)$name) ? $name : 'NULL';
   }
+
+  /*
+   * Start Text values that mean "this course has no fixed start date". A course with one of
+   * these shows in the undated listings instead of being filtered out by startDate, so the
+   * list has to match the options offered in the admin form (add_short_course.post.php).
+   *
+   * Various, Ad Hoc and By Arrangement are no longer offered when adding a course, but they
+   * stay here: adverts saved under the old labels are still live and would otherwise drop out
+   * of the listings.
+   */
+  protected $undated_start_text = array('TBC', 'Contact for Details', 'Instant Access', 'Self-Paced', 'On Demand',
+                                        'Various', 'Ad Hoc', 'By Arrangement');
+
+  protected function undated_start_text_sql()
+  {
+    $tests = array();
+    foreach ($this->undated_start_text as $value) {
+      $tests[] = 'startText='.$this->db->pdb($value);
+    }
+    return '('.implode(' OR ', $tests).')';
+  }
   protected $table     = 'short_courses';
 	protected $pk        = 'shortID';
 	protected $singular_classname = 'CJS_Training_Short_Course';
@@ -50,14 +71,13 @@ class CJS_Training_Short_Courses extends PerchAPI_Factory
   
   public function published(){
 	$today = date('Y-m-d');
-    $results = $this->db->get_rows('SELECT * FROM perch3_short_courses WHERE advertStatus="pub" AND (startDate>='.$this->db->pdb($today).' OR startText LIKE "%ad hoc%" OR startText 
-    LIKE "%by arrangement%" OR startText LIKE "%contact for details%" OR startText LIKE "%various%") ORDER BY startDate ASC');
+    $results = $this->db->get_rows('SELECT * FROM perch3_short_courses WHERE advertStatus="pub" AND (startDate>='.$this->db->pdb($today).' OR '.$this->undated_start_text_sql().') ORDER BY startDate ASC');
     return $results;
   }
   
   public function environmental_education(){
   $today = date('Y-m-d');
-    $results = $this->db->get_rows('SELECT * FROM perch3_short_courses WHERE advertStatus="pub" AND (startDate>='.$this->db->pdb($today).' OR startText LIKE "%ad hoc%" OR startText LIKE "%by arrangement%" OR startText LIKE "%contact for details%" OR startText LIKE "%various%") AND categoryOne="ed" ORDER BY startDate ASC');
+    $results = $this->db->get_rows('SELECT * FROM perch3_short_courses WHERE advertStatus="pub" AND (startDate>='.$this->db->pdb($today).' OR '.$this->undated_start_text_sql().') AND categoryOne="ed" ORDER BY startDate ASC');
     return $results;
   }
   
@@ -70,7 +90,7 @@ class CJS_Training_Short_Courses extends PerchAPI_Factory
   public function by_organisation($organisationID){
 	  $today = date('Y-m-d');
 	$results = $this->db->get_rows('SELECT * FROM perch3_short_courses WHERE organisationID='.$this->db->pdb($organisationID).' AND advertStatus="pub" AND 
-	(startDate>='.$this->db->pdb($today).' OR (startText="TBC" OR startText="Ad Hoc" OR startText="Various" OR startText="Contact For Details" OR startText="By Arrangement")) ORDER BY startDate ASC');
+	(startDate>='.$this->db->pdb($today).' OR '.$this->undated_start_text_sql().') ORDER BY startDate ASC');
     return $results;  
   }
   
@@ -96,7 +116,7 @@ class CJS_Training_Short_Courses extends PerchAPI_Factory
 	    AND advertStatus="pub" AND startDate>='.$this->db->pdb($today).' AND (displayUntil>='.$this->db->pdb($today).' OR displayUntil="0000-00-00") ORDER BY startDate ASC');
     }else{
 		return $this->db->get_rows('SELECT * FROM perch3_short_courses WHERE (categoryOne='.$this->db->pdb($category).' OR categoryTwo='.$this->db->pdb($category).' OR categoryThree='.$this->db->pdb($category).') 
-		AND advertStatus="pub" AND (startText="TBC" OR startText="Ad Hoc" OR startText="Various" OR startText="Contact For Details" OR startText="By Arrangement") AND 
+		AND advertStatus="pub" AND '.$this->undated_start_text_sql().' AND
 		(displayUntil>='.$this->db->pdb($today).' OR displayUntil="0000-00-00") ORDER BY startDate ASC');    
     }
   }
