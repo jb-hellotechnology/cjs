@@ -20,13 +20,13 @@
   
   <link rel="stylesheet" href="https://use.typekit.net/igp6ehm.css">
   
-  <link href="/assets/css/reset.css?v=<?php echo rand(); ?>"  media="screen" rel="stylesheet" type="text/css" />
-  <link href="/assets/css/type.css?v=<?php echo rand(); ?>"  media="screen" rel="stylesheet" type="text/css" />
-  <link href="/assets/css/layout.css?v=<?php echo rand(); ?>"  media="screen" rel="stylesheet" type="text/css" />
-  <link href="/assets/css/styles.css?v=<?php echo rand(); ?>"  media="screen" rel="stylesheet" type="text/css" />
+  <link href="<?php echo cjs_asset('/assets/css/reset.css'); ?>"  media="screen" rel="stylesheet" type="text/css" />
+  <link href="<?php echo cjs_asset('/assets/css/type.css'); ?>"  media="screen" rel="stylesheet" type="text/css" />
+  <link href="<?php echo cjs_asset('/assets/css/layout.css'); ?>"  media="screen" rel="stylesheet" type="text/css" />
+  <link href="<?php echo cjs_asset('/assets/css/styles.css'); ?>"  media="screen" rel="stylesheet" type="text/css" />
   
   
-  <link href="/assets/css/print.css"  media="print" rel="stylesheet" type="text/css" />
+  <link href="<?php echo cjs_asset('/assets/css/print.css'); ?>"  media="print" rel="stylesheet" type="text/css" />
 
   <?php
     $domain        = 'https://'.$_SERVER["HTTP_HOST"];

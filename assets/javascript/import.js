@@ -90,7 +90,13 @@ function createQueue(limit) {
 
 // ─── Initialisation ───────────────────────────────────────
 
-document.addEventListener('DOMContentLoaded', () => {
+/**
+ * The footer loads this file with `defer`, which already waits for the
+ * document. Run against whatever state we find anyway: an `async` tag, or an
+ * injected one, can execute after DOMContentLoaded has been and gone, and a
+ * listener added then never fires — which left every import empty.
+ */
+function init() {
   const queue = createQueue(CONCURRENCY);
 
   // Load all top-level imports — limited concurrency, nested loads handled recursively
@@ -114,4 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	  .then(data => { el.innerHTML = data; })
 	  .catch(err => console.error('import-articles failed:', err));
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}

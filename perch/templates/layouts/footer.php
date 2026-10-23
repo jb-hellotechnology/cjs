@@ -39,8 +39,8 @@
     </div>
   </footer>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-  <script src="/assets/javascript/import.js?v=<?= rand() ?>" defer async></script>
-  <script src="/assets/javascript/scripts.js?v=<?= rand() ?>" defer async></script>
+  <script src="<?php echo cjs_asset('/assets/javascript/import.js'); ?>" defer></script>
+  <script src="<?php echo cjs_asset('/assets/javascript/scripts.js'); ?>" defer></script>
   <script src="https://kit.fontawesome.com/1dd8560de8.js" crossorigin="anonymous" async defer></script>
   <script>
     const sentinel = document.querySelector('.masthead,header');

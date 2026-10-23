@@ -923,6 +923,25 @@ function cjs_canonical_tag($domain){
 /* CJS_SCHEMA_HELPERS_END */
 
 /*
+ * A versioned URL for one of our own stylesheets or scripts.
+ *
+ * The assets go out with a week of cache life, so a file we have changed needs
+ * a changed URL or returning visitors keep the copy they already have. The
+ * query string used to be rand(), which did guarantee that, but at the price
+ * of every visitor re-downloading every file on every page view. A file's
+ * modification time changes exactly when the file does, so browsers hold on to
+ * it until the next deploy and no longer.
+ */
+function cjs_asset($path){
+  $path = '/'.ltrim($path, '/');
+  $file = rtrim($_SERVER['DOCUMENT_ROOT'], '/').$path;
+
+  if (!is_file($file)) return $path;
+
+  return $path.'?v='.filemtime($file);
+}
+
+/*
  * Where an advert stands right now: "live", "closed" (it ran but its closing
  * date has passed) or "missing" (no such advert, or it is not published).
  *
