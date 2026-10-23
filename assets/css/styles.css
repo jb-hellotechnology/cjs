@@ -946,3 +946,9 @@ p.span_commas span:last-of-type::after{
 	margin-bottom:1rem;
 	color:var(--color-dark);;
 }
+
+.button-flex{
+	display: flex;
+	justify-content: space-between;
+}
+

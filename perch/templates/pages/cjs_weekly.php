@@ -14,5 +14,4 @@
     <?php perch_content('Additional Content'); ?>
 </main>
 
-<script src="/assets/javascript/import.js"></script>
 <?php perch_layout('footer'); ?>

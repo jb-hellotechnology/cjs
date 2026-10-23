@@ -25,6 +25,5 @@
 	}
 </script>
 
-<script src="/assets/javascript/import.js"></script>
 
 <?php perch_layout('footer'); ?>

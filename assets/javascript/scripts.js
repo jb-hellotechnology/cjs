@@ -52,22 +52,4 @@ $('a.menu').click(function(){
 	var lower = searchTerm.toLowerCase();
 	var upper = searchTerm.toUpperCase();
 	$('.tags li:contains('+lower+')').show();
-  }	
- 
- 
- $(document).ready(function(){
-	
-	$('.import').each(function(){
-		var src = $(this).data('page-source');
-		console.log(src);
-		$(this).children('div').load(src, function(){
-			$('.import .import').each(function(){
-				var src = $(this).data('page-source');
-				console.log(src);
-				$(this).children('div').load(src);
-			});
-		});
-	})
-	
-	 
- });
+  }
