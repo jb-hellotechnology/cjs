@@ -397,6 +397,149 @@ class CJS_Daily_Indexing
     }
 
 
+    private static function get($url, $headers = array())
+    {
+        if (!function_exists('curl_init')) {
+            return array('status' => 0, 'body' => '', 'error' => 'curl is not available');
+        }
+
+        $ch = curl_init();
+
+        curl_setopt_array($ch, array(
+            CURLOPT_URL            => $url,
+            CURLOPT_HTTPHEADER     => $headers,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CONNECTTIMEOUT => 5,
+            CURLOPT_TIMEOUT        => 10,
+            CURLOPT_USERAGENT      => 'CountrysideJobsService/1.0 (+https://www.countryside-jobs.com)',
+        ));
+
+        $response = curl_exec($ch);
+        $status   = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error    = curl_error($ch);
+
+        curl_close($ch);
+
+        return array(
+            'status' => $status,
+            'body'   => ($response === false) ? '' : $response,
+            'error'  => $error,
+        );
+    }
+
+
+    /* --------------------------------------------------------------- self test */
+
+    /**
+     * Check the setup without spending any of the day's Google quota.
+     *
+     * Each step is reported separately, because the failures all look the same
+     * from the outside: an advert that quietly never gets submitted. Run it from
+     * indexing_check.php after changing the configuration.
+     *
+     * @return array A list of array('label', 'ok', 'detail').
+     */
+    public static function self_test()
+    {
+        $out = array();
+
+        $check = function($label, $ok, $detail) use (&$out) {
+            $out[] = array('label' => $label, 'ok' => $ok, 'detail' => $detail);
+        };
+
+        /* --- the basics the rest depends on --- */
+
+        $check('curl extension', function_exists('curl_init'),
+               function_exists('curl_init') ? 'available' : 'missing: no submission can be made');
+
+        $check('openssl extension', function_exists('openssl_sign'),
+               function_exists('openssl_sign') ? 'available' : 'missing: the Google token cannot be signed');
+
+        $writable = self::writable();
+        $check('state folder writable', $writable,
+               $writable ? self::STATE_DIR : 'cannot write to '.self::STATE_DIR.': no log, and de-duplication will not work');
+
+        /* --- IndexNow --- */
+
+        $key = defined('CJS_INDEXNOW_KEY') ? CJS_INDEXNOW_KEY : '';
+
+        $check('CJS_INDEXNOW_KEY set', $key !== '',
+               $key !== '' ? $key : 'not defined in config.production.php: IndexNow is being skipped');
+
+        if ($key !== '') {
+            $key_url = self::SITE.'/'.$key.'.txt';
+            $res     = self::get($key_url);
+            $served  = trim($res['body']);
+            $ok      = ($res['status'] == 200 && $served === $key);
+
+            $check('IndexNow key file', $ok,
+                   $ok ? $key_url.' matches the key'
+                       : $key_url.' returned HTTP '.$res['status'].
+                         ($served !== '' && $served !== $key ? ', and its contents do not match the key' : '').
+                         ' - upload it to the web root or submissions will be rejected');
+        }
+
+        /* --- Google --- */
+
+        $key_file = defined('CJS_GOOGLE_INDEXING_KEY_FILE') ? CJS_GOOGLE_INDEXING_KEY_FILE : '';
+
+        $check('CJS_GOOGLE_INDEXING_KEY_FILE set', $key_file !== '',
+               $key_file !== '' ? $key_file : 'not defined in config.production.php: Google is being skipped');
+
+        if ($key_file === '') return $out;
+
+        $readable = is_readable($key_file);
+        $check('key file readable', $readable,
+               $readable ? 'readable' : 'cannot read '.$key_file);
+
+        if (!$readable) return $out;
+
+        $json  = json_decode(file_get_contents($key_file), true);
+        $valid = (is_array($json) && isset($json['client_email']) && isset($json['private_key']));
+
+        $check('key file is a service account', $valid,
+               $valid ? $json['client_email'].' (this is the address to add as an owner in Search Console)'
+                      : 'the file is not a service account JSON key');
+
+        if (!$valid) return $out;
+
+        /* Clear any cached token so this really does test the key on disk. */
+        self::state('google_token', array('token' => '', 'expires' => 0));
+
+        $token = self::google_token();
+        $check('access token', $token !== null,
+               $token !== null ? 'granted' : 'could not get a token - see the log for Google\'s reason');
+
+        if ($token === null) return $out;
+
+        /*
+         * getMetadata is a read. It tells us whether this service account is
+         * allowed to speak for the site without publishing anything:
+         *
+         *   404  authorised, but nothing has been submitted for that URL yet
+         *   200  authorised, and a previous submission is on record
+         *   403  the service account is not an owner of the property
+         */
+        $res = self::get('https://indexing.googleapis.com/v3/urlNotifications/metadata?url='.
+                         urlencode(self::SITE.'/jobs'),
+                         array('Authorization: Bearer '.$token));
+
+        if ($res['status'] == 200 || $res['status'] == 404) {
+            $check('Search Console ownership', true,
+                   'the service account can submit for '.self::SITE.
+                   ' (HTTP '.$res['status'].')');
+        }elseif ($res['status'] == 403) {
+            $check('Search Console ownership', false,
+                   'HTTP 403: add '.$json['client_email'].' as a verified owner of the property in Search Console');
+        }else{
+            $check('Search Console ownership', false,
+                   'HTTP '.$res['status'].' '.$res['error'].' '.substr($res['body'], 0, 300));
+        }
+
+        return $out;
+    }
+
+
     /* ------------------------------------------------- state, de-dupe, log */
 
     /**
