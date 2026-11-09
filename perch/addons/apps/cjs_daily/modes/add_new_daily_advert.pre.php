@@ -171,6 +171,11 @@
       
         // IF WE HAVE AN ORG UPDATE IT
         if (is_object($Daily_Job)) {
+	        /* The advert as it stood before this save. Comparing it with the new
+	           data is what tells the indexing code whether an advert has just
+	           gone live, or has just been pulled and needs de-indexing. */
+	        $was = $Daily_Job->to_array();
+
 	        if($data['advertStatus']=='overwrite'){
 		        $result = $Daily_Jobs->delete_overwritten_job($data['advertURL']);
 		        $data['advertStatus'] = 'pub';
@@ -178,11 +183,18 @@
 	        }else{
 	            $result = $Daily_Job->update($data);
 	        }
+
+	        /* Best-effort: asks Bing and Google to come and look now rather than
+	           waiting a day for the sitemap. Never blocks or breaks the save. */
+	        CJS_Daily_Indexing::advert(array_merge($was, $data), $was);
         }else{
             // OTHERWISE CREATE IT
             if (isset($data['daily_jobID'])) unset($data['daily_jobID']);
 
             $new_daily_job = $Daily_Jobs->create($data);
+
+            CJS_Daily_Indexing::advert($data);
+
             PerchUtil::redirect($API->app_path() .'/daily/add_new/?id='.$new_daily_job->id().'&created=1');
         }
     	

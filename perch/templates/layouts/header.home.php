@@ -45,6 +45,9 @@
     ));
 
     cjs_canonical_tag($domain);
+
+    /* Home page only: see cjs_organisation_schema(). */
+    cjs_organisation_schema();
   ?>
     
   <!-- Google tag (gtag.js) -->

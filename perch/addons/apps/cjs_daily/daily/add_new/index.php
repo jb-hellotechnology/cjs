@@ -16,6 +16,7 @@ error_reporting(E_ALL);
     include('../../CJS_Daily.Jobs.class.php');
     include('../../CJS_Daily.Employer.class.php');
     include('../../CJS_Daily.Employers.class.php');
+    include_once('../../CJS_Daily.Indexing.class.php');
     include('../../../cjs_organisations/CJS_Organisations.Org.class.php');
     include('../../../cjs_organisations/CJS_Organisations.Orgs.class.php');
 

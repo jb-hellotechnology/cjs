@@ -15,7 +15,8 @@
     include('CJS_Daily.Advertiser_Message.class.php');
     include('CJS_Daily.Advertiser_Messages.class.php');
     include('CJS_Daily.Search.class.php');
-    
+    include_once('CJS_Daily.Indexing.class.php');
+
     PerchSystem::register_search_handler('CJS_Daily_SearchHandler');
 
 function cjs_daily_form_handler($SubmittedForm)
@@ -891,6 +892,15 @@ function cjs_job_schema($item){
 	$identifier = cjs_schema_identifier($item);
 	if ($identifier !== null) $schema['identifier'] = $identifier;
 
+	/* The address this advert is published at, stated in the data as well as in
+	   the canonical tag. A site that lifts the whole JSON-LD block along with
+	   the advert ends up naming us as the page the posting belongs to. */
+	$url = cjs_schema_absolute_url(isset($item['advertURL']) ? $item['advertURL'] : '');
+	if ($url !== '') {
+		$schema['url']              = $url;
+		$schema['mainEntityOfPage'] = array('@type' => 'WebPage', '@id' => $url);
+	}
+
 	/* Applications go by email or the employer's own form, never from here. */
 	$schema['directApply'] = false;
 
@@ -918,6 +928,66 @@ function cjs_canonical_tag($domain){
   }
 
   echo '<link rel="canonical" href="'.PerchUtil::html($canonical).'" />'."\n";
+}
+
+/* ------------------------------------------------------------- organisation */
+
+/*
+ * Organization markup for the home page.
+ *
+ * This is the piece that ties the CJS name, the website and the social accounts
+ * together as one entity. It matters here because the copies we keep finding are
+ * scraped from the Facebook page: with this in place, the site is the thing
+ * Google treats as the organisation, and the Facebook page is an account
+ * belonging to it, rather than two unrelated sources of the same adverts.
+ *
+ * Output once, on the home page only. Repeating it on every page says nothing
+ * extra and invites conflicting entities.
+ */
+function cjs_organisation_schema(){
+
+  $schema = array(
+    '@context'    => 'https://schema.org',
+    '@type'       => 'Organization',
+    '@id'         => cjs_schema_site_url().'/#organisation',
+    'name'        => 'Countryside Jobs Service',
+    'alternateName' => 'CJS',
+    'url'         => cjs_schema_site_url().'/',
+    'description' => 'Countryside, conservation, ecology and environmental job vacancies, '.
+                     'training courses, volunteering and news, published since 1994.',
+    /* The logo the site itself puts in its header, so the two agree. */
+    'logo'        => array(
+      '@type'  => 'ImageObject',
+      'url'    => cjs_schema_site_url().'/assets/images/CJS_LOGO_2022_BLACK.png',
+    ),
+    'image'        => cjs_schema_site_url().'/assets/images/CJS_LOGO_2022_BLACK.png',
+    'foundingDate' => '1994-07-01',
+    'email'        => 'ranger@countryside-jobs.com',
+    'telephone'    => '+44-1947-896007',
+    'address'      => array(
+      '@type'           => 'PostalAddress',
+      'streetAddress'   => 'The Moorlands, Goathland',
+      'addressLocality' => 'Whitby',
+      'addressRegion'   => 'North Yorkshire',
+      'postalCode'      => 'YO22 5LZ',
+      'addressCountry'  => 'GB',
+    ),
+    /* The accounts CJS publishes in the site footer. Anything added there
+       should be added here too, or the entity stays half-described. */
+    'sameAs'      => array(
+      'https://www.facebook.com/countryside-jobs-service',
+      'https://bsky.app/profile/countrysidejobs.bsky.social',
+      'https://www.threads.com/@countrysidejobs',
+      'https://www.instagram.com/countrysidejobs/',
+      'https://www.linkedin.com/company/countryside-jobs-service/',
+      'https://x.com/CountrysideJobs',
+    ),
+  );
+
+  echo '<script type="application/ld+json">'.
+       json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE |
+                            JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT).
+       '</script>'."\n";
 }
 
 /* CJS_SCHEMA_HELPERS_END */

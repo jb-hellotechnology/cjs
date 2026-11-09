@@ -1,0 +1,10 @@
+# This folder holds the indexing submission log and the de-duplication state
+# file. PHP reads and writes it from disk; nothing here should ever be served
+# over HTTP.
+<IfModule mod_authz_core.c>
+	Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+	Order allow,deny
+	Deny from all
+</IfModule>

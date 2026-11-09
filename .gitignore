@@ -26,8 +26,10 @@
 /perch/addons/apps/cjs_daily/submissions/*
 /perch/addons/apps/**/upload_csv/uploads/*
 /perch/addons/apps/cjs_subscribers/import/files/*
+/perch/addons/apps/cjs_daily/indexing/*
 !/perch/addons/apps/cjs_backup/backups/.htaccess
 !/perch/addons/apps/cjs_daily/submissions/.htaccess
+!/perch/addons/apps/cjs_daily/indexing/.htaccess
 !/perch/addons/apps/**/upload_csv/uploads/.htaccess
 !/perch/addons/apps/cjs_subscribers/import/files/.htaccess
 

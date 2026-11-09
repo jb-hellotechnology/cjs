@@ -22,6 +22,7 @@
 					<perch:cjs id="advertText" html />
 				</perch:if>
 				<p><strong><perch:if id="cDisplayDNotCDate" value="1">Delete Date:<perch:else/>Closing Date:</perch:if></strong> <perch:cjs id="closingDate" format="d/m/Y" />&nbsp;&nbsp;<strong>Location:</strong> <perch:cjs id="location" /></p>
+				<p class="advert-ref">Advertised via Countryside Jobs Service &ndash; ref CJS-<perch:cjs id="daily_jobID" /></p>
 				<div style="width:100%;clear:both;"></div>
 			</div>
 		</div>
@@ -41,6 +42,10 @@
 			<perch:if exists="advertText">
 				<perch:cjs id="advertText" html replace="Â£|£,â€™|'" />
 			</perch:if>
+			<!-- Our own reference, in the body text on purpose. A site that copies
+			     the advert copies this with it, so a quoted search for the ref
+			     finds the copies, and the ref points back here. -->
+			<p class="advert-ref">Advertised via Countryside Jobs Service &ndash; ref CJS-<perch:cjs id="daily_jobID" /></p>
 			<perch:if not-exists="jobClosed">
 				<p><a href="https://countryside-careers.com/my-account/add/?title=<perch:cjs id="title" urlencode="true">%20-%20<perch:cjs id="employerDisplay" urlencode="true">&url=https://countryside-jobs.com<perch:cjs id="advertURL" />">
 					<img src="/assets/images/save_job.svg" alt="Save Job" />

@@ -952,3 +952,12 @@ p.span_commas span:last-of-type::after{
 	justify-content: space-between;
 }
 
+
+/* The CJS reference printed at the foot of every advert. Quiet enough not to
+   compete with the advert itself, but real body text, so a site that copies the
+   advert copies the reference with it. */
+.advert-ref{
+	margin-top:1.5rem;
+	font-size:0.8rem;
+	opacity:0.7;
+}
