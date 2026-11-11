@@ -127,7 +127,33 @@ it.
 
 ## Checking it works
 
-Nothing is stored, so the trail is the mail log and Perch's debug output. Add
-`?debug=true` to the form's page with `PERCH_DEBUG` on and look for
-`cjs_form_ack:` lines. Failures are also written to the PHP error log, prefixed
-`[cjs_form_ack]`.
+Run `check.php`, in this folder:
+
+```
+/perch/addons/apps/cjs_form_ack/check.php?secret=SECRET
+```
+
+`SECRET` is `PERCH_SCHEDULE_SECRET` from `perch/config` (or `PERCH_LICENSE_KEY`
+if that is not set on the server). Without it the page 404s. It reports, for
+*this* server: whether the app is registered and loading, whether the email
+template and the handler hooks in the other apps actually arrived, which pages
+are still serving a pre-republish snapshot, whether the message builds, whether
+SMTP connects and authenticates, the recent adverts and their status, and the
+last `[cjs_form_ack]` lines from the error log.
+
+Add `&send=you@example.com` to send a real test acknowledgement — the only way
+to tell a wiring problem from a delivery problem. `&form=<id>` picks the
+wording, defaulting to `cjs_online`.
+
+Every send attempt, successful or not, writes one line to the PHP error log
+prefixed `[cjs_form_ack]`. Silence there means the acknowledgement was never
+attempted, which is a different problem from one that failed.
+
+### One thing the log cannot tell you
+
+`cjs_daily` only emails anyone when an advert is saved as `pen`, `pub` or
+`over`. Save a **draft** and neither CJS nor the advertiser hears anything, by
+design and since long before this app existed. If a test submission produced no
+acknowledgement, check whether CJS got its own "CJS Daily Submission"
+notification for it: if CJS got nothing either, the advert was a draft and
+nothing is broken.

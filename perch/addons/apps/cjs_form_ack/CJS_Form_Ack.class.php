@@ -86,7 +86,14 @@ class CJS_Form_Ack
                 return false;
             }
 
+            /* Logged on success as well as failure, and deliberately so: without
+               it the error log cannot tell "the acknowledgement was never
+               attempted" from "it was attempted and worked", which is the first
+               thing you need to know when someone says they did not get one.
+               These forms run at a few submissions a day, so it is not noise. */
             PerchUtil::debug('cjs_form_ack: acknowledged '.$formID.' to '.$email, 'success');
+            error_log('[cjs_form_ack] '.$formID.': acknowledged to '.$email);
+
             return true;
 
         } catch (Exception $e) {
