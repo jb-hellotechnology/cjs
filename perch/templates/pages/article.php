@@ -18,6 +18,33 @@
       
       //print_r($post[0]['exploreTags']);
 
+    /*
+     * Not every /article/ address matches a post: an old link, a slug typed
+     * wrong, or one of the few saved with an invisible character in it. Those
+     * used to fall straight through to $post['0']['postTitle'] and die there,
+     * which reaches a crawler as a 500. Google reads 500 as "come back later"
+     * and keeps the address queued, retrying it, where a 404 has it dropped.
+     */
+    if (!is_array($post) || !isset($post[0]['postTitle'])) {
+
+        http_response_code(404);
+
+        perch_page_attributes_extend(array(
+            'description' => 'This article could not be found. Read the latest countryside, wildlife and conservation news from CJS.',
+        ));
+
+        perch_layout('header', array('og_title' => 'Article not found: Countryside Jobs Service'));
+
+        echo '<main class="flow"><div class="textarea flow">';
+        echo '<h1>Article not found</h1>';
+        echo '<p>Sorry, this article could not be found. It may have been removed, or the address may be wrong.</p>';
+        echo '<p><a href="/news">Read the latest news</a>, or go to the <a href="/">CJS home page</a>.</p>';
+        echo '</div></main>';
+
+        perch_layout('footer');
+        exit;
+    }
+
     # set up the variables
     $title      = $post['0']['postTitle'];
     $template	= $post['0']['postTemplate'];
