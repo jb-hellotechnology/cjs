@@ -84,30 +84,37 @@ function cjs_volunteers_feed(){
 
 }
 
-function cjs_jobs_feed(){
+/*
+ * The XML job feeds. $tier is 'full' or 'summary' and comes from
+ * cjs_feed_guard() in the cjs_feed_keys app: a caller with a valid key gets
+ * the advert text, a caller without gets the headline details and a link.
+ * It defaults to 'full' so that removing the keys app, or forgetting to pass
+ * it, leaves the feeds exactly as they were.
+ */
+function cjs_jobs_feed($tier='full'){
 
   $API  = new PerchAPI(1.0, 'cjs_daily');
   $jobs = new CJS_Daily_Jobs($API);
 
-  $list = $jobs->get_all_feed();
+  $list = $jobs->get_all_feed($tier);
 
 }
 
-function cjs_jobs_sector_feed($sector){
+function cjs_jobs_sector_feed($sector, $tier='full'){
 
   $API  = new PerchAPI(1.0, 'cjs_daily');
   $jobs = new CJS_Daily_Jobs($API);
 
-  $list = $jobs->get_sector_feed($sector);
+  $list = $jobs->get_sector_feed($sector, $tier);
 
 }
 
-function cjs_jobs_region_feed($region){
+function cjs_jobs_region_feed($region, $tier='full'){
 
   $API  = new PerchAPI(1.0, 'cjs_daily');
   $jobs = new CJS_Daily_Jobs($API);
 
-  $list = $jobs->get_region_feed($region);
+  $list = $jobs->get_region_feed($region, $tier);
 
 }
 
@@ -149,12 +156,12 @@ function cjs_jobs_sitemap(){
   }
 }
 
-function cjs_jobs_feed_2(){
+function cjs_jobs_feed_2($tier='full'){
 
   $API  = new PerchAPI(1.0, 'cjs_daily');
   $jobs = new CJS_Daily_Jobs($API);
 
-  $list = $jobs->get_all_feed_2();
+  $list = $jobs->get_all_feed_2($tier);
 
 }
 

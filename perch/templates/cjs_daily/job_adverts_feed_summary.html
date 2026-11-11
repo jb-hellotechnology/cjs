@@ -1,0 +1,11 @@
+<item>
+    <title><perch:cjs id="title"> with <perch:cjs id="employerDisplay"></title>
+    <description><![CDATA[<p><perch:cjs id="employerDisplay" /><perch:if exists="rCounty">, <perch:cjs id="rCounty" /></perch:if>.<perch:if exists="closingDate"> Closing date <perch:cjs id="closingDate" format="j F Y" />.</perch:if></p>
+<p><a href="https://www.countryside-jobs.com<perch:cjs id="advertURL" />">Read the full advert on CJS</a></p>]]></description>
+    <cjsFeed:location><perch:cjs id="rCounty" /></cjsFeed:location>
+    <cjsFeed:company><perch:cjs id="employerDisplay" /></cjsFeed:company>
+    <cjsFeed:expiry><perch:cjs id="closingDate" /></cjsFeed:expiry>
+    <link>https://www.countryside-jobs.com<perch:cjs id="advertURL" /></link>
+    <guid isPermaLink="false">cjs_job_<perch:cjs id="daily_jobID"></guid>
+    <pubDate><perch:cjs id="postedDate" format="D, j M Y H:i:s O" /></pubDate>
+</item>

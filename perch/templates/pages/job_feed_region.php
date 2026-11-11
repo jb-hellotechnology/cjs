@@ -1,4 +1,14 @@
 <?php
+	/* Access keys: cjs_feed_guard() must run before any output, because a key
+	   that is present and wrong answers 401 and stops here. No key is not an
+	   error - it returns the summary tier (and, until the enforcement date in
+	   CJS_Feed_Keys, the full one with a notice), so nothing that reads this
+	   feed today breaks. With the app removed the feed behaves as it always
+	   did. See perch/addons/apps/cjs_feed_keys. */
+	$feed = function_exists('cjs_feed_guard')
+	            ? cjs_feed_guard('feed/region')
+	            : ['tier' => 'full', 'notice' => false, 'key' => false];
+
 	/* An XML feed served as text/html gets a Cloudflare JavaScript beacon
 	   appended to it, which is HTML and makes the feed unparseable. The
 	   right content type stops that, whatever the edge settings are. */
@@ -10,10 +20,11 @@
   <title>CJS Jobs Feed - <?= ucwords(perch_get('region')) ?></title>
   <link>https://www.countryside-jobs.com</link>
   <description>Countryside Jobs Specialists</description>
+<?php if (function_exists('cjs_feed_notice')) echo cjs_feed_notice($feed); ?>
 <?php 
 	if(perch_get('region')=='scotland-north'){$region = 'rScotlandNorth';}	
 	if(perch_get('region')=='scotland-south'){$region = 'rScotlandSouth';}	
-	cjs_jobs_region_feed($region); 
+	cjs_jobs_region_feed($region, $feed['tier']); 
 ?>
 </channel>
 </rss>

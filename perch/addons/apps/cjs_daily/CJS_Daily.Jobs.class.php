@@ -221,7 +221,24 @@ class CJS_Daily_Jobs extends PerchAPI_Factory
 	}
   }
   
-  public function get_all_feed(){
+  /*
+   * Which item template a feed renders with.
+   *
+   * 'full' is the advert as the employer wrote it, which is the thing CJS is
+   * paid to publish; 'summary' is title, employer, location, closing date and
+   * a link back. cjs_feed_keys decides which the caller has earned - see
+   * cjs_feed_guard(). Anything that forgets to pass a tier gets 'full', so a
+   * missed call site behaves as it did before keys existed rather than
+   * quietly stripping adverts.
+   */
+  private function feed_template($base, $tier)
+  {
+    if ($tier === 'summary') return 'cjs_daily/'.$base.'_summary.html';
+
+    return 'cjs_daily/'.$base.'.html';
+  }
+
+  public function get_all_feed($tier='full'){
 	
 	$API  = new PerchAPI(1.0, 'cjs_daily');
 	$properties = new CJS_Daily_Jobs($API);
@@ -235,7 +252,7 @@ class CJS_Daily_Jobs extends PerchAPI_Factory
 	$query = $this->db->get_rows('SELECT * FROM perch3_daily_jobs WHERE postedDate<='.$this->db->pdb($date).' AND advertStatus="pub" AND closingDate>'.$this->db->pdb($today).' ORDER BY daily_jobID DESC');
 	foreach($query as $data){
 
-		$Template->set('cjs_daily/job_adverts_feed.html', 'cjs');
+		$Template->set($this->feed_template('job_adverts_feed', $tier), 'cjs');
 		$fields = PerchUtil::json_safe_decode($data['daily_jobDynamicFields'], true);
 
 		$data = array_merge($fields,$data);
@@ -246,7 +263,7 @@ class CJS_Daily_Jobs extends PerchAPI_Factory
 	}
   }
   
-  public function get_sector_feed($sector){
+  public function get_sector_feed($sector, $tier='full'){
 	
 	$API  = new PerchAPI(1.0, 'cjs_daily');
 	$properties = new CJS_Daily_Jobs($API);
@@ -260,7 +277,7 @@ class CJS_Daily_Jobs extends PerchAPI_Factory
 	$query = $this->db->get_rows('SELECT * FROM perch3_daily_jobs WHERE postedDate<='.$this->db->pdb($date).' AND advertStatus="pub" AND closingDate>'.$this->db->pdb($today).' AND '.$sector.'="1" ORDER BY daily_jobID DESC');
 	foreach($query as $data){
 
-		$Template->set('cjs_daily/job_adverts_feed.html', 'cjs');
+		$Template->set($this->feed_template('job_adverts_feed', $tier), 'cjs');
 		$fields = PerchUtil::json_safe_decode($data['daily_jobDynamicFields'], true);
 
 		$data = array_merge($fields,$data);
@@ -271,7 +288,7 @@ class CJS_Daily_Jobs extends PerchAPI_Factory
 	}
   }
   
-  public function get_region_feed($region){
+  public function get_region_feed($region, $tier='full'){
 	
 	$API  = new PerchAPI(1.0, 'cjs_daily');
 	$properties = new CJS_Daily_Jobs($API);
@@ -285,7 +302,7 @@ class CJS_Daily_Jobs extends PerchAPI_Factory
 	$query = $this->db->get_rows('SELECT * FROM perch3_daily_jobs WHERE postedDate<='.$this->db->pdb($date).' AND advertStatus="pub" AND closingDate>'.$this->db->pdb($today).' AND '.$region.'="1" ORDER BY daily_jobID DESC');
 	foreach($query as $data){
 
-		$Template->set('cjs_daily/job_adverts_feed.html', 'cjs');
+		$Template->set($this->feed_template('job_adverts_feed', $tier), 'cjs');
 		$fields = PerchUtil::json_safe_decode($data['daily_jobDynamicFields'], true);
 
 		$data = array_merge($fields,$data);
@@ -347,7 +364,7 @@ class CJS_Daily_Jobs extends PerchAPI_Factory
 	}
   }
   
-  public function get_all_feed_2(){
+  public function get_all_feed_2($tier='full'){
 	
 	$API  = new PerchAPI(1.0, 'cjs_daily');
 	$properties = new CJS_Daily_Jobs($API);
@@ -360,7 +377,7 @@ class CJS_Daily_Jobs extends PerchAPI_Factory
 	$query = $this->db->get_rows('SELECT * FROM perch3_daily_jobs WHERE postedDate<='.$this->db->pdb($date).' AND advertStatus="pub" AND closingDate>'.$this->db->pdb($today).' ORDER BY daily_jobID DESC');
 	foreach($query as $data){
 
-		$Template->set('cjs_daily/job_adverts_feed_2.html', 'cjs');
+		$Template->set($this->feed_template('job_adverts_feed_2', $tier), 'cjs');
 		$fields = PerchUtil::json_safe_decode($data['daily_jobDynamicFields'], true);
 
 		$data = array_merge($fields,$data);
