@@ -245,6 +245,12 @@ class CJS_Organisations_Orgs extends PerchAPI_Factory
 		
 		// Mail it
 		mail($to, 'Organisation Profile Submission', $emailHTML, implode("\r\n", $headers));
+
+		/* Tell whoever filled the form in that it arrived. Sent from here, next to
+		   the team's own notification, so the two always agree: a submission that
+		   failed reCAPTCHA above never produces an acknowledgement. Note $data has
+		   had keys unset by now, so read the values back off the form object. */
+		if (function_exists('cjs_form_ack_send')) cjs_form_ack_send('cjs_organisation', $form->data);
 			
 	}
   }

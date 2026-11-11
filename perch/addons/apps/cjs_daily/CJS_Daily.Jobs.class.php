@@ -1530,6 +1530,11 @@ $fields .= htmlspecialchars($key).": ".htmlspecialchars($value)."
 			
 			// Mail it
 			mail($to, $subject, $emailHTML, implode("\r\n", $headers));
+
+			/* Tell the advertiser it arrived. Sent from here, next to the team's own
+			   notification, so the two always agree: a submission thrown away above
+			   (failed reCAPTCHA, honeypot) never produces an acknowledgement. */
+			if (function_exists('cjs_form_ack_send')) cjs_form_ack_send('cjs_online', $data->data);
 		}   
 	}else{
 		// CHANGED: the old code had no else, so a failed captcha (or a failed
@@ -1802,6 +1807,11 @@ $fields .= htmlspecialchars($key).": ".htmlspecialchars($value)."
 			
 			// Mail it
 			mail($to, $subject, $emailHTML, implode("\r\n", $headers));
+
+			/* Tell the advertiser it arrived. Sent from here, next to the team's own
+			   notification, so the two always agree: a submission thrown away above
+			   (failed reCAPTCHA, honeypot) never produces an acknowledgement. */
+			if (function_exists('cjs_form_ack_send')) cjs_form_ack_send('cjs_volunteer', $data->data);
 	    }
 	    
 	    
@@ -1993,6 +2003,11 @@ $fields .= htmlspecialchars($key).": ".htmlspecialchars($value)."
 			
 			// Mail it
 			mail($to, $subject, $emailHTML, implode("\r\n", $headers));
+
+			/* Tell the advertiser it arrived. Sent from here, next to the team's own
+			   notification, so the two always agree: a submission thrown away above
+			   (failed reCAPTCHA, honeypot) never produces an acknowledgement. */
+			if (function_exists('cjs_form_ack_send')) cjs_form_ack_send('cjs_free', $data->data);
 	    }
 	    
     }else{

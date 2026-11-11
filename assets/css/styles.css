@@ -961,3 +961,83 @@ p.span_commas span:last-of-type::after{
 	font-size:0.8rem;
 	opacity:0.7;
 }
+
+/* The panel a form is replaced by once it has been submitted.
+
+   Perch swaps the whole form out for its <perch:success> block, and on most of
+   the advertising pages that block sits wherever the form region sat — well
+   below the fold, under a screenful of guidance and prices. An advertiser told
+   us they could not tell whether a submission had worked, so this is
+   deliberately loud, and the footer script scrolls it into view and gives it
+   focus. Keep the two together: the styling alone is no use if it is off
+   screen. */
+.form-confirmation{
+	position:relative;
+	padding:1.5rem 1.5rem 1.5rem 4.25rem;
+	border:2px solid #006633;
+	border-left-width:0.5rem;
+	background:#fff;
+	box-shadow:0 2px 10px rgba(4,19,27,0.12);
+	/* Clears the sticky nav when scrolled to. */
+	scroll-margin-top:6rem;
+}
+
+/* Focused by script so screen readers read it out; the border is the visible
+   cue, a focus ring around the whole panel would just look like a mistake. */
+.form-confirmation:focus,
+.form-confirmation:focus-visible{
+	outline:none;
+}
+
+.form-confirmation::before{
+	content:"";
+	position:absolute;
+	top:1.6rem;
+	left:1.5rem;
+	width:1.75rem;
+	height:1.75rem;
+	border-radius:50%;
+	background:#006633 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round' d='M3 8.5l3.5 3.5L13 5'/%3E%3C/svg%3E") no-repeat center;
+	background-size:1rem 1rem;
+}
+
+.form-confirmation > :first-child{
+	margin-top:0;
+}
+
+.form-confirmation p:last-child{
+	margin-bottom:0;
+}
+
+.form-confirmation p{
+	font-size:var(--size-step-1);
+	line-height:1.4;
+}
+
+/* The panel sits outside the .flow wrapper that spaces the rest of the page,
+   so its own paragraphs need spacing of their own. */
+.form-confirmation p + p,
+.form-confirmation ul,
+.form-confirmation ol{
+	margin-top:0.75em;
+}
+
+/* The "check your spam folder" line: still readable, but it should not compete
+   with the confirmation itself. */
+.form-confirmation .form-confirmation__email{
+	margin-top:1rem;
+	padding-top:1rem;
+	border-top:1px solid #d7e2f2;
+	font-size:var(--size-step-0);
+}
+
+@media (max-width: 30em){
+	.form-confirmation{
+		padding:3.5rem 1rem 1rem 1rem;
+	}
+
+	.form-confirmation::before{
+		top:1rem;
+		left:1rem;
+	}
+}

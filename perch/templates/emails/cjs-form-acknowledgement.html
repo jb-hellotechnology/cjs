@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>$email_subject</title>
+</head>
+<!--
+  The acknowledgement every advertising form sends back to whoever filled it in.
+  Filled in by CJS_Form_Ack, which escapes every value before it gets here.
+
+  PerchEmail substitutes any dollar sign followed by a name, takes the subject
+  line back out of <title>, and builds the plain text alternative itself, so:
+    - keep every dollar sign in this file a real variable
+    - leave the title as the email_subject variable
+    - no backslashes anywhere (they are stripped on the way out)
+  Variables (all set by CJS_Form_Ack::vars, written here without their dollar
+  signs so this comment is not itself substituted): email_subject, heading,
+  greeting, intro, next_steps, details, reply_to, year.
+  Styling is inline and table-based on purpose; Outlook ignores the rest.
+-->
+<body style="margin:0; padding:0; background:#f0f5fc;">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#f0f5fc;">
+  <tr>
+    <td align="center" style="padding:24px 12px;">
+
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:600px; background:#ffffff; border:1px solid #d7e2f2; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:1.5; color:#04131b;">
+
+        <tr>
+          <td style="padding:18px 28px; background:#034AA6; color:#ffffff; font-size:18px; font-weight:bold;">
+            Countryside Jobs Service
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:28px 28px 8px 28px;">
+            <h1 style="margin:0 0 0.75em 0; font-size:22px; line-height:1.3; color:#034AA6;">$heading</h1>
+            <p style="margin:0 0 1em 0;">$greeting</p>
+            <p style="margin:0 0 1.25em 0;">$intro</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:0 28px;">
+            <h2 style="margin:0 0 0.6em 0; font-size:16px; color:#04131b;">What happens now</h2>
+            $next_steps
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:0 28px 8px 28px;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse; background:#f0f5fc; border:1px solid #d7e2f2;">
+              <tr>
+                <td style="padding:16px 18px; font-size:15px; line-height:1.5; color:#04131b;">
+                  $details
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:20px 28px 28px 28px;">
+            <p style="margin:0 0 1em 0;">If anything above looks wrong, or you need to change or withdraw what you sent, reply to this email or write to <a href="mailto:$reply_to" style="color:#0477BF;">$reply_to</a> and we will sort it out.</p>
+            <p style="margin:0;">Many thanks,<br />The CJS Team</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:16px 28px; background:#f0f5fc; border-top:1px solid #d7e2f2; font-size:13px; line-height:1.5; color:#3d4b55;">
+            <p style="margin:0 0 0.4em 0;">This is an automatic acknowledgement, sent because a form was completed on <a href="https://www.countryside-jobs.com" style="color:#0477BF;">countryside-jobs.com</a>. It is not confirmation that your advert has been published.</p>
+            <p style="margin:0;">© Countryside Jobs Service $year</p>
+          </td>
+        </tr>
+
+      </table>
+
+    </td>
+  </tr>
+</table>
+</body>
+</html>

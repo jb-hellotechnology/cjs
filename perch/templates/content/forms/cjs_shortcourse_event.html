@@ -1,6 +1,6 @@
 <div class="restrict">
   
-  <perch:form id="cjs_shortcourse_event" method="post" app="perch_forms cjs_training" role="form" class="clear-form">
+  <perch:form id="cjs_shortcourse_event" method="post" app="perch_forms cjs_training cjs_form_ack" role="form" class="clear-form">
   
     <header id="form-header">
       <h3>Create Your Advert</h3>
@@ -159,8 +159,9 @@
     </div>
     
     <perch:success>
-      <div class="success">
+      <div class="success form-confirmation" id="form-confirmation" tabindex="-1">
         <perch:content type="textarea" id="confirmation" label="Confirmation Message" html editor="redactor" />
+        <p class="form-confirmation__email">We have also sent a confirmation email to the address you gave us. If it has not arrived within a few minutes, please check your spam or junk folder.</p>
       </div>
     </perch:success>
     

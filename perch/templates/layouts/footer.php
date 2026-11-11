@@ -43,6 +43,34 @@
   <script src="<?php echo cjs_asset('/assets/javascript/scripts.js'); ?>" defer></script>
   <script src="https://kit.fontawesome.com/1dd8560de8.js" crossorigin="anonymous" async defer></script>
   <script>
+    /* A submitted Perch form is replaced by its <perch:success> block, which sits
+       wherever the form region sat. On the advertising pages that is well down the
+       page, so whoever submits lands back at the top with no sign that anything
+       happened — which is exactly what an advertiser told us. Bring the
+       confirmation into view and give it focus so it is also read out.
+
+       Inline rather than in scripts.js on purpose: that file is jQuery-dependent,
+       and this must run even if jQuery has not loaded. */
+    (function () {
+      var panel = document.getElementById('form-confirmation');
+      if (!panel) return;
+
+      var smooth = !window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      try {
+        panel.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'center' });
+      } catch (e) {
+        panel.scrollIntoView(true);
+      }
+
+      try {
+        panel.focus({ preventScroll: true });
+      } catch (e) {
+        panel.focus();
+      }
+    })();
+  </script>
+  <script>
     const sentinel = document.querySelector('.masthead,header');
     const stickyEl = document.querySelector('nav');
     

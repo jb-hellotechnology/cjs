@@ -190,8 +190,15 @@ class CJS_Workdays_Work_Days extends PerchAPI_Factory
       
       mail($to, 'Volunteer Organisation Submission', $emailHTML, implode("\r\n", $headers));
       
-      return $this->db->execute("INSERT INTO perch3_vorganisations_wd (vorgName, advertEmail, advertWebsite, region, county, cVolPlace, cVolOpps, cWorkDays, cSurveys, advertStatus, vorganisationDynamicFields) VALUES 
+      $stored = $this->db->execute("INSERT INTO perch3_vorganisations_wd (vorgName, advertEmail, advertWebsite, region, county, cVolPlace, cVolOpps, cWorkDays, cSurveys, advertStatus, vorganisationDynamicFields) VALUES 
       ('$name', '$contactemail', '$contactwebsite', '$region', '$county', '$volunteerplacements', '$volunteeropps', '$workdays', '$surveys', 'pen', '{\"description\":{\"_flang\":\"html\",\"raw\":\"$text\",\"processed\":\"$text\"}}')");
+
+      /* Tell whoever filled the form in that it arrived. Sent from here, next to
+         the team's own notification, so the two always agree: a submission that
+         failed reCAPTCHA above never produces an acknowledgement. */
+      if (function_exists('cjs_form_ack_send')) cjs_form_ack_send('cjs_volunteerorganisation', $data->data);
+
+      return $stored;
     
     }else{
       echo 'robot';

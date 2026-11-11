@@ -1,4 +1,4 @@
-<perch:form id="grants_funding" method="post" app="perch_forms" role="form">
+<perch:form id="grants_funding" method="post" app="perch_forms cjs_form_ack" role="form">
   
   <p>
     <strong>General basic information listing submission</strong>
@@ -39,8 +39,9 @@
 	</section>
   
   <perch:success>
-    <div class="success">
+    <div class="success form-confirmation" id="form-confirmation" tabindex="-1">
       <perch:content type="textarea" id="confirmation" label="Confirmation Message" html editor="redactor" />
+      <p class="form-confirmation__email">We have also sent a confirmation email to the address you gave us. If it has not arrived within a few minutes, please check your spam or junk folder.</p>
     </div>
   </perch:success>
   
