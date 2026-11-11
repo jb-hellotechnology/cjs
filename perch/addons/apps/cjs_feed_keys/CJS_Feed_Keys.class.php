@@ -26,7 +26,7 @@ class CJS_Feed_Keys
      * Nothing ever returns an error for a missing key, so no existing
      * integration breaks on the day this lands - it quietly gets less.
      */
-    const ENFORCE_FROM = '2026-12-15';
+    const ENFORCE_FROM = '2026-11-11';
 
     private static $table = false;
     private static $checked = false;
