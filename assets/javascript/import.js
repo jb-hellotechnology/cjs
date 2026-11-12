@@ -1,7 +1,58 @@
 // ─── Config ──────────────────────────────────────────────
 const CONCURRENCY = 4; // Max simultaneous requests — tune to taste
+const MAX_RETRIES  = 3;   // extra attempts for a throttled or briefly failing page
+const BASE_BACKOFF = 600; // ms, doubled each attempt
 
 // ─── Helpers ─────────────────────────────────────────────
+
+/* Statuses worth asking again about. Anything else — a 404, a 410 for a closed
+   advert — is a real answer and retrying it would only waste requests. */
+const RETRYABLE = [429, 500, 502, 503, 504];
+
+/**
+ * How long to wait before asking again.
+ *
+ * The edge sends Retry-After with a 429, so use it when it is there. Otherwise
+ * back off exponentially, with a little jitter: a page like /professionalONE
+ * fires twenty-odd imports at once, and without jitter every retry would land
+ * in the same instant and trip the limit all over again.
+ */
+function retryDelay(response, attempt) {
+  const header = response.headers.get('Retry-After');
+
+  if (header) {
+	const seconds = parseInt(header, 10);
+	if (!isNaN(seconds) && seconds > 0) return Math.min(seconds * 1000, 10000);
+  }
+
+  return BASE_BACKOFF * Math.pow(2, attempt) + Math.random() * 400;
+}
+
+/**
+ * Fetch a page, waiting and asking again if we were throttled.
+ *
+ * One view of a page full of imports is twenty-odd requests to our own job and
+ * article pages, which is enough to brush against the rate limit protecting
+ * those paths from bulk copying. A throttled request used to leave a permanent
+ * empty box on the page; now it waits its turn.
+ */
+async function fetchWithRetry(url, queue) {
+  let lastStatus = 0;
+
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+	const response = await queue(() => fetch(url));
+
+	if (response.ok) return response;
+
+	lastStatus = response.status;
+
+	if (!RETRYABLE.includes(response.status) || attempt === MAX_RETRIES) break;
+
+	await new Promise(resolve => setTimeout(resolve, retryDelay(response, attempt)));
+  }
+
+  throw new Error(`HTTP ${lastStatus} for ${url}`);
+}
 
 /**
  * Parses a `data-page-source` value like:
@@ -32,8 +83,7 @@ async function loadImport(el, queue) {
   const { url, selector } = parseSource(rawSrc);
 
   try {
-	const response = await queue(() => fetch(url));
-	if (!response.ok) throw new Error(`HTTP ${response.status} for ${url}`);
+	const response = await fetchWithRetry(url, queue);
 
 	const html = await response.text();
 	const doc = new DOMParser().parseFromString(html, 'text/html');

@@ -19,6 +19,11 @@ class CJS_Form_Ack
     /* Where the email body comes from, relative to perch/templates. */
     const TEMPLATE = 'emails/cjs-form-acknowledgement.html';
 
+    /* Seconds to wait for the mail host to accept a connection before giving
+       up on the acknowledgement. Deliberately short: this runs inside an
+       advertiser's form submission. */
+    const CONNECT_TIMEOUT = 5;
+
     /* Form ids already acknowledged in this request. A form listed in the app
        attribute AND wired up in its handler would otherwise send twice. */
     private static $sent = [];
@@ -78,6 +83,23 @@ class CJS_Form_Ack
             if ($name !== '') $Email->recipientName($name);
 
             $Email->set_bulk($vars);
+
+            /* The claim at the top of this file - that nothing here can stop a
+               submission - was not actually true. $Email->send() opens an SMTP
+               connection inside the advertiser's request, and PHPMailer 5.2
+               waits 300 seconds for it. A mail host that is slow, filtered or
+               refusing connections therefore hangs the request until PHP's
+               max_execution_time kills it, and the advertiser sees a 500 on an
+               advert that has already been written to the database.
+
+               So: knock on the port first, with a short timeout, and give up
+               quietly if nothing answers. An acknowledgement that does not
+               arrive is a nuisance; an advert submission that dies is not. */
+            if (!self::mail_host_reachable()) {
+                self::log($formID.': '.PERCH_EMAIL_HOST.':'.PERCH_EMAIL_PORT.' did not answer within '
+                          .self::CONNECT_TIMEOUT.'s, acknowledgement skipped.');
+                return false;
+            }
 
             $sent = $Email->send();
 
@@ -265,6 +287,31 @@ class CJS_Form_Ack
            entity decoding, and an apostrophe is far more likely in a name than
            an ampersand. */
         return htmlspecialchars($value, ENT_COMPAT | ENT_SUBSTITUTE, 'UTF-8');
+    }
+
+    /*
+     * Can we open a TCP connection to the mail host at all? This is not a test
+     * that mail will send - it is a test that trying will not block. The TLS
+     * and SMTP dialogue that follows has its own (much longer) timeouts, but
+     * the failure that hangs a request is almost always the connection itself.
+     */
+    private static function mail_host_reachable()
+    {
+        if (!defined('PERCH_EMAIL_METHOD') || strtolower(PERCH_EMAIL_METHOD) !== 'smtp') return true;
+
+        $errno  = 0;
+        $errstr = '';
+
+        $socket = @fsockopen(PERCH_EMAIL_HOST, (int) PERCH_EMAIL_PORT, $errno, $errstr, self::CONNECT_TIMEOUT);
+
+        if ($socket === false) {
+            PerchUtil::debug('cjs_form_ack: mail host unreachable: '.$errstr.' ('.$errno.')', 'error');
+            return false;
+        }
+
+        fclose($socket);
+
+        return true;
     }
 
     private static function log($message)
