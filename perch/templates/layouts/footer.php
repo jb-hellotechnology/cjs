@@ -71,16 +71,36 @@
     })();
   </script>
   <script>
-    const sentinel = document.querySelector('.masthead,header');
-    const stickyEl = document.querySelector('nav');
-    
-    const observer = new IntersectionObserver(([entry]) => {
-        stickyEl.classList.toggle('is-sticky', !entry.isIntersecting);
-    }, {
-        threshold: 0,
-    });
-    
-    observer.observe(sentinel);
+    /* Shrink the nav to its sticky state once the header has scrolled away.
+
+       The nav we want is the one that sits after the header, not inside it:
+       the home layout carries a second nav.mobile within the header, and
+       that one is display:none on desktop - picking it with a bare
+       querySelector('nav') meant the home page never went sticky at all. */
+    (function () {
+      var sentinel = document.querySelector('.masthead,header');
+      if (!sentinel) return;
+
+      var stickyEl = null;
+      var navs = document.querySelectorAll('nav');
+
+      for (var i = 0; i < navs.length; i++) {
+        if (!navs[i].closest('header')) {
+          stickyEl = navs[i];
+          break;
+        }
+      }
+
+      if (!stickyEl || !window.IntersectionObserver) return;
+
+      var observer = new IntersectionObserver(function (entries) {
+        stickyEl.classList.toggle('is-sticky', !entries[0].isIntersecting);
+      }, {
+        threshold: 0
+      });
+
+      observer.observe(sentinel);
+    })();
   </script>
 </body>
 </html>
